@@ -55,7 +55,6 @@ namespace LifeCost
                     info.bonesCost = 0;
                     
                 }
-
             }
         }
     }
