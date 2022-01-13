@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SpaceCost {
+namespace LifeCost {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace SpaceCost {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("SpaceCost.Artwork", typeof(Artwork).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("LifeCost.Artwork", typeof(Artwork).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

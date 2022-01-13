@@ -8,83 +8,252 @@ using UnityEngine;
 using HarmonyLib;
 using System.Linq;
 
-namespace SpaceCost
+namespace LifeCost
 {
 
 	internal class PayCostPatch
 	{
+
+		//On Play, spend life
 		[HarmonyPatch(typeof(PlayableCard), "OnPlayed")]
 		public class void_TeethPatch_payCost
 		{
-
-
 			[HarmonyPostfix]
 			public static void Postfix(ref PlayableCard __instance)
 			{
 				Plugin.Log.LogWarning("Cost test: PayCost Patch fired");
-				if (__instance.Info.BloodCost < 0) {
+				if (__instance.Info.LifeCostz() > 0 && __instance.slot.IsPlayerSlot) {
 
-					int costToPay = __instance.Info.BloodCost * -1;
+					int costToPay = __instance.Info.LifeCostz();
 					int currentCurrency = RunState.Run.currency;
 					int lifeBalance = Singleton<LifeManager>.Instance.Balance * -1;
 					int finalCurrency = currentCurrency + lifeBalance;
 
-
 					Plugin.Log.LogWarning("Cost test: costToPay- " + costToPay);
 					Plugin.Log.LogWarning("Cost test: currentCurrency- " + currentCurrency);
 
-					if (costToPay > currentCurrency)
-                    {
-						RunState.Run.currency = 0;
-						costToPay = costToPay - currentCurrency;
-						Plugin.Log.LogWarning("Cost test: costToPay after - currentCurrency - " + costToPay);
-						var damage = costToPay;
-						var numWeights = 1;
-						var toPlayer = true;
-						var alternatePrefab = ResourceBank.Get<GameObject>("Prefabs/Environment/ScaleWeights/Weight");
-						alternatePrefab.transform.localScale.Set(3 * costToPay, 3 * costToPay, 3 * costToPay);
-						Singleton<LifeManager>.Instance.Scales3D.highlightedInteractable.SetEnabled(false);
-						Singleton<LifeManager>.Instance.Scales3D.highlightedInteractable.ShowState(HighlightedInteractable.State.Highlighted, false, 0.1f);
-						int num = 0;
-						for (int i = 0; i < numWeights; i = num + 1)
-						{
-							Vector3 dropPos = toPlayer ? Singleton<LifeManager>.Instance.Scales3D.PlayerSide : Singleton<LifeManager>.Instance.Scales3D.OpponentSide;
-							GameObject weight = WeightUtil.SpawnWeight(Singleton<LifeManager>.Instance.Scales3D.transform, dropPos, true, alternatePrefab);
-							WeightUtil.DropWeight(weight);
-							
-
-							if (toPlayer)
-							{
-								Singleton<LifeManager>.Instance.Scales3D.playerWeight += damage / numWeights;
-								Singleton<LifeManager>.Instance.Scales3D.playerWeights.Add(weight);
-								Singleton<LifeManager>.Instance.PlayerDamage += damage;
-							}
-							else
-							{
-								Singleton<LifeManager>.Instance.Scales3D.opponentWeight += damage / numWeights;
-								Singleton<LifeManager>.Instance.Scales3D.opponentWeights.Add(weight);
-								Singleton<LifeManager>.Instance.OpponentDamage += damage;
-							}
-
-							Singleton<LifeManager>.Instance.Scales3D.SetBalanceBasedOnWeights(false);
-							dropPos = default(Vector3);
-							weight = null;
-							num = i;
-						}
-						Singleton<LifeManager>.Instance.Scales3D.highlightedInteractable.ShowState(HighlightedInteractable.State.NonInteractable, false, 0.2f);
-						Singleton<LifeManager>.Instance.Scales3D.highlightedInteractable.SetEnabled(true);
-
-					} else {
-						Singleton<CurrencyBowl>.Instance.MoveIntoPlace(Singleton<CurrencyBowl>.Instance.NEAR_SCALES_POS, Singleton<CurrencyBowl>.Instance.NEAR_SCALES_ROT, Tween.EaseInOutStrong, false);
-						Singleton<CurrencyBowl>.Instance.TakeWeights(currentCurrency);
-						Singleton<CurrencyBowl>.Instance.MoveAway(Singleton<CurrencyBowl>.Instance.NEAR_SCALES_POS);
-						RunState.Run.currency = currentCurrency - costToPay;
-					}
+					__instance.StartCoroutine(extractCost(costToPay, currentCurrency));
 
 
 					Plugin.Log.LogWarning("Cost test: run currency - " + RunState.Run.currency);
 					Plugin.Log.LogWarning("Cost test: player life - " + Singleton<LifeManager>.Instance.PlayerDamage);
 				}
+			}
+		}
+
+		//Do the calculations here
+		public static IEnumerator extractCost(int costToPay, int currentCurrency)
+		{
+			var waitTime = 0.5F;
+			if (costToPay > currentCurrency)
+			{
+				Singleton<ViewManager>.Instance.SwitchToView(View.Scales, false, false);
+				costToPay = costToPay - currentCurrency;
+				Plugin.Log.LogWarning("Cost test: costToPay after - currentCurrency - " + costToPay);
+				Singleton<ViewManager>.Instance.SwitchToView(View.Scales, false, false);
+				yield return new WaitForSeconds(waitTime);
+				List<Rigidbody> list = Singleton<CurrencyBowl>.Instance.TakeWeights(RunState.Run.currency);
+				foreach (Rigidbody rigidbody in list)
+				{
+					float num3 = (float)list.IndexOf(rigidbody) * 0.05f;
+					Tween.Position(rigidbody.transform, rigidbody.transform.position + Vector3.up * 0.5f, 0.075f, num3, Tween.EaseIn, Tween.LoopType.None, null, null, true);
+					Tween.Position(rigidbody.transform, new Vector3(0f, 5.5f, 4f), 0.3f, 0.125f + num3, Tween.EaseOut, Tween.LoopType.None, null, null, true);
+					UnityEngine.Object.Destroy(rigidbody.gameObject, 0.5f);
+				}
+				RunState.Run.currency = 0;
+				yield return new WaitForSeconds(waitTime);
+				yield return ShowDamageSequence(costToPay, costToPay, true); 
+				Singleton<ViewManager>.Instance.SwitchToView(View.Board, false, false);
+
+			}
+			else
+			{
+				Singleton<ViewManager>.Instance.SwitchToView(View.Scales, false, false);
+				yield return new WaitForSeconds(waitTime);
+				List<Rigidbody> list = Singleton<CurrencyBowl>.Instance.TakeWeights(costToPay);
+				foreach (Rigidbody rigidbody in list)
+				{
+					float num3 = (float)list.IndexOf(rigidbody) * 0.05f;
+					Tween.Position(rigidbody.transform, rigidbody.transform.position + Vector3.up * 0.5f, 0.075f, num3, Tween.EaseIn, Tween.LoopType.None, null, null, true);
+					Tween.Position(rigidbody.transform, new Vector3(0f, 5.5f, 4f), 0.3f, 0.125f + num3, Tween.EaseOut, Tween.LoopType.None, null, null, true);
+					UnityEngine.Object.Destroy(rigidbody.gameObject, 0.5f);
+				}
+				yield return new WaitForSeconds(waitTime);
+				RunState.Run.currency = currentCurrency - costToPay;
+				Singleton<ViewManager>.Instance.SwitchToView(View.Board, false, false);
+			}
+			yield break;
+		}
+
+		//Ported Damage sequence from KCM to make mod work in both non-KCM version and the KCM version
+		public static IEnumerator ShowDamageSequence(int damage, int numWeights, bool toPlayer, float waitAfter = 0.125f, GameObject alternateWeightPrefab = null, float waitBeforeCalcDamage = 0f, bool changeView = true)
+		{
+			bool flag = damage > 1 && Singleton<OpponentAnimationController>.Instance != null;
+			if (flag)
+			{
+				bool flag2 = P03AnimationController.Instance != null && P03AnimationController.Instance.CurrentFace == P03AnimationController.Face.Default;
+				if (flag2)
+				{
+					P03AnimationController.Instance.SwitchToFace(toPlayer ? P03AnimationController.Face.Happy : P03AnimationController.Face.Angry, false, true);
+				}
+				else
+				{
+					bool flag3 = Singleton<LifeManager>.Instance.scales != null;
+					if (flag3)
+					{
+						Singleton<OpponentAnimationController>.Instance.SetLookTarget(Singleton<LifeManager>.Instance.scales.transform, Vector3.up * 2f);
+					}
+				}
+			}
+			bool flag4 = Singleton<LifeManager>.Instance.scales != null;
+			if (flag4)
+			{
+				if (changeView)
+				{
+					Singleton<ViewManager>.Instance.SwitchToView(View.Scales, false, false);
+					yield return new WaitForSeconds(0.1f);
+				}
+				yield return Singleton<LifeManager>.Instance.scales.AddDamage(damage, numWeights, toPlayer, alternateWeightPrefab);
+				bool flag5 = waitBeforeCalcDamage > 0f;
+				if (flag5)
+				{
+					yield return new WaitForSeconds(waitBeforeCalcDamage);
+				}
+				if (toPlayer)
+				{
+					Singleton<LifeManager>.Instance.PlayerDamage += damage;
+				}
+				else
+				{
+					Singleton<LifeManager>.Instance.OpponentDamage += damage;
+				}
+				yield return new WaitForSeconds(waitAfter);
+			}
+			bool flag6 = Singleton<OpponentAnimationController>.Instance != null;
+			if (flag6)
+			{
+				bool flag7 = P03AnimationController.Instance != null && (P03AnimationController.Instance.CurrentFace == P03AnimationController.Face.Angry || P03AnimationController.Instance.CurrentFace == P03AnimationController.Face.Happy);
+				if (flag7)
+				{
+					P03AnimationController.Instance.PlayFaceStatic();
+					P03AnimationController.Instance.SwitchToFace(P03AnimationController.Face.Default, false, false);
+				}
+				else
+				{
+					Singleton<OpponentAnimationController>.Instance.ClearLookTarget();
+				}
+			}
+			yield break;
+		}
+
+
+		//Adjust the hint for Life
+		[HarmonyPatch(typeof(HintsHandler), "OnNonplayableCardClicked")]
+		public class void_TeethPatch_payCostHint
+		{ 
+
+			[HarmonyPrefix]
+			public static bool Prefix(PlayableCard card, List<PlayableCard> cardsInHand)
+			{
+				bool isPart = SaveManager.SaveFile.IsPart2;
+				if (isPart)
+				{
+					HintsHandler.OnGBCNonPlayableCardPressed(card);
+				}
+				else
+				{
+					bool flag = card.EnergyCost > Singleton<ResourcesManager>.Instance.PlayerEnergy;
+					if (flag)
+					{
+						HintsHandler.notEnoughEnergyHint.TryPlayDialogue(new string[]
+						{
+						card.Info.DisplayedNameLocalized,
+						card.EnergyCost.ToString(),
+						Singleton<ResourcesManager>.Instance.PlayerEnergy.ToString()
+						});
+					}
+					else
+					{
+						bool flag2 = card.Info.GemsCost.Exists((GemType x) => !Singleton<ResourcesManager>.Instance.HasGem(x));
+						if (flag2)
+						{
+							GemType gem = card.Info.GemsCost.Find((GemType x) => !Singleton<ResourcesManager>.Instance.HasGem(x));
+							HintsHandler.notEnoughGemsHint.TryPlayDialogue(new string[]
+							{
+							card.Info.DisplayedNameLocalized,
+							HintsHandler.GetColorCodeForGem(gem) + Localization.Translate(gem.ToString()) + "</color>"
+							});
+						}
+						else
+						{
+							bool flag3 = card.Info.BonesCost > Singleton<ResourcesManager>.Instance.PlayerBones;
+							if (flag3)
+							{
+								HintsHandler.notEnoughBonesHint.TryPlayDialogue(new string[]
+								{
+								card.Info.DisplayedNameLocalized,
+								card.Info.BonesCost.ToString()
+								});
+							}
+							else
+							{
+								bool flag4 = !Singleton<BoardManager>.Instance.SacrificesCreateRoomForCard(card, Singleton<BoardManager>.Instance.GetSlots(true));
+								if (flag4)
+								{
+									HintsHandler.slotsFullHint.TryPlayDialogue(null);
+								}
+								else
+								{
+									bool flag5;
+									if (cardsInHand != null)
+									{
+										if (cardsInHand.Exists((PlayableCard x) => x.Info.name == "Squirrel") && Singleton<BoardManager>.Instance.AvailableSacrificeValue == card.Info.BloodCost - 1)
+										{
+											flag5 = Singleton<BoardManager>.Instance.GetSlots(true).Exists((CardSlot x) => x.Card == null);
+											goto IL_231;
+										}
+									}
+									flag5 = false;
+								IL_231:
+									bool flag6 = flag5;
+									if (flag6)
+									{
+										HintsHandler.notEnoughBloodButSquirrelHint.TryPlayDialogue(new string[]
+										{
+										card.Info.DisplayedNameLocalized
+										});
+									}
+									else
+									{
+										PlayableCard playableCard = Singleton<BoardManager>.Instance.CardsOnBoard.Find((PlayableCard x) => !x.OpponentCard && !x.CanBeSacrificed);
+										bool flag7 = playableCard != null;
+										if (flag7)
+										{
+											HintsHandler.notEnoughBloodTerrainHint.TryPlayDialogue(new string[]
+											{
+											playableCard.Info.DisplayedNameLocalized
+											});
+										}
+										 else if (card.Info.BloodCost < 0)
+										{
+											
+										///	var message = "You do not have enough Life to play that. Gain Life by damaging me.";
+										///	CustomCoroutine.Instance.StartCoroutine(Singleton<TextDisplayer>.Instance.ShowMessage(message, Emotion.Neutral, TextDisplayer.LetterAnimation.Jitter, DialogueEvent.Speaker.Single, null));
+										} else
+										{
+											HintsHandler.notEnoughBloodHint.TryPlayDialogue(new string[]
+											{
+											card.Info.DisplayedNameLocalized,
+											card.Info.BloodCost.ToString()
+											});
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+				return false;
 			}
 		}
 	}

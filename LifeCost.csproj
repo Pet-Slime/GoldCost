@@ -1,12 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <Description>Spaceeeeeee</Description>
+    <Description>Paying with your life for cards, take the gamble</Description>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <LangVersion>latest</LangVersion>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <AssemblyName>SpaceCost</AssemblyName>
-    <RootNamespace>SpaceCost</RootNamespace>
+    <AssemblyName>LifeCost</AssemblyName>
+    <RootNamespace>LifeCost</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
@@ -27,6 +27,9 @@
     <Reference Include="Assembly-CSharp">
       <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Inscryption\Inscryption_Data\Managed\Assembly-CSharp.dll</HintPath>
     </Reference>
+    <Reference Include="RenderFixMaybe">
+      <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Inscryption\BepInEx\plugins\UnofficialScrybePatches-Inscryption_Unofficial_Patch\plugins\RenderFixMaybe.dll</HintPath>
+    </Reference>
     <Reference Include="Sirenix.Serialization">
       <HintPath>lib\Sirenix.Serialization.dll</HintPath>
     </Reference>
@@ -38,10 +41,19 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Artwork.resx</DependentUpon>
     </Compile>
+    <Compile Update="Resources\Artwork.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Artwork.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Update="Artwork.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Artwork.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Artwork.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Artwork.Designer.cs</LastGenOutput>
     </EmbeddedResource>
@@ -50,7 +62,7 @@
   <Target Name="CopyDLLs" AfterTargets="Build">
     <Message Text="Executing CopyDLLs task" Importance="High" />
 
-    <Copy SourceFiles="$(TargetDir)$(ProjectName).dll;" DestinationFolder="C:\Program Files (x86)\Steam\steamapps\common\Inscryption\BepInEx\plugins\SpaceCost" />
+    <Copy SourceFiles="$(TargetDir)$(ProjectName).dll;" DestinationFolder="C:\Program Files (x86)\Steam\steamapps\common\Inscryption\BepInEx\plugins\LifeCost" />
     
     <Copy Condition="Exists('C:\DEVELOPER\InscryptionMods\lib\')" SourceFiles="$(TargetDir)$(ProjectName).dll" DestinationFolder="C:\DEVELOPER\InscryptionMods\lib\" />
 

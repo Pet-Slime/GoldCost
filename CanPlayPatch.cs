@@ -6,7 +6,7 @@ using UnityEngine;
 using HarmonyLib;
 using System.Linq;
 
-namespace SpaceCost
+namespace LifeCost
 {
     internal class CanPlayPatch
     {
@@ -16,15 +16,12 @@ namespace SpaceCost
 			[HarmonyPostfix]
 			public static void Postfix(ref bool __result, ref PlayableCard __instance)
 			{
-				Plugin.Log.LogWarning("Cost test: CanPlay Patch fired");
-				Plugin.Log.LogWarning("Cost test: blood cost info- " + __instance.Info.BloodCost);
-				Plugin.Log.LogWarning("Cost test: blood cost info- " + (__instance.Info.BloodCost < 0));
-				if (__instance.Info.BloodCost < 0) {
+				if (__instance.Info.LifeCostz() > 0) {
 
-					int costToPay = __instance.Info.BloodCost * -1;
+					int costToPay = __instance.Info.LifeCostz();
 					int currentCurrency = RunState.Run.currency; 
 					int lifeBalance = Singleton<LifeManager>.Instance.Balance + 5;
-					int finalCurrency = currentCurrency + lifeBalance;
+					int finalCurrency = currentCurrency + lifeBalance +1;
 
 					if (costToPay > finalCurrency)
                     {
