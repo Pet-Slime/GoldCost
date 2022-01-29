@@ -31,15 +31,15 @@ namespace LifeCost
 			harmony.PatchAll();
 			//Abilities
 
-			cards.card_1.AddCard();
-			cards.card_2.AddCard();
-			cards.card_3.AddCard();
-			cards.card_4.AddCard();
-			cards.card_5.AddCard();
-			cards.card_6.AddCard();
-			cards.card_7.AddCard();
-			cards.card_8.AddCard();
-			cards.card_9.AddCard();
+///			cards.card_1.AddCard();
+///			cards.card_2.AddCard();
+///			cards.card_3.AddCard();
+///			cards.card_4.AddCard();
+///			cards.card_5.AddCard();
+///			cards.card_6.AddCard();
+///			cards.card_7.AddCard();
+///			cards.card_8.AddCard();
+///			cards.card_9.AddCard();
 		}
 
 		private void Start()

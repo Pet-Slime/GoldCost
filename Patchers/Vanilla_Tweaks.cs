@@ -26,12 +26,12 @@ namespace LifeCost
             int cost;
             if (CostDictionaries.LifeCost.TryGetValue(info, out cost))
             {
-                Plugin.Log.LogInfo("the cost of " + info + " is equal to " + cost);
+ ///               Plugin.Log.LogInfo("the cost of " + info + " is equal to " + cost);
                 return cost - 1;
             }
             else
             {
-                Plugin.Log.LogInfo("the cost of " + info + " was not found");
+  ///              Plugin.Log.LogInfo("the cost of " + info + " was not found");
                 return -1;
             }
 
