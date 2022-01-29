@@ -36,11 +36,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Artwork.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Artwork.resx</DependentUpon>
-    </Compile>
     <Compile Update="Resources\Artwork.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -49,10 +44,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="Artwork.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Artwork.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
     <EmbeddedResource Update="Resources\Artwork.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Artwork.Designer.cs</LastGenOutput>

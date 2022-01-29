@@ -49,11 +49,15 @@ namespace LifeCost
             for (int index = 0; index < cards.Count; index++)
             {
                 CardInfo info = cards[index];
+                if (info.energyCost < 0)
+                {
+                    info.LifeCostz(info.PowerLevel-1);
+                    info.energyCost = 0;
+                }
                 if (info.bonesCost > 0)
                 {
-                    info.LifeCostz(info.BonesCost);
+                    info.LifeCostz(info.bonesCost);
                     info.bonesCost = 0;
-                    
                 }
             }
         }

@@ -19,9 +19,18 @@ namespace LifeCost
 				if (__instance.Info.LifeCostz() > 0) {
 
 					int costToPay = __instance.Info.LifeCostz();
-					int currentCurrency = RunState.Run.currency; 
+					int currentCurrency = 0; 
+					bool flag1 = SceneLoader.ActiveSceneName == "Part1_Cabin" || SceneLoader.ActiveSceneName == "Part1_Sanctum";
+					if (flag1)
+					{
+						currentCurrency = RunState.Run.currency;
+					}
+					else
+					{
+						currentCurrency = OnSetupPatch_Part2.PlayerFoils;
+					}
 					int lifeBalance = Singleton<LifeManager>.Instance.Balance + 5;
-					int finalCurrency = currentCurrency + lifeBalance +1;
+					int finalCurrency = currentCurrency + lifeBalance + 1;
 
 					if (costToPay > finalCurrency)
                     {

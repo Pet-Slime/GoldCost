@@ -583,156 +583,6 @@ namespace LifeCost.Resources {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        internal static byte[] pixel_1 {
-            get {
-                object obj = ResourceManager.GetObject("pixel_1", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
-        /// </summary>
-        internal static byte[] pixel_10 {
-            get {
-                object obj = ResourceManager.GetObject("pixel_10", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
-        /// </summary>
-        internal static byte[] pixel_11 {
-            get {
-                object obj = ResourceManager.GetObject("pixel_11", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
-        /// </summary>
-        internal static byte[] pixel_12 {
-            get {
-                object obj = ResourceManager.GetObject("pixel_12", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
-        /// </summary>
-        internal static byte[] pixel_13 {
-            get {
-                object obj = ResourceManager.GetObject("pixel_13", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
-        /// </summary>
-        internal static byte[] pixel_14 {
-            get {
-                object obj = ResourceManager.GetObject("pixel_14", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
-        /// </summary>
-        internal static byte[] pixel_15 {
-            get {
-                object obj = ResourceManager.GetObject("pixel_15", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
-        /// </summary>
-        internal static byte[] pixel_2 {
-            get {
-                object obj = ResourceManager.GetObject("pixel_2", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
-        /// </summary>
-        internal static byte[] pixel_3 {
-            get {
-                object obj = ResourceManager.GetObject("pixel_3", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
-        /// </summary>
-        internal static byte[] pixel_4 {
-            get {
-                object obj = ResourceManager.GetObject("pixel_4", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
-        /// </summary>
-        internal static byte[] pixel_5 {
-            get {
-                object obj = ResourceManager.GetObject("pixel_5", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
-        /// </summary>
-        internal static byte[] pixel_6 {
-            get {
-                object obj = ResourceManager.GetObject("pixel_6", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
-        /// </summary>
-        internal static byte[] pixel_7 {
-            get {
-                object obj = ResourceManager.GetObject("pixel_7", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
-        /// </summary>
-        internal static byte[] pixel_8 {
-            get {
-                object obj = ResourceManager.GetObject("pixel_8", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
-        /// </summary>
-        internal static byte[] pixel_9 {
-            get {
-                object obj = ResourceManager.GetObject("pixel_9", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
-        /// </summary>
         internal static byte[] pixel_base {
             get {
                 object obj = ResourceManager.GetObject("pixel_base", resourceCulture);
@@ -786,6 +636,156 @@ namespace LifeCost.Resources {
         internal static byte[] pixel_heat {
             get {
                 object obj = ResourceManager.GetObject("pixel_heat", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] pixel_L_1 {
+            get {
+                object obj = ResourceManager.GetObject("pixel_L_1", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] pixel_L_10 {
+            get {
+                object obj = ResourceManager.GetObject("pixel_L_10", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] pixel_L_11 {
+            get {
+                object obj = ResourceManager.GetObject("pixel_L_11", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] pixel_L_12 {
+            get {
+                object obj = ResourceManager.GetObject("pixel_L_12", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] pixel_L_13 {
+            get {
+                object obj = ResourceManager.GetObject("pixel_L_13", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] pixel_L_14 {
+            get {
+                object obj = ResourceManager.GetObject("pixel_L_14", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] pixel_L_15 {
+            get {
+                object obj = ResourceManager.GetObject("pixel_L_15", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] pixel_L_2 {
+            get {
+                object obj = ResourceManager.GetObject("pixel_L_2", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] pixel_L_3 {
+            get {
+                object obj = ResourceManager.GetObject("pixel_L_3", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] pixel_L_4 {
+            get {
+                object obj = ResourceManager.GetObject("pixel_L_4", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] pixel_L_5 {
+            get {
+                object obj = ResourceManager.GetObject("pixel_L_5", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] pixel_L_6 {
+            get {
+                object obj = ResourceManager.GetObject("pixel_L_6", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] pixel_L_7 {
+            get {
+                object obj = ResourceManager.GetObject("pixel_L_7", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] pixel_L_8 {
+            get {
+                object obj = ResourceManager.GetObject("pixel_L_8", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] pixel_L_9 {
+            get {
+                object obj = ResourceManager.GetObject("pixel_L_9", resourceCulture);
                 return ((byte[])(obj));
             }
         }

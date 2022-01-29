@@ -7,6 +7,7 @@ using DiskCardGame;
 using UnityEngine;
 using HarmonyLib;
 using System.Linq;
+using GBC;
 
 namespace LifeCost
 {
@@ -25,16 +26,21 @@ namespace LifeCost
 				if (__instance.Info.LifeCostz() > 0 && __instance.slot.IsPlayerSlot) {
 
 					int costToPay = __instance.Info.LifeCostz();
-					int currentCurrency = RunState.Run.currency;
-					int lifeBalance = Singleton<LifeManager>.Instance.Balance * -1;
-					int finalCurrency = currentCurrency + lifeBalance;
 
 					Plugin.Log.LogWarning("Cost test: costToPay- " + costToPay);
-					Plugin.Log.LogWarning("Cost test: currentCurrency- " + currentCurrency);
 
-					__instance.StartCoroutine(extractCost(costToPay, currentCurrency));
-
-
+					bool flag1 = SceneLoader.ActiveSceneName == "Part1_Cabin" || SceneLoader.ActiveSceneName == "Part1_Sanctum";
+					if (flag1)
+					{
+						int currentCurrency = RunState.Run.currency;
+						Plugin.Log.LogWarning("Cost test: currentCurrency- " + currentCurrency);
+						__instance.StartCoroutine(extractCostPart1(costToPay, currentCurrency));
+					} else
+					{
+						int currentCurrency = OnSetupPatch_Part2.PlayerFoils;
+						Plugin.Log.LogWarning("Cost test: currentCurrency- " + currentCurrency);
+						__instance.StartCoroutine(extractCostPart2(costToPay, currentCurrency));
+					}
 					Plugin.Log.LogWarning("Cost test: run currency - " + RunState.Run.currency);
 					Plugin.Log.LogWarning("Cost test: player life - " + Singleton<LifeManager>.Instance.PlayerDamage);
 				}
@@ -42,7 +48,7 @@ namespace LifeCost
 		}
 
 		//Do the calculations here
-		public static IEnumerator extractCost(int costToPay, int currentCurrency)
+		public static IEnumerator extractCostPart1(int costToPay, int currentCurrency)
 		{
 			var waitTime = 0.5F;
 			if (costToPay > currentCurrency)
@@ -86,7 +92,7 @@ namespace LifeCost
 		}
 
 		//Ported Damage sequence from KCM to make mod work in both non-KCM version and the KCM version
-		public static IEnumerator ShowDamageSequence(int damage, int numWeights, bool toPlayer, float waitAfter = 0.125f, GameObject alternateWeightPrefab = null, float waitBeforeCalcDamage = 0f, bool changeView = true)
+		public static IEnumerator ShowDamageSequence(int damage, int numWeights, bool toPlayer, float waitAfter = 0.125f, GameObject alternateWeightPrefab = null, float waitBeforeCalcDamage = 0f, bool changeView = false)
 		{
 			bool flag = damage > 1 && Singleton<OpponentAnimationController>.Instance != null;
 			if (flag)
@@ -145,6 +151,30 @@ namespace LifeCost
 			}
 			yield break;
 		}
+
+
+		public static IEnumerator extractCostPart2(int costToPay, int currentCurrency)
+		{
+			var waitTime = 0.5F;
+			if (costToPay > currentCurrency)
+			{
+				costToPay = costToPay - currentCurrency;
+				yield return new WaitForSeconds(waitTime);
+				AudioController.Instance.PlaySound2D("chipDelay_2", MixerGroup.None, 1f, 0f, null, null, null, null, false);
+				yield return OnSetupPatch_Part2.foilToZero();
+				yield return new WaitForSeconds(waitTime); 
+				yield return ShowDamageSequence(costToPay, costToPay, true);
+
+			}
+			else
+			{
+				AudioController.Instance.PlaySound2D("chipDelay_2", MixerGroup.None, 1f, 0f, null, null, null, null, false);
+				yield return OnSetupPatch_Part2.foilSpend(costToPay);
+			}
+			yield break;
+		}
+
+
 
 
 		//Adjust the hint for Life

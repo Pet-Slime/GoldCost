@@ -1,5 +1,5 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
+using GBC;
 using DiskCardGame;
 using UnityEngine;
 using HarmonyLib;
@@ -7,8 +7,9 @@ using Pixelplacement;
 
 namespace LifeCost
 {
-    internal class OnSetupPatch
+    internal class OnSetupPatch_Part1
     {
+
 		[HarmonyPatch(typeof(ResourcesManager), "Setup", MethodType.Normal)]
 		public class void_TeethPatch_ReourceSetup
 		{
@@ -39,6 +40,5 @@ namespace LifeCost
 			AudioController.Instance.PlaySound3D(soundId, MixerGroup.TableObjectsSFX, holder.transform.position, 1f, 0f, null, null, new AudioParams.Randomization(true), null, false);
 			yield break;
 		}
-
 	}
 }

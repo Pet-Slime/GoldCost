@@ -274,51 +274,6 @@
   <data name="mox_cost_o" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>mox_cost_o.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="pixel_1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>pixel\pixel_1.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="pixel_10" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>pixel\pixel_10.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="pixel_11" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>pixel\pixel_11.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="pixel_12" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>pixel\pixel_12.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="pixel_13" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>pixel\pixel_13.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="pixel_14" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>pixel\pixel_14.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="pixel_15" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>pixel\pixel_15.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="pixel_2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>pixel\pixel_2.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="pixel_3" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>pixel\pixel_3.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="pixel_4" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>pixel\pixel_4.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="pixel_5" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>pixel\pixel_5.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="pixel_6" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>pixel\pixel_6.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="pixel_7" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>pixel\pixel_7.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="pixel_8" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>pixel\pixel_8.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="pixel_9" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>pixel\pixel_9.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="pixel_base" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>pixel\pixel_base.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -339,6 +294,51 @@
   </data>
   <data name="pixel_life" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>pixel\pixel_life.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="pixel_L_1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>pixel\pixel_L_1.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="pixel_L_10" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>pixel\pixel_L_10.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="pixel_L_11" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>pixel\pixel_L_11.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="pixel_L_12" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>pixel\pixel_L_12.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="pixel_L_13" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>pixel\pixel_L_13.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="pixel_L_14" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>pixel\pixel_L_14.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="pixel_L_15" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>pixel\pixel_L_15.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="pixel_L_2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>pixel\pixel_L_2.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="pixel_L_3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>pixel\pixel_L_3.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="pixel_L_4" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>pixel\pixel_L_4.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="pixel_L_5" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>pixel\pixel_L_5.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="pixel_L_6" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>pixel\pixel_L_6.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="pixel_L_7" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>pixel\pixel_L_7.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="pixel_L_8" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>pixel\pixel_L_8.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="pixel_L_9" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>pixel\pixel_L_9.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="pixel_mox_blue" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>pixel\pixel_mox_blue.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
