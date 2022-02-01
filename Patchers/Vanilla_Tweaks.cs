@@ -51,14 +51,20 @@ namespace LifeCost
                 CardInfo info = cards[index];
                 if (info.energyCost < 0)
                 {
-                    info.LifeCostz(info.PowerLevel-1);
+                    int cost = info.energyCost * -1;
+                    info.LifeCostz(cost);
                     info.energyCost = 0;
                 }
-                if (info.bonesCost > 0)
+
+                if (info.BloodCost > 0)
                 {
-                    info.LifeCostz(info.bonesCost);
-                    info.bonesCost = 0;
+                    info.metaCategories.Clear();
                 }
+                if (info.BonesCost > 0)
+                {
+                    info.metaCategories.Clear();
+                }
+
             }
         }
     }

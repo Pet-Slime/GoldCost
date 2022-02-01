@@ -9,11 +9,14 @@ namespace LifeCost
 {
 	[BepInPlugin(PluginGuid, PluginName, PluginVersion)]
 	[BepInDependency(APIGUID, BepInDependency.DependencyFlags.HardDependency)]
+	[BepInDependency(ZGUID, BepInDependency.DependencyFlags.SoftDependency)]
 
 	public partial class Plugin : BaseUnityPlugin
 	{
 		public const string APIGUID = "cyantist.inscryption.api";
 		public const string PluginGuid = "extraVoid.inscryption.LifeCost";
+		public const string ZGUID = "extraVoid.inscryption.renderPatcher";
+		public static bool RenderFixActive = false;
 		private const string PluginName = "Life Scrybe";
 		private const string PluginVersion = "1.0.0";
 
@@ -26,6 +29,10 @@ namespace LifeCost
 			Log = base.Logger;
 			Directory = this.Info.Location.Replace("LifeCost.dll", "");
 
+			if (BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey(ZGUID))
+			{
+				RenderFixActive = true;
+			}
 
 			Harmony harmony = new(PluginGuid);
 			harmony.PatchAll();
