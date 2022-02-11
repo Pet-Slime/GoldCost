@@ -73,6 +73,16 @@ namespace LifeCost.Resources {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
+        internal static byte[] costChoiceRewardBack {
+            get {
+                object obj = ResourceManager.GetObject("costChoiceRewardBack", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
         internal static byte[] life_cost_1 {
             get {
                 object obj = ResourceManager.GetObject("life_cost_1", resourceCulture);
@@ -223,6 +233,86 @@ namespace LifeCost.Resources {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
+        internal static byte[] lifecost_Abundance {
+            get {
+                object obj = ResourceManager.GetObject("lifecost_Abundance", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] lifecost_Abundance_a2 {
+            get {
+                object obj = ResourceManager.GetObject("lifecost_Abundance_a2", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] lifecost_greedy {
+            get {
+                object obj = ResourceManager.GetObject("lifecost_greedy", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] lifecost_greedy_a2 {
+            get {
+                object obj = ResourceManager.GetObject("lifecost_greedy_a2", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] lifecost_Midas {
+            get {
+                object obj = ResourceManager.GetObject("lifecost_Midas", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] lifecost_midas_a2 {
+            get {
+                object obj = ResourceManager.GetObject("lifecost_midas_a2", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] lifecost_vamperic {
+            get {
+                object obj = ResourceManager.GetObject("lifecost_vamperic", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] lifecost_vamperic_a2 {
+            get {
+                object obj = ResourceManager.GetObject("lifecost_vamperic_a2", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
         internal static byte[] pixel_L_1 {
             get {
                 object obj = ResourceManager.GetObject("pixel_L_1", resourceCulture);
@@ -366,6 +456,36 @@ namespace LifeCost.Resources {
         internal static byte[] pixel_L_9 {
             get {
                 object obj = ResourceManager.GetObject("pixel_L_9", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] pixel_teck {
+            get {
+                object obj = ResourceManager.GetObject("pixel_teck", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] teck {
+            get {
+                object obj = ResourceManager.GetObject("teck", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] teck_e {
+            get {
+                object obj = ResourceManager.GetObject("teck_e", resourceCulture);
                 return ((byte[])(obj));
             }
         }

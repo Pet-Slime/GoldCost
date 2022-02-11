@@ -118,8 +118,35 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="costChoiceRewardBack" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>costChoiceRewardBack.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="cost_blank" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>cost_blank.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="lifecost_Abundance" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>sigils\lifecost_Abundance.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="lifecost_Abundance_a2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>sigils\lifecost_Abundance_a2.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="lifecost_greedy" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>sigils\lifecost_greedy.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="lifecost_greedy_a2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>sigils\lifecost_greedy_a2.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="lifecost_Midas" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>sigils\lifecost_Midas.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="lifecost_midas_a2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>sigils\lifecost_midas_a2.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="lifecost_vamperic" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>sigils\lifecost_vamperic.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="lifecost_vamperic_a2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>sigils\lifecost_vamperic_a2.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="life_cost_1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>life_cost_1.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -210,5 +237,14 @@
   </data>
   <data name="pixel_L_9" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>pixel\pixel_L_9.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="pixel_teck" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>pixel_teck.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="teck" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>teck.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="teck_e" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>teck_e.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>

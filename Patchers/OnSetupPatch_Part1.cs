@@ -10,16 +10,36 @@ namespace LifeCost
     internal class OnSetupPatch_Part1
     {
 
-		[HarmonyPatch(typeof(ResourcesManager), "Setup", MethodType.Normal)]
+		[HarmonyPatch(typeof(ResourcesManager))]
 		public class void_TeethPatch_ReourceSetup
 		{
-			[HarmonyPostfix]
-			public static void Postfix(ref ResourcesManager __instance)
+			[HarmonyPostfix, HarmonyPatch(nameof(ResourcesManager.Setup))]
+			public static IEnumerator Postfix(
+			IEnumerator enumerator,
+			ResourcesManager __instance
+			)
 			{
 				if (__instance is Part1ResourcesManager)
 				{
-					__instance.StartCoroutine(BowlSetup());
+					yield return BowlSetup();
+					yield return enumerator;
 				}
+
+			}
+		}
+
+		[HarmonyPatch(typeof(Part1ResourcesManager))]
+		public class void_TeethPatch_ReourceCleanup
+		{
+			[HarmonyPostfix, HarmonyPatch(nameof(Part1ResourcesManager.CleanUp))]
+			public static IEnumerator Postfix(
+			IEnumerator enumerator,
+			Part1ResourcesManager __instance
+			)
+			{
+				yield return BowlCleanup();
+				yield return enumerator;
+
 			}
 		}
 
@@ -38,6 +58,12 @@ namespace LifeCost
 			}
 			string soundId = (holder.activeWeights.Count > 3) ? "teeth_long" : "teeth_short";
 			AudioController.Instance.PlaySound3D(soundId, MixerGroup.TableObjectsSFX, holder.transform.position, 1f, 0f, null, null, new AudioParams.Randomization(true), null, false);
+			yield break;
+		}
+
+		public static IEnumerator BowlCleanup()
+		{
+			Singleton<CurrencyBowl>.Instance.Hide();
 			yield break;
 		}
 	}

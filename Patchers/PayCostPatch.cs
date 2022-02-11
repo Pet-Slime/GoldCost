@@ -15,52 +15,148 @@ namespace LifeCost
 	internal class PayCostPatch
 	{
 
-		//On Play, spend life
-		[HarmonyPatch(typeof(PlayableCard), "OnPlayed")]
-		public class void_TeethPatch_payCost
+
+	[HarmonyPatch(typeof(PlayerHand))]
+	public class void_TeethPatch_payCost
+	{
+		[HarmonyPostfix, HarmonyPatch(nameof(PlayerHand.SelectSlotForCard))]
+		public static IEnumerator Postfix(
+		IEnumerator enumerator,
+		PlayerHand __instance,
+		PlayableCard card
+		)
 		{
-			[HarmonyPostfix]
-			public static void Postfix(ref PlayableCard __instance)
+			Plugin.Log.LogWarning("Cost test: PayCost Patch fired");
+			if (card.Info.LifeCostz() > 0)
 			{
-				Plugin.Log.LogWarning("Cost test: PayCost Patch fired");
-				if (__instance.Info.LifeCostz() > 0 && __instance.slot.IsPlayerSlot) {
-
-					int costToPay = __instance.Info.LifeCostz();
-
-					Plugin.Log.LogWarning("Cost test: costToPay- " + costToPay);
-
-					bool flag1 = SceneLoader.ActiveSceneName == "Part1_Cabin" || SceneLoader.ActiveSceneName == "Part1_Sanctum";
-					if (flag1)
-					{
-						int currentCurrency = RunState.Run.currency;
-						Plugin.Log.LogWarning("Cost test: currentCurrency- " + currentCurrency);
-						__instance.StartCoroutine(extractCostPart1(costToPay, currentCurrency));
-					} else
-					{
-						int currentCurrency = OnSetupPatch_Part2.PlayerFoils;
-						Plugin.Log.LogWarning("Cost test: currentCurrency- " + currentCurrency);
-						__instance.StartCoroutine(extractCostPart2(costToPay, currentCurrency));
-					}
-					Plugin.Log.LogWarning("Cost test: run currency - " + RunState.Run.currency);
-					Plugin.Log.LogWarning("Cost test: player life - " + Singleton<LifeManager>.Instance.PlayerDamage);
+	
+				__instance.CardsInHand.ForEach(delegate (PlayableCard x)
+				{
+					x.SetEnabled(false);
+				});
+				yield return new WaitWhile(() => __instance.ChoosingSlot);
+				__instance.OnSelectSlotStartedForCard(card);
+				if (Singleton<RuleBookController>.Instance != null)
+				{
+					Singleton<RuleBookController>.Instance.SetShown(false, true);
 				}
+				Singleton<BoardManager>.Instance.CancelledSacrifice = false;
+				__instance.choosingSlotCard = card;
+				if (card != null && card.Anim != null)
+				{
+					card.Anim.SetSelectedToPlay(true);
+				}
+				Singleton<BoardManager>.Instance.ShowCardNearBoard(card, true);
+				if (Singleton<TurnManager>.Instance.SpecialSequencer != null)
+				{
+					yield return Singleton<TurnManager>.Instance.SpecialSequencer.CardSelectedFromHand(card);
+				}
+				bool cardWasPlayed = false;
+				bool requiresSacrifices = card.Info.BloodCost > 0;
+				if (requiresSacrifices)
+				{
+					List<CardSlot> validSlots = Singleton<BoardManager>.Instance.PlayerSlotsCopy.FindAll((CardSlot x) => x.Card != null);
+					yield return Singleton<BoardManager>.Instance.ChooseSacrificesForCard(validSlots, card);
+				}
+				if (!Singleton<BoardManager>.Instance.CancelledSacrifice)
+				{
+					List<CardSlot> validSlots2 = Singleton<BoardManager>.Instance.PlayerSlotsCopy.FindAll((CardSlot x) => x.Card == null);
+					yield return Singleton<BoardManager>.Instance.ChooseSlot(validSlots2, !requiresSacrifices);
+					CardSlot lastSelectedSlot = Singleton<BoardManager>.Instance.LastSelectedSlot;
+					if (lastSelectedSlot != null)
+					{
+						cardWasPlayed = true;
+						card.Anim.SetSelectedToPlay(false);
+						yield return __instance.PlayCardOnSlot(card, lastSelectedSlot);
+						if (card.Info.BonesCost > 0)
+						{
+							yield return Singleton<ResourcesManager>.Instance.SpendBones(card.Info.BonesCost);
+						}
+						if (card.EnergyCost > 0)
+						{
+							yield return Singleton<ResourcesManager>.Instance.SpendEnergy(card.EnergyCost);
+						}
+						if (card.Info.LifeCostz() > 0)
+						{
+							int costToPay = card.Info.LifeCostz();
+							bool flag2 = !SaveManager.SaveFile.IsPart2;
+							if (flag2)
+								{
+								if (card.HasAbility(lifecost_vamperic.ability))
+								{
+									yield return extractCostPart1_lifeOnly(costToPay);
+								}
+								else if (card.HasAbility(lifecost_Greedy.ability))
+								{
+									int currentCurrency = RunState.Run.currency;
+									yield return extractCostPart1_MoneyOnly(costToPay, currentCurrency);
+								}
+								else
+								{
+									int currentCurrency = RunState.Run.currency;
+									yield return extractCostPart1_hybrid(costToPay, currentCurrency);
+								}
+							}
+							else
+							{
+								if (card.HasAbility(lifecost_vamperic.ability))
+								{
+									yield return extractCostPart2_lifeOnly(costToPay);
+								}
+								else if (card.HasAbility(lifecost_Greedy.ability))
+								{
+									yield return extractCostPart2_MoneyOnly(costToPay);
+								}
+								else
+								{
+									int currentCurrency = OnSetupPatch_Part2.PlayerFoils;
+									yield return extractCostPart2_hybrid(costToPay, currentCurrency);
+								}
+							}
+						}
+					}
+				}
+				if (!cardWasPlayed)
+				{
+					Singleton<BoardManager>.Instance.ShowCardNearBoard(card, false);
+				}
+				__instance.choosingSlotCard = null;
+				if (card != null && card.Anim != null)
+				{
+					card.Anim.SetSelectedToPlay(false);
+				}
+				__instance.CardsInHand.ForEach(delegate (PlayableCard x)
+				{
+					x.SetEnabled(true);
+				});
+				yield break;
+	
+	
+	
 			}
+			else
+			{
+				yield return enumerator;
+			}
+	
 		}
+	}
+	
 
 		//Do the calculations here
-		public static IEnumerator extractCostPart1(int costToPay, int currentCurrency)
+		public static IEnumerator extractCostPart1_hybrid(int costToPay, int currentCurrency)
 		{
-			var waitTime = 0.5F;
+			var waitTime = 0.1F;
 			if (costToPay > currentCurrency)
 			{
-				Singleton<ViewManager>.Instance.SwitchToView(View.Scales, false, false);
+				Singleton<ViewManager>.Instance.SwitchToView(View.Scales, false, true);
 				costToPay = costToPay - currentCurrency;
 				Plugin.Log.LogWarning("Cost test: costToPay after - currentCurrency - " + costToPay);
-				Singleton<ViewManager>.Instance.SwitchToView(View.Scales, false, false);
 				yield return new WaitForSeconds(waitTime);
 				List<Rigidbody> list = Singleton<CurrencyBowl>.Instance.TakeWeights(RunState.Run.currency);
 				foreach (Rigidbody rigidbody in list)
 				{
+					yield return new WaitForSeconds(waitTime);
 					float num3 = (float)list.IndexOf(rigidbody) * 0.05f;
 					Tween.Position(rigidbody.transform, rigidbody.transform.position + Vector3.up * 0.5f, 0.075f, num3, Tween.EaseIn, Tween.LoopType.None, null, null, true);
 					Tween.Position(rigidbody.transform, new Vector3(0f, 5.5f, 4f), 0.3f, 0.125f + num3, Tween.EaseOut, Tween.LoopType.None, null, null, true);
@@ -69,16 +165,18 @@ namespace LifeCost
 				RunState.Run.currency = 0;
 				yield return new WaitForSeconds(waitTime);
 				yield return ShowDamageSequence(costToPay, costToPay, true); 
-				Singleton<ViewManager>.Instance.SwitchToView(View.Board, false, false);
+				Singleton<ViewManager>.Instance.SwitchToView(View.Hand, false, true);
+				Singleton<ViewManager>.Instance.Controller.LockState = ViewLockState.Unlocked;
 
 			}
 			else
 			{
-				Singleton<ViewManager>.Instance.SwitchToView(View.Scales, false, false);
+				Singleton<ViewManager>.Instance.SwitchToView(View.Scales, false, true);
 				yield return new WaitForSeconds(waitTime);
 				List<Rigidbody> list = Singleton<CurrencyBowl>.Instance.TakeWeights(costToPay);
 				foreach (Rigidbody rigidbody in list)
 				{
+					yield return new WaitForSeconds(waitTime);
 					float num3 = (float)list.IndexOf(rigidbody) * 0.05f;
 					Tween.Position(rigidbody.transform, rigidbody.transform.position + Vector3.up * 0.5f, 0.075f, num3, Tween.EaseIn, Tween.LoopType.None, null, null, true);
 					Tween.Position(rigidbody.transform, new Vector3(0f, 5.5f, 4f), 0.3f, 0.125f + num3, Tween.EaseOut, Tween.LoopType.None, null, null, true);
@@ -86,8 +184,42 @@ namespace LifeCost
 				}
 				yield return new WaitForSeconds(waitTime);
 				RunState.Run.currency = currentCurrency - costToPay;
-				Singleton<ViewManager>.Instance.SwitchToView(View.Board, false, false);
+				Singleton<ViewManager>.Instance.SwitchToView(View.Hand, false, true);
+				Singleton<ViewManager>.Instance.Controller.LockState = ViewLockState.Unlocked;
 			}
+			yield break;
+		}
+
+		public static IEnumerator extractCostPart1_lifeOnly(int costToPay)
+		{
+			var waitTime = 0.1F;
+			Singleton<ViewManager>.Instance.SwitchToView(View.Scales, false, true);
+			yield return new WaitForSeconds(waitTime);
+			yield return ShowDamageSequence(costToPay, costToPay, true);
+			yield return new WaitForSeconds(waitTime);
+			Singleton<ViewManager>.Instance.SwitchToView(View.Hand, false, true);
+			Singleton<ViewManager>.Instance.Controller.LockState = ViewLockState.Unlocked;
+			yield break;
+		}
+
+		public static IEnumerator extractCostPart1_MoneyOnly(int costToPay, int currentCurrency)
+		{
+			var waitTime = 0.1F;
+			Singleton<ViewManager>.Instance.SwitchToView(View.Scales, false, true);
+			yield return new WaitForSeconds(waitTime);
+			List<Rigidbody> list = Singleton<CurrencyBowl>.Instance.TakeWeights(costToPay);
+			foreach (Rigidbody rigidbody in list)
+			{
+				yield return new WaitForSeconds(waitTime);
+				float num3 = (float)list.IndexOf(rigidbody) * 0.05f;
+				Tween.Position(rigidbody.transform, rigidbody.transform.position + Vector3.up * 0.5f, 0.075f, num3, Tween.EaseIn, Tween.LoopType.None, null, null, true);
+				Tween.Position(rigidbody.transform, new Vector3(0f, 5.5f, 4f), 0.3f, 0.125f + num3, Tween.EaseOut, Tween.LoopType.None, null, null, true);
+				UnityEngine.Object.Destroy(rigidbody.gameObject, 0.5f);
+			}
+			yield return new WaitForSeconds(waitTime);
+			RunState.Run.currency = currentCurrency - costToPay;
+			Singleton<ViewManager>.Instance.SwitchToView(View.Hand, false, true);
+			Singleton<ViewManager>.Instance.Controller.LockState = ViewLockState.Unlocked;
 			yield break;
 		}
 
@@ -153,7 +285,7 @@ namespace LifeCost
 		}
 
 
-		public static IEnumerator extractCostPart2(int costToPay, int currentCurrency)
+		public static IEnumerator extractCostPart2_hybrid(int costToPay, int currentCurrency)
 		{
 			var waitTime = 0.5F;
 			if (costToPay > currentCurrency)
@@ -174,117 +306,24 @@ namespace LifeCost
 			yield break;
 		}
 
-
-
-
-		//Adjust the hint for Life
-		[HarmonyPatch(typeof(HintsHandler), "OnNonplayableCardClicked")]
-		public class void_TeethPatch_payCostHint
-		{ 
-
-			[HarmonyPrefix]
-			public static bool Prefix(PlayableCard card, List<PlayableCard> cardsInHand)
-			{
-				bool isPart = SaveManager.SaveFile.IsPart2;
-				if (isPart)
-				{
-					HintsHandler.OnGBCNonPlayableCardPressed(card);
-				}
-				else
-				{
-					bool flag = card.EnergyCost > Singleton<ResourcesManager>.Instance.PlayerEnergy;
-					if (flag)
-					{
-						HintsHandler.notEnoughEnergyHint.TryPlayDialogue(new string[]
-						{
-						card.Info.DisplayedNameLocalized,
-						card.EnergyCost.ToString(),
-						Singleton<ResourcesManager>.Instance.PlayerEnergy.ToString()
-						});
-					}
-					else
-					{
-						bool flag2 = card.Info.GemsCost.Exists((GemType x) => !Singleton<ResourcesManager>.Instance.HasGem(x));
-						if (flag2)
-						{
-							GemType gem = card.Info.GemsCost.Find((GemType x) => !Singleton<ResourcesManager>.Instance.HasGem(x));
-							HintsHandler.notEnoughGemsHint.TryPlayDialogue(new string[]
-							{
-							card.Info.DisplayedNameLocalized,
-							HintsHandler.GetColorCodeForGem(gem) + Localization.Translate(gem.ToString()) + "</color>"
-							});
-						}
-						else
-						{
-							bool flag3 = card.Info.BonesCost > Singleton<ResourcesManager>.Instance.PlayerBones;
-							if (flag3)
-							{
-								HintsHandler.notEnoughBonesHint.TryPlayDialogue(new string[]
-								{
-								card.Info.DisplayedNameLocalized,
-								card.Info.BonesCost.ToString()
-								});
-							}
-							else
-							{
-								bool flag4 = !Singleton<BoardManager>.Instance.SacrificesCreateRoomForCard(card, Singleton<BoardManager>.Instance.GetSlots(true));
-								if (flag4)
-								{
-									HintsHandler.slotsFullHint.TryPlayDialogue(null);
-								}
-								else
-								{
-									bool flag5;
-									if (cardsInHand != null)
-									{
-										if (cardsInHand.Exists((PlayableCard x) => x.Info.name == "Squirrel") && Singleton<BoardManager>.Instance.AvailableSacrificeValue == card.Info.BloodCost - 1)
-										{
-											flag5 = Singleton<BoardManager>.Instance.GetSlots(true).Exists((CardSlot x) => x.Card == null);
-											goto IL_231;
-										}
-									}
-									flag5 = false;
-								IL_231:
-									bool flag6 = flag5;
-									if (flag6)
-									{
-										HintsHandler.notEnoughBloodButSquirrelHint.TryPlayDialogue(new string[]
-										{
-										card.Info.DisplayedNameLocalized
-										});
-									}
-									else
-									{
-										PlayableCard playableCard = Singleton<BoardManager>.Instance.CardsOnBoard.Find((PlayableCard x) => !x.OpponentCard && !x.CanBeSacrificed);
-										bool flag7 = playableCard != null;
-										if (flag7)
-										{
-											HintsHandler.notEnoughBloodTerrainHint.TryPlayDialogue(new string[]
-											{
-											playableCard.Info.DisplayedNameLocalized
-											});
-										}
-										 else if (card.Info.BloodCost < 0)
-										{
-											
-										///	var message = "You do not have enough Life to play that. Gain Life by damaging me.";
-										///	CustomCoroutine.Instance.StartCoroutine(Singleton<TextDisplayer>.Instance.ShowMessage(message, Emotion.Neutral, TextDisplayer.LetterAnimation.Jitter, DialogueEvent.Speaker.Single, null));
-										} else
-										{
-											HintsHandler.notEnoughBloodHint.TryPlayDialogue(new string[]
-											{
-											card.Info.DisplayedNameLocalized,
-											card.Info.BloodCost.ToString()
-											});
-										}
-									}
-								}
-							}
-						}
-					}
-				}
-				return false;
-			}
+		public static IEnumerator extractCostPart2_lifeOnly(int costToPay)
+		{
+			var waitTime = 0.5F;
+			yield return new WaitForSeconds(waitTime);
+			yield return ShowDamageSequence(costToPay, costToPay, true);
+			yield return new WaitForSeconds(waitTime);
+			yield break;
 		}
+
+		public static IEnumerator extractCostPart2_MoneyOnly(int costToPay)
+		{
+			var waitTime = 0.5F;
+			yield return new WaitForSeconds(waitTime);
+			AudioController.Instance.PlaySound2D("chipDelay_2", MixerGroup.None, 1f, 0f, null, null, null, null, false);
+			yield return OnSetupPatch_Part2.foilSpend(costToPay);
+			yield return new WaitForSeconds(waitTime);
+			yield break;
+		}
+
 	}
 }

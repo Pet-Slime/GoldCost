@@ -35,15 +35,8 @@ namespace LifeCost
 		public static IEnumerator foilSetup()
 		{
 			Plugin.Log.LogWarning("Life cost set up");
-			if (SaveData.Data.currency > 10)
-            {
-				yield return PlayerFoils = 10;
-				yield return SaveData.Data.currency -= 10;
-			} else
-            {
-				yield return PlayerFoils = SaveData.Data.currency;
-				yield return SaveData.Data.currency = 0;
-			}
+			yield return PlayerFoils = SaveData.Data.currency;
+			yield return SaveData.Data.currency = 0;
 			Plugin.Log.LogWarning(PlayerFoils);
 			yield break;
 		}
@@ -51,7 +44,7 @@ namespace LifeCost
 		public static IEnumerator foilCleanUp()
 		{
 			Plugin.Log.LogWarning("Life cost clean up");
-			yield return SaveData.Data.currency = PlayerFoils + SaveData.Data.currency;
+			yield return SaveData.Data.currency = PlayerFoils;
 			yield return PlayerFoils = 0;
 			yield break;
 		}

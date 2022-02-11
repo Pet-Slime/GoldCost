@@ -1,8 +1,6 @@
 ﻿using DiskCardGame;
-using System;
 using System.Collections.Generic;
-using Sirenix.OdinInspector;
-using UnityEngine;
+using HarmonyLib;
 
 namespace LifeCost
 {
@@ -18,6 +16,10 @@ namespace LifeCost
         public static int LifeCostz(this CardInfo infoz, int whattoset = -1)
         {
             var info = CardLoader.AllData.Find(cardInfo => cardInfo.name == infoz.name);
+            if (info == null)
+            {
+                return -1;
+            }
             if (whattoset != -1)
             {
                 CostDictionaries.LifeCost.Add(info, whattoset + 1);
@@ -26,12 +28,10 @@ namespace LifeCost
             int cost;
             if (CostDictionaries.LifeCost.TryGetValue(info, out cost))
             {
- ///               Plugin.Log.LogInfo("the cost of " + info + " is equal to " + cost);
                 return cost - 1;
             }
             else
             {
-  ///              Plugin.Log.LogInfo("the cost of " + info + " was not found");
                 return -1;
             }
 
@@ -40,31 +40,26 @@ namespace LifeCost
 
 
     public static class vanilla_tweaks
-    { 
-        public static void AddCard()
+    {
+
+        [HarmonyPatch(typeof(LoadingScreenManager), "LoadGameData")]
+        public class LoadingScreenManager_LoadGameData
         {
-            var cards = ScriptableObjectLoader<CardInfo>.AllData;
-
-
-            for (int index = 0; index < cards.Count; index++)
+            public static void Postfix()
             {
-                CardInfo info = cards[index];
-                if (info.energyCost < 0)
-                {
-                    int cost = info.energyCost * -1;
-                    info.LifeCostz(cost);
-                    info.energyCost = 0;
-                }
+                var cards = ScriptableObjectLoader<CardInfo>.AllData;
 
-                if (info.BloodCost > 0)
-                {
-                    info.metaCategories.Clear();
-                }
-                if (info.BonesCost > 0)
-                {
-                    info.metaCategories.Clear();
-                }
 
+                for (int index = 0; index < cards.Count; index++)
+                {
+                    CardInfo info = cards[index];
+                    if (info.energyCost < 0)
+                    {
+                        int cost = info.energyCost * -1;
+                        info.LifeCostz(cost);
+                        info.energyCost = 0;
+                    }
+                }
             }
         }
     }

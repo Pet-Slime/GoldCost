@@ -36,22 +36,35 @@ namespace LifeCost
 
 			Harmony harmony = new(PluginGuid);
 			harmony.PatchAll();
-			//Abilities
 
-///			cards.card_1.AddCard();
-///			cards.card_2.AddCard();
-///			cards.card_3.AddCard();
-///			cards.card_4.AddCard();
-///			cards.card_5.AddCard();
-///			cards.card_6.AddCard();
-///			cards.card_7.AddCard();
-///			cards.card_8.AddCard();
-///			cards.card_9.AddCard();
-		}
 
-		private void Start()
-		{
-			vanilla_tweaks.AddCard();
+
+///			APIPlugin.NewDialogue.Add("lifecost_NotEnoughLife", new DialogueEvent()
+///			{
+///				id = "NotEnoughLife",
+///				speakers = new List<DialogueEvent.Speaker>() { DialogueEvent.Speaker.Leshy },
+///				mainLines = new DialogueEvent.LineSet()
+///				{
+///					lines = new List<DialogueEvent.Line>()
+///					{
+///						new DialogueEvent.Line { text = "You dont have enough life to gamble away for that card." }
+///					}
+///				}
+///			});
+
+			AddGreedy();
+			AddVamperic();
+
+			cards.Teck.AddCard();
+			///			cards.card_1.AddCard();
+			///			cards.card_2.AddCard();
+			///			cards.card_3.AddCard();
+			///			cards.card_4.AddCard();
+			///			cards.card_5.AddCard();
+			///			cards.card_6.AddCard();
+			///			cards.card_7.AddCard();
+			///			cards.card_8.AddCard();
+			///			cards.card_9.AddCard();
 		}
 	}
 }

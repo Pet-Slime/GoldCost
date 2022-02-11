@@ -4,7 +4,7 @@ using APIPlugin;
 using DiskCardGame;
 using UnityEngine;
 using HarmonyLib;
-using System.Linq;
+using GBC;
 
 namespace LifeCost
 {
@@ -30,14 +30,65 @@ namespace LifeCost
 						currentCurrency = OnSetupPatch_Part2.PlayerFoils;
 					}
 					int lifeBalance = Singleton<LifeManager>.Instance.Balance + 5;
-					int finalCurrency = currentCurrency + lifeBalance + 1;
+
+					int finalCurrency = 0;
+
+					if (__instance.HasAbility(lifecost_vamperic.ability))
+                    {
+						finalCurrency =  lifeBalance;
+					} else if (__instance.HasAbility(lifecost_Greedy.ability))
+					{
+						finalCurrency = currentCurrency;
+					} else
+                    {
+						finalCurrency = currentCurrency + lifeBalance;
+					}
 
 					if (costToPay > finalCurrency)
                     {
 						__result = false;
-                    }
+					}
 				}
 			}
+		}
+
+
+		//Adjust the hint for Life
+		[HarmonyPatch(typeof(HintsHandler), "OnNonplayableCardClicked")]
+		public class void_TeethPatch_payCostHint
+		{
+
+			[HarmonyPrefix]
+			public static bool Prefix(PlayableCard card, List<PlayableCard> cardsInHand)
+			{
+				bool isPart = SaveManager.SaveFile.IsPart2;
+				if (isPart)
+				{
+					HintsHandler.OnGBCNonPlayableCardPressed(card);
+					return false;
+				}
+				else
+				{
+					int lifeBalance = Singleton<LifeManager>.Instance.Balance + 5;
+					int finalCurrency = RunState.Run.currency + lifeBalance;
+					bool flag = card.Info.LifeCostz() > finalCurrency;
+					if (flag)
+					{
+//						var cost = card.Info.LifeCostz();
+//						HintsHandlerEX.notEnoughLife.TryPlayDialogue(null);
+						return false;
+					}
+				}
+				return true;
+				
+			}
+		}
+
+		public class HintsHandlerEX : HintsHandler
+		{
+
+			public static HintsHandler.Hint notEnoughLife = new HintsHandler.Hint("lifecost_NotEnoughLife", 1);
+
 		}
 	}
 }
