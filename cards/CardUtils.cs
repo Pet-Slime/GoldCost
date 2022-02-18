@@ -77,10 +77,10 @@ namespace LifeCost.cards
 		public static AbilityIdentifier GetAbilityId(string rulebookName)
 		{
 
-			return AbilityIdentifier.GetAbilityIdentifier(LifeCost.Plugin.PluginGuid, rulebookName);
+#pragma warning disable CS0618 // Type or member is obsolete
+            return AbilityIdentifier.GetAbilityIdentifier(LifeCost.Plugin.PluginGuid, rulebookName);
+#pragma warning restore CS0618 // Type or member is obsolete
 
-		}
-
-
+        }
 	}
 }

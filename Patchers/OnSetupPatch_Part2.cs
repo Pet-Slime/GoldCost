@@ -35,31 +35,28 @@ namespace LifeCost
 		public static IEnumerator foilSetup()
 		{
 			Plugin.Log.LogWarning("Life cost set up");
-			yield return PlayerFoils = SaveData.Data.currency;
-			yield return SaveData.Data.currency = 0;
-			Plugin.Log.LogWarning(PlayerFoils);
+			Plugin.Log.LogWarning(SaveData.Data.currency);
 			yield break;
 		}
 
 		public static IEnumerator foilCleanUp()
 		{
 			Plugin.Log.LogWarning("Life cost clean up");
-			yield return SaveData.Data.currency = PlayerFoils;
-			yield return PlayerFoils = 0;
+			Plugin.Log.LogWarning(SaveData.Data.currency);
 			yield break;
 		}
 
 		public static IEnumerator foilSpend(int amount)
 		{
-			Plugin.Log.LogWarning("Spending foils: " + PlayerFoils);
-			yield return PlayerFoils -= amount;
-			Plugin.Log.LogWarning("current foils: " + PlayerFoils);
+			Plugin.Log.LogWarning("Spending foils: " + SaveData.Data.currency);
+			yield return SaveData.Data.currency = SaveData.Data.currency - amount;
+			Plugin.Log.LogWarning("current foils: " + SaveData.Data.currency);
 			yield break;
 		}
 
 		public static IEnumerator foilToZero()
 		{
-			yield return PlayerFoils = 0;
+			yield return SaveData.Data.currency = 0;
 			yield break;
 		}
 	}

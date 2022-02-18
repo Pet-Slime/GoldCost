@@ -82,12 +82,12 @@ namespace LifeCost
 							bool flag2 = !SaveManager.SaveFile.IsPart2;
 							if (flag2)
 								{
-								if (card.HasAbility(lifecost_vamperic.ability))
-								{
+								if (card.HasAbility(lifecost_vamperic.ability) || card.Info.specialAbilities.Contains(VampericSpecialAbility.specialAbility))
+									{
 									yield return extractCostPart1_lifeOnly(costToPay);
 								}
-								else if (card.HasAbility(lifecost_Greedy.ability))
-								{
+								else if (card.HasAbility(lifecost_Greedy.ability) || card.Info.specialAbilities.Contains(GreedySpecialAbility.specialAbility))
+									{
 									int currentCurrency = RunState.Run.currency;
 									yield return extractCostPart1_MoneyOnly(costToPay, currentCurrency);
 								}
@@ -99,12 +99,12 @@ namespace LifeCost
 							}
 							else
 							{
-								if (card.HasAbility(lifecost_vamperic.ability))
-								{
+								if (card.HasAbility(lifecost_vamperic.ability) || card.Info.specialAbilities.Contains(VampericSpecialAbility.specialAbility))
+									{
 									yield return extractCostPart2_lifeOnly(costToPay);
 								}
-								else if (card.HasAbility(lifecost_Greedy.ability))
-								{
+								else if (card.HasAbility(lifecost_Greedy.ability) || card.Info.specialAbilities.Contains(GreedySpecialAbility.specialAbility))
+									{
 									yield return extractCostPart2_MoneyOnly(costToPay);
 								}
 								else

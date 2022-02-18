@@ -20,7 +20,7 @@ namespace LifeCost
 
 					int costToPay = __instance.Info.LifeCostz();
 					int currentCurrency = 0; 
-					bool flag1 = SceneLoader.ActiveSceneName == "Part1_Cabin" || SceneLoader.ActiveSceneName == "Part1_Sanctum";
+					bool flag1 = SceneLoader.ActiveSceneName.StartsWith("Part1");
 					if (flag1)
 					{
 						currentCurrency = RunState.Run.currency;
@@ -33,10 +33,10 @@ namespace LifeCost
 
 					int finalCurrency = 0;
 
-					if (__instance.HasAbility(lifecost_vamperic.ability))
+					if (__instance.HasAbility(lifecost_vamperic.ability) || __instance.Info.specialAbilities.Contains(VampericSpecialAbility.specialAbility))
                     {
 						finalCurrency =  lifeBalance;
-					} else if (__instance.HasAbility(lifecost_Greedy.ability))
+					} else if (__instance.HasAbility(lifecost_Greedy.ability) || __instance.Info.specialAbilities.Contains(GreedySpecialAbility.specialAbility))
 					{
 						finalCurrency = currentCurrency;
 					} else

@@ -18,16 +18,22 @@ namespace LifeCost
 		public const string ZGUID = "extraVoid.inscryption.renderPatcher";
 		public static bool RenderFixActive = false;
 		private const string PluginName = "Life Scrybe";
-		private const string PluginVersion = "1.0.0";
+		private const string PluginVersion = "1.4.0";
 
 		public static string Directory;
 		internal static ManualLogSource Log;
+
+
+		internal static ConfigEntry<float> configTeethSpeed;
 
 
 		private void Awake()
 		{
 			Log = base.Logger;
 			Directory = this.Info.Location.Replace("LifeCost.dll", "");
+
+
+			configTeethSpeed = Config.Bind("Teeth Speed", "Teeth Speed", 1f, "Configer the Speed in which golden teeth have in act 1 during the set up of the board. Used to be 25f. Higher numbers may cause issues. do not go below 1f.");
 
 			if (BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey(ZGUID))
 			{
@@ -54,6 +60,8 @@ namespace LifeCost
 
 			AddGreedy();
 			AddVamperic();
+			GreedySpecialAbility.addGreedySpecialAbility();
+			VampericSpecialAbility.addVampericSpecialAbility();
 
 			cards.Teck.AddCard();
 			///			cards.card_1.AddCard();
