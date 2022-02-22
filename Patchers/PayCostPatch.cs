@@ -26,7 +26,7 @@ namespace LifeCost
 		PlayableCard card
 		)
 		{
-			Plugin.Log.LogWarning("Cost test: PayCost Patch fired");
+///			Plugin.Log.LogWarning("Cost test: PayCost Patch fired");
 			if (card.Info.LifeCostz() > 0)
 			{
 	
@@ -151,7 +151,7 @@ namespace LifeCost
 			{
 				Singleton<ViewManager>.Instance.SwitchToView(View.Scales, false, true);
 				costToPay = costToPay - currentCurrency;
-				Plugin.Log.LogWarning("Cost test: costToPay after - currentCurrency - " + costToPay);
+///				Plugin.Log.LogWarning("Cost test: costToPay after - currentCurrency - " + costToPay);
 				yield return new WaitForSeconds(waitTime);
 				List<Rigidbody> list = Singleton<CurrencyBowl>.Instance.TakeWeights(RunState.Run.currency);
 				foreach (Rigidbody rigidbody in list)
