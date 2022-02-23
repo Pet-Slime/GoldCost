@@ -5,16 +5,20 @@ using HarmonyLib;
 using BepInEx.Configuration;
 
 
-namespace LifeCost
+namespace LifeCostRenderFixPatcher
 {
 	[BepInPlugin(PluginGuid, PluginName, PluginVersion)]
 	[BepInDependency(APIGUID, BepInDependency.DependencyFlags.HardDependency)]
+	[BepInDependency(LGUID, BepInDependency.DependencyFlags.SoftDependency)]
+	[BepInDependency(ZGUID, BepInDependency.DependencyFlags.SoftDependency)]
 
 	public partial class Plugin : BaseUnityPlugin
 	{
 		public const string APIGUID = "cyantist.inscryption.api";
-		public const string PluginGuid = "extraVoid.inscryption.LifeCost";
-		private const string PluginName = "Life Scrybe";
+		public const string PluginGuid = "extraVoid.inscryption.LifeCostRenderPatcher";
+		public const string ZGUID = "extraVoid.inscryption.renderPatcher";
+		public const string LGUID = "extraVoid.inscryption.LifeCost";
+		private const string PluginName = "Life Scrybe Render Patcher";
 		private const string PluginVersion = "1.0.0";
 
 		public static string Directory;
@@ -24,27 +28,12 @@ namespace LifeCost
 		private void Awake()
 		{
 			Log = base.Logger;
-			Directory = this.Info.Location.Replace("LifeCost.dll", "");
 
-
-			Harmony harmony = new(PluginGuid);
-			harmony.PatchAll();
-			//Abilities
-
-///			cards.card_1.AddCard();
-///			cards.card_2.AddCard();
-///			cards.card_3.AddCard();
-///			cards.card_4.AddCard();
-///			cards.card_5.AddCard();
-///			cards.card_6.AddCard();
-///			cards.card_7.AddCard();
-///			cards.card_8.AddCard();
-///			cards.card_9.AddCard();
-		}
-
-		private void Start()
-		{
-			vanilla_tweaks.AddCard();
+			if (BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey(ZGUID))
+			{
+				Harmony harmony = new(PluginGuid);
+				harmony.PatchAll();
+			}
 		}
 	}
 }

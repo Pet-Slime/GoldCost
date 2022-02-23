@@ -1,15 +1,10 @@
-﻿using BepInEx;
-using BepInEx.Logging;
-using DiskCardGame;
+﻿using DiskCardGame;
 using UnityEngine;
-using HarmonyLib;
+using LifeCost;
 using System.Collections.Generic;
-using Art = LifeCost.Resources.Artwork;
-using Part2R = RenderFixMaybe.Part2CostRender_Right;
-using Part2L = RenderFixMaybe.Part2CostRender_Left;
-using Part1 = RenderFixMaybe.Part1CostRender;
+using Art = LifeCostRenderFixPatcher.Resources.Artwork;
 
-namespace LifeCost
+namespace LifeCostRenderFixPatcher
 {
     internal class Part2RenderFix_left
 	{
@@ -171,8 +166,22 @@ namespace LifeCost
 			}
 			if (lifeCost > 0)
 			{
-				Texture2D texLifeCost = GetFinalTexture(lifeCost, Art.pixel_life);
-				masterList.Add(texLifeCost);
+
+				if (card.HasAbility(lifecost_vamperic.ability) || card.specialAbilities.Contains(VampericSpecialAbility.specialAbility))
+				{
+					Texture2D texLifeCost = GetFinalTexture(lifeCost, Art.pixel_pure_life);
+					masterList.Add(texLifeCost);
+				}
+				else if (card.HasAbility(lifecost_Greedy.ability) || card.specialAbilities.Contains(GreedySpecialAbility.specialAbility))
+				{
+					Texture2D texLifeCost = GetFinalTexture(lifeCost, Art.pixel_money);
+					masterList.Add(texLifeCost);
+				}
+				else
+				{
+					Texture2D texLifeCost = GetFinalTexture(lifeCost, Art.pixel_life);
+					masterList.Add(texLifeCost);
+				}
 
 			}
 			if (energyCost > 0)

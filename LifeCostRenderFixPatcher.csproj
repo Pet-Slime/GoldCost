@@ -1,12 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <Description>Paying with your life for cards, take the gamble</Description>
+    <Description>Patch for life cost and the rendercost</Description>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <LangVersion>latest</LangVersion>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <AssemblyName>LifeCost</AssemblyName>
-    <RootNamespace>LifeCost</RootNamespace>
+    <AssemblyName>LifeCostRenderFixPatcher</AssemblyName>
+    <RootNamespace>LifeCostRenderFixPatcher</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
@@ -27,8 +27,11 @@
     <Reference Include="Assembly-CSharp">
       <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Inscryption\Inscryption_Data\Managed\Assembly-CSharp.dll</HintPath>
     </Reference>
+    <Reference Include="LifeCost">
+      <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Inscryption\BepInEx\plugins\Void_Slime-Life_Cost_API\LifeCost.dll</HintPath>
+    </Reference>
     <Reference Include="RenderFixMaybe">
-      <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Inscryption\BepInEx\plugins\UnofficialScrybePatches-Inscryption_Unofficial_Patch\plugins\RenderFixMaybe.dll</HintPath>
+      <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Inscryption\BepInEx\plugins\UnofficialScrybePatches-Inscryption_Unofficial_Patch\RenderFixMaybe.dll</HintPath>
     </Reference>
     <Reference Include="Sirenix.Serialization">
       <HintPath>lib\Sirenix.Serialization.dll</HintPath>
@@ -53,7 +56,7 @@
   <Target Name="CopyDLLs" AfterTargets="Build">
     <Message Text="Executing CopyDLLs task" Importance="High" />
 
-    <Copy SourceFiles="$(TargetDir)$(ProjectName).dll;" DestinationFolder="C:\Program Files (x86)\Steam\steamapps\common\Inscryption\BepInEx\plugins\LifeCost" />
+    <Copy SourceFiles="$(TargetDir)$(ProjectName).dll;" DestinationFolder="C:\Program Files (x86)\Steam\steamapps\common\Inscryption\BepInEx\plugins\Void_Slime-Life_Cost_API" />
     
     <Copy Condition="Exists('C:\DEVELOPER\InscryptionMods\lib\')" SourceFiles="$(TargetDir)$(ProjectName).dll" DestinationFolder="C:\DEVELOPER\InscryptionMods\lib\" />
 

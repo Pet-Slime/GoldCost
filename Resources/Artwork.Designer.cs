@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace LifeCost.Resources {
+namespace LifeCostRenderFixPatcher.Resources {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace LifeCost.Resources {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("LifeCost.Resources.Artwork", typeof(Artwork).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("LifeCostRenderFixPatcher.Resources.Artwork", typeof(Artwork).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -86,6 +86,46 @@ namespace LifeCost.Resources {
         internal static byte[] blood_cost_10 {
             get {
                 object obj = ResourceManager.GetObject("blood_cost_10", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] blood_cost_101 {
+            get {
+                object obj = ResourceManager.GetObject("blood_cost_101", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] blood_cost_11 {
+            get {
+                object obj = ResourceManager.GetObject("blood_cost_11", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] blood_cost_12 {
+            get {
+                object obj = ResourceManager.GetObject("blood_cost_12", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] blood_cost_13 {
+            get {
+                object obj = ResourceManager.GetObject("blood_cost_13", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -196,6 +236,66 @@ namespace LifeCost.Resources {
         internal static byte[] bone_cost_10 {
             get {
                 object obj = ResourceManager.GetObject("bone_cost_10", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] bone_cost_11 {
+            get {
+                object obj = ResourceManager.GetObject("bone_cost_11", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] bone_cost_12 {
+            get {
+                object obj = ResourceManager.GetObject("bone_cost_12", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] bone_cost_13 {
+            get {
+                object obj = ResourceManager.GetObject("bone_cost_13", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] bone_cost_14 {
+            get {
+                object obj = ResourceManager.GetObject("bone_cost_14", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] bone_cost_15 {
+            get {
+                object obj = ResourceManager.GetObject("bone_cost_15", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] bone_cost_16 {
+            get {
+                object obj = ResourceManager.GetObject("bone_cost_16", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -803,6 +903,16 @@ namespace LifeCost.Resources {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
+        internal static byte[] pixel_money {
+            get {
+                object obj = ResourceManager.GetObject("pixel_money", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
         internal static byte[] pixel_mox_blue {
             get {
                 object obj = ResourceManager.GetObject("pixel_mox_blue", resourceCulture);
@@ -836,6 +946,16 @@ namespace LifeCost.Resources {
         internal static byte[] pixel_mox_red {
             get {
                 object obj = ResourceManager.GetObject("pixel_mox_red", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] pixel_pure_life {
+            get {
+                object obj = ResourceManager.GetObject("pixel_pure_life", resourceCulture);
                 return ((byte[])(obj));
             }
         }

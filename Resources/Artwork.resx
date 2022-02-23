@@ -127,6 +127,18 @@
   <data name="blood_cost_10" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>blood_cost_10.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="blood_cost_101" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>blood_cost_10.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="blood_cost_11" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>blood_cost_11.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="blood_cost_12" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>blood_cost_12.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="blood_cost_13" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>blood_cost_13.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="blood_cost_2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>blood_cost_2.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -159,6 +171,24 @@
   </data>
   <data name="bone_cost_10" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>bone_cost_10.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="bone_cost_11" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>bone_cost_11.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="bone_cost_12" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>bone_cost_12.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="bone_cost_13" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>bone_cost_13.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="bone_cost_14" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>bone_cost_14.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="bone_cost_15" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>bone_cost_15.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="bone_cost_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>bone_cost_16.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="bone_cost_2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>bone_cost_2.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -340,6 +370,9 @@
   <data name="pixel_L_9" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>pixel\pixel_L_9.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="pixel_money" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>pixel\pixel_money.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="pixel_mox_blue" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>pixel\pixel_mox_blue.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -351,5 +384,8 @@
   </data>
   <data name="pixel_mox_red" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>pixel\pixel_mox_red.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="pixel_pure_life" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>pixel\pixel_pure_life.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>
