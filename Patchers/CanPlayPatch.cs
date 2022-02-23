@@ -27,7 +27,7 @@ namespace LifeCost
 					}
 					else
 					{
-						currentCurrency = OnSetupPatch_Part2.PlayerFoils;
+						currentCurrency = SaveData.Data.currency;
 					}
 					int lifeBalance = Singleton<LifeManager>.Instance.Balance + 5;
 

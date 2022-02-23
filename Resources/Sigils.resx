@@ -118,11 +118,20 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="costChoiceRewardBack" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>costChoiceRewardBack.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="activecoinflip_sigil_a2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>sigils\activecoinflip-sigil-a2.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="cost_blank" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>cost_blank.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="activelifegamble_sigil_a2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>sigils\activelifegamble-sigil-a2.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="active_lifecost_hybrid" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>sigils\active_lifecost_hybrid.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="active_lifecost_justlife" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>sigils\active_lifecost_justlife.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="active_lifecost_justmoney" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>sigils\active_lifecost_justmoney.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="lifecost_Abundance" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>sigils\lifecost_Abundance.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -130,11 +139,35 @@
   <data name="lifecost_Abundance_a2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>sigils\lifecost_Abundance_a2.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="lifecost_ActivateStatsUpLife" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>sigils\lifecost_ActivateStatsUpLife.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="lifecost_ActivateStatsUpLife_a2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>sigils\lifecost_ActivateStatsUpLife_a2.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="lifecost_ActivateStatsUpMoney" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>sigils\lifecostActivateStatsUpMoney.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="lifecost_ActivateStatsUpMoney_a2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>sigils\lifecostActivateStatsUpMoney_a2.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="lifecost_CashConverter" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>sigils\lifecost_CashConverter.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="lifecost_CashConverter_a2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>sigils\lifecost_CashConverter_a2.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="lifecost_greedy" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>sigils\lifecost_greedy.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="lifecost_greedy_a2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>sigils\lifecost_greedy_a2.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="lifecost_LifeConverter" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>sigils\lifecost_LifeConverter.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="lifecost_LifeConverter_a2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>sigils\lifecost_LifeConverter_a2.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="lifecost_Midas" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>sigils\lifecost_Midas.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -148,103 +181,7 @@
   <data name="lifecost_vamperic_a2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>sigils\lifecost_vamperic_a2.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="life_cost_1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>life_cost_1.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="life_cost_10" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>life_cost_10.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="life_cost_11" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>life_cost_11.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="life_cost_12" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>life_cost_12.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="life_cost_13" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>life_cost_13.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="life_cost_14" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>life_cost_14.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="life_cost_15" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>life_cost_15.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="life_cost_2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>life_cost_2.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="life_cost_3" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>life_cost_3.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="life_cost_4" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>life_cost_4.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="life_cost_5" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>life_cost_5.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="life_cost_6" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>life_cost_6.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="life_cost_7" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>life_cost_7.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="life_cost_8" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>life_cost_8.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="life_cost_9" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>life_cost_9.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="pixel_L_1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>pixel\pixel_L_1.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="pixel_L_10" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>pixel\pixel_L_10.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="pixel_L_11" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>pixel\pixel_L_11.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="pixel_L_12" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>pixel\pixel_L_12.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="pixel_L_13" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>pixel\pixel_L_13.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="pixel_L_14" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>pixel\pixel_L_14.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="pixel_L_15" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>pixel\pixel_L_15.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="pixel_L_2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>pixel\pixel_L_2.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="pixel_L_3" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>pixel\pixel_L_3.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="pixel_L_4" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>pixel\pixel_L_4.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="pixel_L_5" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>pixel\pixel_L_5.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="pixel_L_6" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>pixel\pixel_L_6.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="pixel_L_7" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>pixel\pixel_L_7.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="pixel_L_8" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>pixel\pixel_L_8.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="pixel_L_9" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>pixel\pixel_L_9.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="pixel_teck" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>pixel_teck.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="teck" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>teck.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="teck_e" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>teck_e.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="randompower_sigil_a2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>sigils\randompower-sigil-a2.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>

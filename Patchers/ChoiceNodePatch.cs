@@ -5,7 +5,7 @@ using DiskCardGame;
 using UnityEngine;
 using HarmonyLib;
 using System;
-using Art = LifeCost.Resources.Artwork;
+using Art = LifeCost.Resources.Cost;
 
 namespace LifeCost.Patchers
 {

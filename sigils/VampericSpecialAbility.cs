@@ -4,7 +4,7 @@ using GBC;
 using APIPlugin;
 using DiskCardGame;
 using UnityEngine;
-using Art = LifeCost.Resources.Artwork;
+using Art = LifeCost.Resources.Sigils;
 using System.Linq;
 
 

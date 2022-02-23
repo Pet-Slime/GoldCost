@@ -33,17 +33,35 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Resources\Artwork.Designer.cs">
+    <Compile Update="Resources\Sigils.Designer.cs">
+      <DependentUpon>Sigils.resx</DependentUpon>
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>Artwork.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\Cards.Designer.cs">
+      <DependentUpon>Cards.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Update="Resources\Cost.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Cost.resx</DependentUpon>
     </Compile>
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="Resources\Artwork.resx">
+    <EmbeddedResource Update="Resources\Sigils.resx">
+      <LastGenOutput>Sigils.Designer.cs</LastGenOutput>
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Artwork.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Cards.resx">
+      <LastGenOutput>Cards.Designer.cs</LastGenOutput>
+      <Generator>ResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Cost.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Cost.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
 

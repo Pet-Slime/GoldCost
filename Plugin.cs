@@ -60,6 +60,8 @@ namespace LifeCost
 
 			AddGreedy();
 			AddVamperic();
+			AddActiveStatsUpLife();
+			AddActiveStatsUpMoney();
 			GreedySpecialAbility.addGreedySpecialAbility();
 			VampericSpecialAbility.addVampericSpecialAbility();
 

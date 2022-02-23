@@ -24,10 +24,10 @@ namespace LifeCost.cards
 
 			List<CardAppearanceBehaviour.Appearance> appearanceBehaviour = new List<CardAppearanceBehaviour.Appearance>();
 
-			Texture2D DefaultTexture = CardUtils.LoadTextureFromResource(LifeCost.Resources.Artwork.teck);
-			Texture2D pixelTexture = CardUtils.LoadTextureFromResource(LifeCost.Resources.Artwork.pixel_teck);
+			Texture2D DefaultTexture = CardUtils.LoadTextureFromResource(LifeCost.Resources.Cards.teck);
+			Texture2D pixelTexture = CardUtils.LoadTextureFromResource(LifeCost.Resources.Cards.pixel_teck);
 
-			Texture2D eTexture = CardUtils.LoadTextureFromResource(LifeCost.Resources.Artwork.teck_e);
+			Texture2D eTexture = CardUtils.LoadTextureFromResource(LifeCost.Resources.Cards.teck_e);
 
 			IceCubeIdentifier iceCubeId = null;
 			EvolveIdentifier evolveId = null;

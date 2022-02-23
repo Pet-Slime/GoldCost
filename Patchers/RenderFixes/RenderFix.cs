@@ -6,7 +6,7 @@ using BepInEx;
 using BepInEx.Logging;
 using DiskCardGame;
 using UnityEngine;
-using Art = LifeCost.Resources.Artwork;
+using Art = LifeCost.Resources.Cost;
 
 namespace LifeCost.Patchers.RenderFixes
 {
@@ -60,10 +60,15 @@ namespace LifeCost.Patchers.RenderFixes
 		public static Vector2 vector = new Vector2(Xposition, Yposition);
 
 
-		public static Sprite LoadSpriteFromResource(byte[] resourceFile)
+		public static Sprite LoadSpriteFromResource(string resourceFile)
 		{
 			var texture = new Texture2D(2, 2);
-			texture.LoadImage(resourceFile);
+			var test = (byte[])Art.ResourceManager.GetObject(resourceFile);
+			if (test == null)
+			{
+				test = Art.cost_blank;
+			}
+			texture.LoadImage(test);
 			texture.filterMode = FilterMode.Point;
 			var sprite = UnityEngine.Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), vector, pixelPerUnity);
 			return sprite;
@@ -72,54 +77,21 @@ namespace LifeCost.Patchers.RenderFixes
 		private static Sprite GetAct1Sprite(CardInfo card)
 		{
 			int lifeCost = card.LifeCostz();
-			Sprite sprite = LoadSpriteFromResource(Art.cost_blank);
-			switch (lifeCost)
-			{
-				case 1:
-					sprite = LoadSpriteFromResource(Art.life_cost_1);
-					break;
-				case 2:
-					sprite = LoadSpriteFromResource(Art.life_cost_2);
-					break;
-				case 3:
-					sprite = LoadSpriteFromResource(Art.life_cost_3);
-					break;
-				case 4:
-					sprite = LoadSpriteFromResource(Art.life_cost_4);
-					break;
-				case 5:
-					sprite = LoadSpriteFromResource(Art.life_cost_5);
-					break;
-				case 6:
-					sprite = LoadSpriteFromResource(Art.life_cost_6);
-					break;
-				case 7:
-					sprite = LoadSpriteFromResource(Art.life_cost_7);
-					break;
-				case 8:
-					sprite = LoadSpriteFromResource(Art.life_cost_8);
-					break;
-				case 9:
-					sprite = LoadSpriteFromResource(Art.life_cost_9);
-					break;
-				case 10:
-					sprite = LoadSpriteFromResource(Art.life_cost_10);
-					break;
-				case 11:
-					sprite = LoadSpriteFromResource(Art.life_cost_11);
-					break;
-				case 12:
-					sprite = LoadSpriteFromResource(Art.life_cost_12);
-					break;
-				case 13:
-					sprite = LoadSpriteFromResource(Art.life_cost_13);
-					break;
-				case 14:
-					sprite = LoadSpriteFromResource(Art.life_cost_14);
-					break;
-				case 15:
-					sprite = LoadSpriteFromResource(Art.life_cost_15);
-					break;
+			Sprite sprite = LoadSpriteFromResource("cost_blank");
+			if (lifeCost > 0)
+            {
+				if (card.HasAbility(lifecost_vamperic.ability) || card.specialAbilities.Contains(VampericSpecialAbility.specialAbility))
+				{
+					sprite = LoadSpriteFromResource($"life_cost_{lifeCost}");
+				}
+				else if (card.HasAbility(lifecost_Greedy.ability) || card.specialAbilities.Contains(GreedySpecialAbility.specialAbility))
+				{
+					sprite = LoadSpriteFromResource($"life_cost_{lifeCost}");
+				}
+				else
+				{
+					sprite = LoadSpriteFromResource($"life_cost_{lifeCost}");
+				}
 			}
 			return sprite;
 		}
@@ -127,54 +99,21 @@ namespace LifeCost.Patchers.RenderFixes
 		private static Sprite GetAct2Sprite(CardInfo card)
 		{
 			int lifeCost = card.LifeCostz();
-			Sprite sprite = LoadSpriteFromResource(Art.cost_blank);
-			switch (lifeCost)
+			Sprite sprite = LoadSpriteFromResource("cost_blank");
+			if (lifeCost > 0)
 			{
-				case 1:
-					sprite = LoadSpriteFromResource(Art.pixel_L_1);
-					break;
-				case 2:
-					sprite = LoadSpriteFromResource(Art.pixel_L_2);
-					break;
-				case 3:
-					sprite = LoadSpriteFromResource(Art.pixel_L_3);
-					break;
-				case 4:
-					sprite = LoadSpriteFromResource(Art.pixel_L_4);
-					break;
-				case 5:
-					sprite = LoadSpriteFromResource(Art.pixel_L_5);
-					break;
-				case 6:
-					sprite = LoadSpriteFromResource(Art.pixel_L_6);
-					break;
-				case 7:
-					sprite = LoadSpriteFromResource(Art.pixel_L_7);
-					break;
-				case 8:
-					sprite = LoadSpriteFromResource(Art.pixel_L_8);
-					break;
-				case 9:
-					sprite = LoadSpriteFromResource(Art.pixel_L_9);
-					break;
-				case 10:
-					sprite = LoadSpriteFromResource(Art.pixel_L_10);
-					break;
-				case 11:
-					sprite = LoadSpriteFromResource(Art.pixel_L_11);
-					break;
-				case 12:
-					sprite = LoadSpriteFromResource(Art.pixel_L_12);
-					break;
-				case 13:
-					sprite = LoadSpriteFromResource(Art.pixel_L_13);
-					break;
-				case 14:
-					sprite = LoadSpriteFromResource(Art.pixel_L_14);
-					break;
-				case 15:
-					sprite = LoadSpriteFromResource(Art.pixel_L_15);
-					break;
+				if (card.HasAbility(lifecost_vamperic.ability) || card.specialAbilities.Contains(VampericSpecialAbility.specialAbility))
+				{
+					sprite = LoadSpriteFromResource($"pixel_B_{lifeCost}");
+				}
+				else if (card.HasAbility(lifecost_Greedy.ability) || card.specialAbilities.Contains(GreedySpecialAbility.specialAbility))
+				{
+					sprite = LoadSpriteFromResource($"pixel_M_{lifeCost}");
+				}
+				else
+				{
+					sprite = LoadSpriteFromResource($"pixel_L_{lifeCost}");
+				}
 			}
 			return sprite;
 		}

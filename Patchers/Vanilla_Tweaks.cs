@@ -59,6 +59,26 @@ namespace LifeCost
                         info.LifeCostz(cost);
                         info.energyCost = 0;
                     }
+
+                    if (info.name == "Zombie")
+                    {
+                        info.LifeCostz(info.bonesCost);
+                        info.bonesCost = 0;
+                    }
+
+                    if (info.name == "FrankNStein")
+                    {
+                        info.LifeCostz(info.bonesCost);
+                        info.bonesCost = 0;
+                        info.specialAbilities.Add(VampericSpecialAbility.specialAbility);
+                    }
+
+                    if (info.name == "Gravedigger")
+                    {
+                        info.LifeCostz(info.bonesCost);
+                        info.bonesCost = 0;
+                        info.specialAbilities.Add(GreedySpecialAbility.specialAbility);
+                    }
                 }
             }
         }
