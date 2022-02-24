@@ -62,6 +62,10 @@ namespace LifeCost
 			AddVamperic();
 			AddActiveStatsUpLife();
 			AddActiveStatsUpMoney();
+			AddActivateLifeConverter();
+			AddActiveCashConverter();
+			AddActivateLifeRandomStatsUp();
+			addActivateEnergyGamble();
 			GreedySpecialAbility.addGreedySpecialAbility();
 			VampericSpecialAbility.addVampericSpecialAbility();
 

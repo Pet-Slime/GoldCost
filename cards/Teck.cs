@@ -15,6 +15,7 @@ namespace LifeCost.cards
 			List<Tribe> Tribes = new List<Tribe>();
 
 			List<Ability> Abilities = new List<Ability>();
+			Abilities.Add(lifecost_ActivateStatsUpLife.ability);
 
 			List<Trait> Traits = new List<Trait>();
 

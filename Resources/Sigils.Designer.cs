@@ -93,9 +93,9 @@ namespace LifeCost.Resources {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        internal static byte[] activecoinflip_sigil_a2 {
+        internal static byte[] lifecost_ActivateEnergyGamble {
             get {
-                object obj = ResourceManager.GetObject("activecoinflip_sigil_a2", resourceCulture);
+                object obj = ResourceManager.GetObject("lifecost_ActivateEnergyGamble", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -103,9 +103,9 @@ namespace LifeCost.Resources {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        internal static byte[] activelifegamble_sigil_a2 {
+        internal static byte[] lifecost_ActivateEnergyGamble_a2 {
             get {
-                object obj = ResourceManager.GetObject("activelifegamble_sigil_a2", resourceCulture);
+                object obj = ResourceManager.GetObject("lifecost_ActivateEnergyGamble_a2", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -113,9 +113,9 @@ namespace LifeCost.Resources {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        internal static byte[] lifecost_Abundance {
+        internal static byte[] lifecost_ActivateLifeRandomStatsUp {
             get {
-                object obj = ResourceManager.GetObject("lifecost_Abundance", resourceCulture);
+                object obj = ResourceManager.GetObject("lifecost_ActivateLifeRandomStatsUp", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -123,9 +123,9 @@ namespace LifeCost.Resources {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        internal static byte[] lifecost_Abundance_a2 {
+        internal static byte[] lifecost_ActivateLifeRandomStatsUp_a2 {
             get {
-                object obj = ResourceManager.GetObject("lifecost_Abundance_a2", resourceCulture);
+                object obj = ResourceManager.GetObject("lifecost_ActivateLifeRandomStatsUp_a2", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -233,26 +233,6 @@ namespace LifeCost.Resources {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        internal static byte[] lifecost_Midas {
-            get {
-                object obj = ResourceManager.GetObject("lifecost_Midas", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
-        /// </summary>
-        internal static byte[] lifecost_midas_a2 {
-            get {
-                object obj = ResourceManager.GetObject("lifecost_midas_a2", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
-        /// </summary>
         internal static byte[] lifecost_vamperic {
             get {
                 object obj = ResourceManager.GetObject("lifecost_vamperic", resourceCulture);
@@ -266,16 +246,6 @@ namespace LifeCost.Resources {
         internal static byte[] lifecost_vamperic_a2 {
             get {
                 object obj = ResourceManager.GetObject("lifecost_vamperic_a2", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
-        /// </summary>
-        internal static byte[] randompower_sigil_a2 {
-            get {
-                object obj = ResourceManager.GetObject("randompower_sigil_a2", resourceCulture);
                 return ((byte[])(obj));
             }
         }

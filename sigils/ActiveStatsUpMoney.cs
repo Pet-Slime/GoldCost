@@ -15,7 +15,7 @@ namespace LifeCost
 		{
 			// setup ability
 			const string rulebookName = "Greedy Strength";
-			const string rulebookDescription = "Activate: Pay 5 currency to increase the power and health of this card by 1";
+			const string rulebookDescription = "Pay 5 currency to increase the power and health of this card by 1";
 			const string LearnDialogue = "One can be hired to do many tasks";
 			// const string TextureFile = "Artwork/void_pathetic.png";
 
@@ -66,7 +66,9 @@ namespace LifeCost
 			mod.attackAdjustment++;
 			mod.healthAdjustment++;
 			base.Card.OnStatsChanged();
+			Singleton<ViewManager>.Instance.SwitchToView(View.Board, false, true);
 			yield return new WaitForSeconds(0.25f);
+			Singleton<ViewManager>.Instance.Controller.LockState = ViewLockState.Unlocked;
 			yield break;
 		}
 

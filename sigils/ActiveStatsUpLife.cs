@@ -14,8 +14,8 @@ namespace LifeCost
 		private NewAbility AddActiveStatsUpLife()
 		{
 			// setup ability
-			const string rulebookName = "Life Strength";
-			const string rulebookDescription = "Activate: Pay 3 life to increase the power and health of this card by 1";
+			const string rulebookName = "Vamperic Strength";
+			const string rulebookDescription = "Pay 3 life to increase the power and health of this card by 1";
 			const string LearnDialogue = "Hurting oneself can lead to an increase in strength.";
 			// const string TextureFile = "Artwork/void_pathetic.png";
 
@@ -55,6 +55,11 @@ namespace LifeCost
 
 		public override IEnumerator Activate()
 		{
+			bool flag1 = !SaveManager.SaveFile.IsPart2;
+			if (flag1)
+			{
+				Singleton<ViewManager>.Instance.SwitchToView(View.Board, false, true);
+			}
 			CardModificationInfo mod = base.Card.TemporaryMods.Find((CardModificationInfo x) => x.singletonId == MOD_ID);
 			bool flag = mod == null;
 			if (flag)
@@ -67,6 +72,10 @@ namespace LifeCost
 			mod.healthAdjustment++;
 			base.Card.OnStatsChanged();
 			yield return new WaitForSeconds(0.25f);
+			if (flag1)
+			{
+				Singleton<ViewManager>.Instance.Controller.LockState = ViewLockState.Unlocked;
+			}
 			yield break;
 		}
 

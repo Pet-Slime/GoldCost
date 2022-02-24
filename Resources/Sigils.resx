@@ -118,12 +118,6 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="activecoinflip_sigil_a2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>sigils\activecoinflip-sigil-a2.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="activelifegamble_sigil_a2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>sigils\activelifegamble-sigil-a2.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="active_lifecost_hybrid" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>sigils\active_lifecost_hybrid.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -133,11 +127,17 @@
   <data name="active_lifecost_justmoney" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>sigils\active_lifecost_justmoney.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="lifecost_Abundance" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>sigils\lifecost_Abundance.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="lifecost_ActivateEnergyGamble" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>sigils\lifecost_ActivateEnergyGamble.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="lifecost_Abundance_a2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>sigils\lifecost_Abundance_a2.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="lifecost_ActivateEnergyGamble_a2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>sigils\lifecost_ActivateEnergyGamble_a2.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="lifecost_ActivateLifeRandomStatsUp" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>sigils\lifecost_ActivateLifeRandomStatsUp.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="lifecost_ActivateLifeRandomStatsUp_a2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>sigils\lifecost_ActivateLifeRandomStatsUp_a2.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="lifecost_ActivateStatsUpLife" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>sigils\lifecost_ActivateStatsUpLife.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -169,19 +169,10 @@
   <data name="lifecost_LifeConverter_a2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>sigils\lifecost_LifeConverter_a2.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="lifecost_Midas" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>sigils\lifecost_Midas.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="lifecost_midas_a2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>sigils\lifecost_midas_a2.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="lifecost_vamperic" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>sigils\lifecost_vamperic.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="lifecost_vamperic_a2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>sigils\lifecost_vamperic_a2.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="randompower_sigil_a2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>sigils\randompower-sigil-a2.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>
