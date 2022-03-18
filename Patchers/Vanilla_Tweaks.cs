@@ -1,66 +1,52 @@
 ﻿using DiskCardGame;
 using System.Collections.Generic;
-using HarmonyLib;
+using InscryptionAPI.Card;
+using System.Collections;
+using System;
+using System.Linq;
 
 namespace LifeCost
 {
-    public static class CostDictionaries
-    {
-        public static Dictionary<CardInfo, int> LifeCost = new Dictionary<CardInfo, int>();
-    }
-
     public static class ext
     {
-
-
-        public static int LifeCostz(this CardInfo infoz, int whattoset = -1)
+        public static int LifeCostz(this CardInfo info)
         {
-            var info = CardLoader.AllData.Find(cardInfo => cardInfo.name == infoz.name);
-            if (info == null)
-            {
-                return -1;
-            }
-            if (whattoset != -1)
-            {
-                CostDictionaries.LifeCost.Add(info, whattoset + 1);
-            }
-
-            int cost;
-            if (CostDictionaries.LifeCost.TryGetValue(info, out cost))
-            {
-                return cost - 1;
-            }
-            else
-            {
-                return -1;
-            }
-
+            int? lifecost = info.GetExtendedPropertyAsInt("LifeCost");
+            return lifecost.HasValue ? lifecost.Value : 0;
         }
     }
 
 
     public static class vanilla_tweaks
     {
-
-        [HarmonyPatch(typeof(LoadingScreenManager), "LoadGameData")]
-        public class LoadingScreenManager_LoadGameData
+        public static void ChangeCardsToLifecost()
         {
-            public static void Postfix()
+            ///           var cards = ScriptableObjectLoader<CardInfo>.AllData;
+            ///
+            ///
+            ///           for (int index = 0; index < cards.Count; index++)
+            ///           {
+            ///               CardInfo info = cards[index];
+            ///               if (info.energyCost < 0)
+            ///               {
+            ///                   int cost = info.energyCost * -1;
+            ///                   info.SetExtendedProperty("LifeCost", cost);
+            ///                   info.energyCost = 0;
+            ///               }
+            ///           }
+
+            CardManager.ModifyCardList += delegate (List<CardInfo> cards)
             {
-                var cards = ScriptableObjectLoader<CardInfo>.AllData;
-
-
-                for (int index = 0; index < cards.Count; index++)
+                foreach (CardInfo card in cards.Where(c => c.energyCost < 0))
                 {
-                    CardInfo info = cards[index];
-                    if (info.energyCost < 0)
-                    {
-                        int cost = info.energyCost * -1;
-                        info.LifeCostz(cost);
-                        info.energyCost = 0;
-                    }
+                    int cost = card.energyCost * -1;
+                    card.SetExtendedProperty("LifeCost", cost);
+                    card.energyCost = 0;
                 }
-            }
+
+                return cards;
+            };
+
         }
     }
 }

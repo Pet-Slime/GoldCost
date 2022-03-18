@@ -11,30 +11,22 @@ namespace LifeCost
 	public partial class Plugin
 	{
 		//Request by blind
-		private NewAbility AddActiveStatsUpMoney()
+		private void AddActiveStatsUpMoney()
 		{
 			// setup ability
 			const string rulebookName = "Greedy Strength";
 			const string rulebookDescription = "Pay 5 currency to increase the power and health of this card by 1";
 			const string LearnDialogue = "One can be hired to do many tasks";
-			// const string TextureFile = "Artwork/void_pathetic.png";
-
-			AbilityInfo info = LifeCost.cards.CardUtils.CreateInfoWithDefaultSettings(rulebookName, rulebookDescription, LearnDialogue, true, 3, false);
-			info.canStack = false;
-			info.activated = true;
-			info.pixelIcon = LifeCost.cards.CardUtils.LoadSpriteFromResource(Art.lifecost_ActivateStatsUpMoney_a2);
-
-			Texture2D tex = LifeCost.cards.CardUtils.LoadTextureFromResource(Art.lifecost_ActivateStatsUpMoney);
-
-			var abIds = LifeCost.cards.CardUtils.GetAbilityId(info.rulebookName);
-			
-			NewAbility newAbility = new NewAbility(info, typeof(lifecost_ActiveStatsUpMoney), tex, abIds);
-
+			Texture2D tex_a1 = LifeCost.cards.CardUtils.LoadTextureFromResource(Art.lifecost_ActivateStatsUpMoney);
+			byte[] tex_a2 = Art.lifecost_ActivateStatsUpMoney_a2;
+			int powerlevel = 3;
+			bool LeshyUsable = true;
+			bool part1Shops = false;
+			bool canStack = false;
 
 			// set ability to behaviour class
-			lifecost_ActiveStatsUpMoney.ability = newAbility.ability;
-
-			return newAbility;
+			lifecost_ActiveStatsUpMoney.ability = cards.CardUtils.CreateAbilityWithDefaultSettings(rulebookName, rulebookDescription, typeof(lifecost_ActiveStatsUpMoney), tex_a1, tex_a2, LearnDialogue,
+																					true, powerlevel, LeshyUsable, part1Shops, canStack).ability;
 
 		}
 	}
@@ -45,7 +37,7 @@ namespace LifeCost
 
 		public static Ability ability;
 
-		protected override int MoneyCost
+		public override int MoneyCost
 		{
 			get
 			{

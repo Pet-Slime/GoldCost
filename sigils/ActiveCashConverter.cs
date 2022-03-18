@@ -11,30 +11,22 @@ namespace LifeCost
 	public partial class Plugin
 	{
 		//Request by blind
-		private NewAbility AddActiveCashConverter()
+		private void AddActiveCashConverter()
 		{
 			// setup ability
 			const string rulebookName = "Cash Converter";
 			const string rulebookDescription = "Pay 4 foils to put 1 damage on your opponent's side of the scale";
 			const string LearnDialogue = "Money for Blood";
-			// const string TextureFile = "Artwork/void_pathetic.png";
-
-			AbilityInfo info = LifeCost.cards.CardUtils.CreateInfoWithDefaultSettings(rulebookName, rulebookDescription, LearnDialogue, true, 3, false);
-			info.canStack = false;
-			info.activated = true;
-			info.pixelIcon = LifeCost.cards.CardUtils.LoadSpriteFromResource(Art.lifecost_CashConverter_a2);
-
-			Texture2D tex = LifeCost.cards.CardUtils.LoadTextureFromResource(Art.lifecost_CashConverter);
-
-			var abIds = LifeCost.cards.CardUtils.GetAbilityId(info.rulebookName);
-			
-			NewAbility newAbility = new NewAbility(info, typeof(lifecost_ActivateCashConverter), tex, abIds);
-
+			Texture2D tex_a1 = LifeCost.cards.CardUtils.LoadTextureFromResource(Art.lifecost_CashConverter);
+			byte[] tex_a2 = Art.lifecost_CashConverter_a2;
+			int powerlevel = 5;
+			bool LeshyUsable = true;
+			bool part1Shops = false;
+			bool canStack = false;
 
 			// set ability to behaviour class
-			lifecost_ActivateCashConverter.ability = newAbility.ability;
-
-			return newAbility;
+			lifecost_ActivateCashConverter.ability = cards.CardUtils.CreateAbilityWithDefaultSettings(rulebookName, rulebookDescription, typeof(lifecost_ActivateCashConverter), tex_a1, tex_a2, LearnDialogue,
+																					true, powerlevel, LeshyUsable, part1Shops, canStack).ability;
 
 		}
 	}
@@ -45,7 +37,7 @@ namespace LifeCost
 
 		public static Ability ability;
 
-		protected override int MoneyCost
+		public override int MoneyCost
 		{
 			get
 			{

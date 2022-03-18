@@ -11,29 +11,22 @@ namespace LifeCost
 	public partial class Plugin
 	{
 		//Request by blind
-		private NewAbility AddVamperic()
+		private void AddVamperic()
 		{
 			// setup ability
 			const string rulebookName = "Vamperic";
 			const string rulebookDescription = "[creature] will only accept Life for it's cost instead of Life and Teeth, if it has a Finance cost.";
 			const string LearnDialogue = "Gooooooooldddddd! *cough* sorry about that. Couldn't resist.";
-			// const string TextureFile = "Artwork/void_pathetic.png";
-
-			AbilityInfo info = LifeCost.cards.CardUtils.CreateInfoWithDefaultSettings(rulebookName, rulebookDescription, LearnDialogue, true, 3, false);
-			info.canStack = true;
-			info.pixelIcon = LifeCost.cards.CardUtils.LoadSpriteFromResource(Art.lifecost_vamperic_a2);
-
-			Texture2D tex = LifeCost.cards.CardUtils.LoadTextureFromResource(Art.lifecost_vamperic);
-
-			var abIds = LifeCost.cards.CardUtils.GetAbilityId(info.rulebookName);
-			
-			NewAbility newAbility = new NewAbility(info, typeof(lifecost_vamperic), tex, abIds);
-
+			Texture2D tex_a1 = LifeCost.cards.CardUtils.LoadTextureFromResource(Art.lifecost_vamperic);
+			byte[] tex_a2 = Art.lifecost_vamperic_a2;
+			int powerlevel = 0;
+			bool LeshyUsable = false;
+			bool part1Shops = false;
+			bool canStack = false;
 
 			// set ability to behaviour class
-			lifecost_vamperic.ability = newAbility.ability;
-
-			return newAbility;
+			lifecost_vamperic.ability = cards.CardUtils.CreateAbilityWithDefaultSettings(rulebookName, rulebookDescription, typeof(lifecost_vamperic), tex_a1, tex_a2, LearnDialogue,
+																					true, powerlevel, LeshyUsable, part1Shops, canStack).ability;
 
 		}
 	}

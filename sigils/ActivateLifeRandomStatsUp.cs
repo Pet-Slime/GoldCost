@@ -11,30 +11,22 @@ namespace LifeCost
 	public partial class Plugin
 	{
 		//Request by blind
-		private NewAbility AddActivateLifeRandomStatsUp()
+		private void AddActivateLifeRandomStatsUp()
 		{
 			// setup ability
 			const string rulebookName = "Die Roll";
-			const string rulebookDescription = "Pay 3 life to gain between 0 and 6 increase in stats, distributed randomly";
+			const string rulebookDescription = "Pay 5 Life/Foils to gain between 0 and 6 increase in stats, distributed randomly";
 			const string LearnDialogue = "Sing it once, Sing it twice, take a chance and roll the dice!";
-			// const string TextureFile = "Artwork/void_pathetic.png";
-
-			AbilityInfo info = LifeCost.cards.CardUtils.CreateInfoWithDefaultSettings(rulebookName, rulebookDescription, LearnDialogue, true, 3, false);
-			info.canStack = false;
-			info.activated = true;
-			info.pixelIcon = LifeCost.cards.CardUtils.LoadSpriteFromResource(Art.lifecost_ActivateLifeRandomStatsUp_a2);
-
-			Texture2D tex = LifeCost.cards.CardUtils.LoadTextureFromResource(Art.lifecost_ActivateLifeRandomStatsUp);
-
-			var abIds = LifeCost.cards.CardUtils.GetAbilityId(info.rulebookName);
-			
-			NewAbility newAbility = new NewAbility(info, typeof(lifecost_ActivateLifeRandomStatsUp), tex, abIds);
-
+			Texture2D tex_a1 = LifeCost.cards.CardUtils.LoadTextureFromResource(Art.lifecost_ActivateLifeRandomStatsUp);
+			byte[] tex_a2 = Art.lifecost_ActivateLifeRandomStatsUp_a2;
+			int powerlevel = 3;
+			bool LeshyUsable = true;
+			bool part1Shops = false;
+			bool canStack = false;
 
 			// set ability to behaviour class
-			lifecost_ActivateLifeRandomStatsUp.ability = newAbility.ability;
-
-			return newAbility;
+			lifecost_ActivateLifeRandomStatsUp.ability = cards.CardUtils.CreateAbilityWithDefaultSettings(rulebookName, rulebookDescription, typeof(lifecost_ActivateLifeRandomStatsUp), tex_a1, tex_a2, LearnDialogue,
+																					true, powerlevel, LeshyUsable, part1Shops, canStack).ability;
 
 		}
 	}
@@ -45,11 +37,11 @@ namespace LifeCost
 
 		public static Ability ability;
 
-		protected override int MoneyCost
+		public override int LifeMoneyCost
 		{
 			get
 			{
-				return 3;
+				return 5;
 			}
 		}
 

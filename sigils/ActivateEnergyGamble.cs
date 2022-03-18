@@ -11,29 +11,22 @@ namespace LifeCost
 	public partial class Plugin
 	{
 		//Request by blind
-		private NewAbility addActivateEnergyGamble()
+		private void addActivateEnergyGamble()
 		{
 			// setup ability
 			const string rulebookName = "Max Energy Gamble";
 			const string rulebookDescription = "Pay 6 energy to put 0 to 3 damage on someone's side of the scale";
 			const string LearnDialogue = "Money for Blood";
-			// const string TextureFile = "Artwork/void_pathetic.png";
-
-			AbilityInfo info = LifeCost.cards.CardUtils.CreateInfoWithDefaultSettings(rulebookName, rulebookDescription, LearnDialogue, true, 3, false);
-			info.activated = true;
-			info.pixelIcon = LifeCost.cards.CardUtils.LoadSpriteFromResource(Art.lifecost_ActivateEnergyGamble_a2);
-
-			Texture2D tex = LifeCost.cards.CardUtils.LoadTextureFromResource(Art.lifecost_ActivateEnergyGamble);
-
-			var abIds = LifeCost.cards.CardUtils.GetAbilityId(info.rulebookName);
-			
-			NewAbility newAbility = new NewAbility(info, typeof(lifecost_ActivateEnergyGamble), tex, abIds);
-
+			Texture2D tex_a1 = LifeCost.cards.CardUtils.LoadTextureFromResource(Art.lifecost_ActivateEnergyGamble);
+			byte[] tex_a2 = Art.lifecost_ActivateEnergyGamble_a2;
+			int powerlevel = 3;
+			bool LeshyUsable = true;
+			bool part1Shops = false;
+			bool canStack = false;
 
 			// set ability to behaviour class
-			lifecost_ActivateEnergyGamble.ability = newAbility.ability;
-
-			return newAbility;
+			lifecost_ActivateLifeRandomStatsUp.ability = cards.CardUtils.CreateAbilityWithDefaultSettings(rulebookName, rulebookDescription, typeof(lifecost_ActivateLifeRandomStatsUp), tex_a1, tex_a2, LearnDialogue,
+																					true, powerlevel, LeshyUsable, part1Shops, canStack).ability;
 
 		}
 	}
@@ -44,7 +37,7 @@ namespace LifeCost
 
 		public static Ability ability;
 
-		protected override int EnergyCost
+		public override int EnergyCost
 		{
 			get
 			{

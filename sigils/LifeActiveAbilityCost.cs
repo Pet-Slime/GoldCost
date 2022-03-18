@@ -13,15 +13,15 @@ namespace LifeCost.sigils
 	[HarmonyPatch]
 	public abstract class LifeActiveAbilityCost : ActivatedAbilityBehaviour
     {
-        protected virtual int LifeMoneyCost { get; }
+        public virtual int LifeMoneyCost { get; }
 
-		protected virtual int LifeCost { get; }
+		public virtual int LifeCost { get; }
 
-		protected virtual int MoneyCost { get; }
+		public virtual int MoneyCost { get; }
 
-		protected override int EnergyCost { get; }
+		public override int EnergyCost { get; }
 
-		protected override int BonesCost { get; }
+		public override int BonesCost { get; }
 
 		[HarmonyPostfix]
 		[HarmonyPatch(typeof(ActivatedAbilityBehaviour), nameof(ActivatedAbilityBehaviour.OnActivatedAbility))]

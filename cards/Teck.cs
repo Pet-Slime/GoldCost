@@ -1,78 +1,56 @@
 ﻿using System.Collections.Generic;
 using DiskCardGame;
 using UnityEngine;
-using APIPlugin;
+using InscryptionAPI.Card;
 
 namespace LifeCost.cards
 {
     public static class Teck
-    {
+	{
+		public static readonly Ability CustomAbility = InscryptionAPI.Guid.GuidManager.GetEnumValue<Ability>("extraVoid.inscryption.LifeCost", "Vamperic Strength");
 		public static void AddCard()
 		{
+			string name = "lifecost_Teck";
+			string displayName = "Teck";
+			string description = "The Lost Beast, in the shape of a tooth, showing up only in error.";
+			int baseAttack = 1;
+			int baseHealth = 1;
+			int bloodCost = 0;
+			int boneCost = 0;
+			int energyCost = -2;
 
 			List<CardMetaCategory> metaCategories = new List<CardMetaCategory>();
 
 			List<Tribe> Tribes = new List<Tribe>();
 
 			List<Ability> Abilities = new List<Ability>();
-			Abilities.Add(lifecost_ActivateStatsUpLife.ability);
+			Abilities.Add(Ability.ActivatedDrawSkeleton);
 
 			List<Trait> Traits = new List<Trait>();
 
-			List<AbilityIdentifier> customAbilities = new List<AbilityIdentifier>();
-
-			List<SpecialTriggeredAbility> specialAbilities = new List<SpecialTriggeredAbility>();
-
-			List<CardAppearanceBehaviour.Appearance> appearanceBehaviour = new List<CardAppearanceBehaviour.Appearance>();
-
 			Texture2D DefaultTexture = CardUtils.LoadTextureFromResource(LifeCost.Resources.Cards.teck);
-			Texture2D pixelTexture = CardUtils.LoadTextureFromResource(LifeCost.Resources.Cards.pixel_teck);
-
+			Texture2D pTexture = CardUtils.LoadTextureFromResource(LifeCost.Resources.Cards.pixel_teck);
 			Texture2D eTexture = CardUtils.LoadTextureFromResource(LifeCost.Resources.Cards.teck_e);
 
-			IceCubeIdentifier iceCubeId = null;
-			EvolveIdentifier evolveId = null;
-			TailIdentifier tail = null;
+			CardInfo newCard = CardUtils.CreateCardWithDefaultSettings(
+				InternalName: name,
+				DisplayName: displayName,
+				attack: baseAttack,
+				health: baseHealth,
+				texture_base: DefaultTexture,
+				texture_emission: eTexture,
+				texture_pixel: pTexture,
+				cardMetaCategories: metaCategories,
+				tribes: Tribes,
+				traits: Traits,
+				abilities: Abilities,
+				bloodCost: bloodCost,
+				boneCost: boneCost,
+				energyCost: energyCost
+				);
+			newCard.description = description;
+			CardManager.Add("lifecost", newCard);
 
-			NewCard.Add(name: "lifecost_Teck",
-				displayedName: "Teck",
-				baseAttack: 1,
-				baseHealth: 1,
-				metaCategories,
-				cardComplexity: CardComplexity.Advanced,
-				temple: CardTemple.Nature,
-				description: "The Lost Beast, in the shape of a tooth, showing up only in error.",
-				hideAttackAndHealth: false,
-				bloodCost: 0,
-				bonesCost: 0,
-				energyCost: -2,
-				gemsCost: null,
-				specialStatIcon: SpecialStatIcon.None,
-				Tribes,
-				Traits,
-				specialAbilities,
-				Abilities,
-				customAbilities,
-				specialAbilitiesIdsParam: null,
-				evolveParams: null,
-				defaultEvolutionName: null,
-				tailParams: null,
-				iceCubeParams: null,
-				flipPortraitForStrafe: false,
-				onePerDeck: false,
-				appearanceBehaviour,
-				DefaultTexture,
-				altTex: null,
-				titleGraphic: null,
-				pixelTexture,
-				eTexture,
-				animatedPortrait: null,
-				decals: null,
-				evolveId,
-				iceCubeId,
-				tail);
-
-			
 		}
 	}
 }
