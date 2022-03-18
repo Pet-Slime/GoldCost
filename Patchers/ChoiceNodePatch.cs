@@ -1,11 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using APIPlugin;
+using InscryptionAPI.Helpers;
 using DiskCardGame;
 using UnityEngine;
 using HarmonyLib;
-using System;
-using Art = LifeCost.Resources.Cost;
 
 namespace LifeCost.Patchers
 {
@@ -49,7 +47,7 @@ namespace LifeCost.Patchers
 			{
 				if (choice.resourceType == ResourceTypeMarker)
 				{
-						__result = LoadTextureFromResource(Art.costChoiceRewardBack);
+					__result = TextureHelper.GetImageAsTexture($"lifeCostChoiceRewardBack.png", typeof(ChoiceNodePatch).Assembly);
 				}
 			}
 		}
@@ -107,7 +105,9 @@ namespace LifeCost.Patchers
 
 		public static CardInfo GetRandomChoosableLifeCard(int randomSeed)
 		{
-			List<CardInfo> list = CardLoader.GetUnlockedCards(CardMetaCategory.ChoiceNode, CardTemple.Nature).FindAll((CardInfo x) => x.LifeCostz() > 0);
+			List<CardInfo> list = CardLoader.GetUnlockedCards(CardMetaCategory.ChoiceNode, CardTemple.Nature).FindAll((CardInfo x) => x.LifeMoneyCost() > 0);
+			list.AddRange(CardLoader.GetUnlockedCards(CardMetaCategory.ChoiceNode, CardTemple.Nature).FindAll((CardInfo x) => x.LifeCost() > 0));
+			list.AddRange(CardLoader.GetUnlockedCards(CardMetaCategory.ChoiceNode, CardTemple.Nature).FindAll((CardInfo x) => x.MoneyCost() > 0));
 			bool flag = list.Count == 0;
 			CardInfo result;
 			if (flag)

@@ -18,15 +18,19 @@ namespace LifeCost
 			const string rulebookDescription = "Pay 3 life to increase the power and health of this card by 1";
 			const string LearnDialogue = "Hurting oneself can lead to an increase in strength.";
 			Texture2D tex_a1 = LifeCost.cards.CardUtils.LoadTextureFromResource(Art.lifecost_ActivateStatsUpLife);
-			byte[] tex_a2 = Art.lifecost_ActivateStatsUpLife_a2;
+			Sprite tex_a2 = LifeCost.cards.CardUtils.LoadSpriteFromResource(Art.lifecost_ActivateStatsUpLife_a2);
 			int powerlevel = 3;
 			bool LeshyUsable = true;
 			bool part1Shops = true;
 			bool canStack = false;
 
+			var test = cards.CardUtils.CreateAbilityWithDefaultSettings(rulebookName, rulebookDescription, typeof(lifecost_ActivateStatsUpLife), tex_a1, tex_a2, LearnDialogue,
+																					true, powerlevel, LeshyUsable, part1Shops, canStack);
+
+			test.activated = true;
+
 			// set ability to behaviour class
-			lifecost_ActiveStatsUpMoney.ability = cards.CardUtils.CreateAbilityWithDefaultSettings(rulebookName, rulebookDescription, typeof(lifecost_ActiveStatsUpMoney), tex_a1, tex_a2, LearnDialogue,
-																					true, powerlevel, LeshyUsable, part1Shops, canStack).ability;
+			lifecost_ActivateStatsUpLife.ability = test.ability;
 
 		}
 	}

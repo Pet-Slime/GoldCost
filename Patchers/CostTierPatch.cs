@@ -18,7 +18,7 @@ namespace LifeCost.Patchers
 			[HarmonyPostfix]
 			public static void Postfix(ref int __result, ref CardInfo __instance)
 			{
-				__result += Mathf.RoundToInt((float)__instance.LifeCostz() / 2f);
+				__result += Mathf.RoundToInt((float)__instance.LifeMoneyCost() / 2f) + Mathf.RoundToInt((float)__instance.LifeCost()) + Mathf.RoundToInt((float)__instance.MoneyCost() / 4f);
 			}
 		}
 
@@ -28,7 +28,7 @@ namespace LifeCost.Patchers
 			[HarmonyPostfix]
 			public static void Postfix(ref CardInfo card, List<CardInfo> hand, ref bool __result, ref Deck __instance)
 			{
-				bool flag9 = card.LifeCostz() <= 3;
+				bool flag9 = card.LifeCost() <= 4 || card.LifeMoneyCost() <= 4;
 				__result = (__result && flag9);
 			}
 		}

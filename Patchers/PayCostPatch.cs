@@ -27,7 +27,7 @@ namespace LifeCost
 		)
 		{
 ///			Plugin.Log.LogWarning("Cost test: PayCost Patch fired");
-			if (card.Info.LifeCostz() > 0)
+			if (card.Info.LifeMoneyCost() > 0 || card.Info.LifeCost() > 0 || card.Info.MoneyCost() > 0)
 			{
 	
 				__instance.CardsInHand.ForEach(delegate (PlayableCard x)
@@ -76,40 +76,45 @@ namespace LifeCost
 						{
 							yield return Singleton<ResourcesManager>.Instance.SpendEnergy(card.EnergyCost);
 						}
-						if (card.Info.LifeCostz() > 0)
+						if (card.Info.LifeMoneyCost() > 0 || card.Info.LifeCost() > 0 || card.Info.MoneyCost() > 0)
 						{
-							int costToPay = card.Info.LifeCostz();
 							bool flag2 = !SaveManager.SaveFile.IsPart2;
 							if (flag2)
+							{
+								if (card.Info.LifeCost() > 0)
 								{
-								if (card.HasAbility(lifecost_vamperic.ability) || card.Info.specialAbilities.Contains(VampericSpecialAbility.specialAbility))
-									{
+									int costToPay = card.Info.LifeCost();
 									yield return extractCostPart1_lifeOnly(costToPay);
 								}
-								else if (card.HasAbility(lifecost_Greedy.ability) || card.Info.specialAbilities.Contains(GreedySpecialAbility.specialAbility))
-									{
+								if (card.Info.MoneyCost() > 0)
+								{
+									int costToPay = card.Info.MoneyCost();
 									int currentCurrency = RunState.Run.currency;
 									yield return extractCostPart1_MoneyOnly(costToPay, currentCurrency);
 								}
-								else
+								if (card.Info.LifeMoneyCost() > 0)
 								{
+									int costToPay = card.Info.LifeMoneyCost();
 									int currentCurrency = RunState.Run.currency;
 									yield return extractCostPart1_hybrid(costToPay, currentCurrency);
 								}
 							}
 							else
-							{
-								if (card.HasAbility(lifecost_vamperic.ability) || card.Info.specialAbilities.Contains(VampericSpecialAbility.specialAbility))
-									{
-									yield return extractCostPart2_lifeOnly(costToPay);
-								}
-								else if (card.HasAbility(lifecost_Greedy.ability) || card.Info.specialAbilities.Contains(GreedySpecialAbility.specialAbility))
-									{
-									yield return extractCostPart2_MoneyOnly(costToPay);
-								}
-								else
 								{
-									int currentCurrency = OnSetupPatch_Part2.PlayerFoils;
+									if (card.Info.LifeCost() > 0)
+									{
+										int costToPay = card.Info.LifeCost();
+										yield return extractCostPart2_lifeOnly(costToPay);
+									}
+									if (card.Info.MoneyCost() > 0)
+									{
+										int costToPay = card.Info.MoneyCost();
+										yield return extractCostPart2_MoneyOnly(costToPay);
+									}
+									if (card.Info.LifeMoneyCost() > 0)
+									{
+										int costToPay = card.Info.LifeMoneyCost();
+										int currentCurrency = OnSetupPatch_Part2.PlayerFoils;
 									yield return extractCostPart2_hybrid(costToPay, currentCurrency);
 								}
 							}

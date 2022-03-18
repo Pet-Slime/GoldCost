@@ -7,7 +7,6 @@ namespace LifeCost.cards
 {
     public static class Teck
 	{
-		public static readonly Ability CustomAbility = InscryptionAPI.Guid.GuidManager.GetEnumValue<Ability>("extraVoid.inscryption.LifeCost", "Vamperic Strength");
 		public static void AddCard()
 		{
 			string name = "lifecost_Teck";
@@ -24,7 +23,7 @@ namespace LifeCost.cards
 			List<Tribe> Tribes = new List<Tribe>();
 
 			List<Ability> Abilities = new List<Ability>();
-			Abilities.Add(Ability.ActivatedDrawSkeleton);
+			Abilities.Add(lifecost_ActivateStatsUpLife.ability);
 
 			List<Trait> Traits = new List<Trait>();
 
@@ -49,7 +48,7 @@ namespace LifeCost.cards
 				energyCost: energyCost
 				);
 			newCard.description = description;
-			newCard.SetExtendedProperty("LifeCost", 2);
+			newCard.SetExtendedProperty("MoneyCost", 6);
 			CardManager.Add("lifecost", newCard);
 
 		}

@@ -18,14 +18,14 @@ namespace LifeCost
 			const string rulebookDescription = "Pay 2 life to gain 2 foils";
 			const string LearnDialogue = "Blood for money";
 			Texture2D tex_a1 = LifeCost.cards.CardUtils.LoadTextureFromResource(Art.lifecost_LifeConverter);
-			byte[] tex_a2 = Art.lifecost_LifeConverter_a2;
+			Sprite tex_a2 = LifeCost.cards.CardUtils.LoadSpriteFromResource(Art.lifecost_LifeConverter_a2);
 			int powerlevel = 3;
 			bool LeshyUsable = true;
 			bool part1Shops = false;
 			bool canStack = false;
 
 			// set ability to behaviour class
-			lifecost_ActiveStatsUpMoney.ability = cards.CardUtils.CreateAbilityWithDefaultSettings(rulebookName, rulebookDescription, typeof(lifecost_ActiveStatsUpMoney), tex_a1, tex_a2, LearnDialogue,
+			lifecost_ActivateLifeConverter.ability = cards.CardUtils.CreateAbilityWithDefaultSettings(rulebookName, rulebookDescription, typeof(lifecost_ActivateLifeConverter), tex_a1, tex_a2, LearnDialogue,
 																					true, powerlevel, LeshyUsable, part1Shops, canStack).ability;
 
 		}

@@ -18,14 +18,14 @@ namespace LifeCost
 			const string rulebookDescription = "Pay 6 energy to put 0 to 3 damage on someone's side of the scale";
 			const string LearnDialogue = "Money for Blood";
 			Texture2D tex_a1 = LifeCost.cards.CardUtils.LoadTextureFromResource(Art.lifecost_ActivateEnergyGamble);
-			byte[] tex_a2 = Art.lifecost_ActivateEnergyGamble_a2;
+			Sprite tex_a2 = LifeCost.cards.CardUtils.LoadSpriteFromResource(Art.lifecost_ActivateEnergyGamble_a2);
 			int powerlevel = 3;
 			bool LeshyUsable = true;
 			bool part1Shops = false;
 			bool canStack = false;
 
 			// set ability to behaviour class
-			lifecost_ActivateLifeRandomStatsUp.ability = cards.CardUtils.CreateAbilityWithDefaultSettings(rulebookName, rulebookDescription, typeof(lifecost_ActivateLifeRandomStatsUp), tex_a1, tex_a2, LearnDialogue,
+			lifecost_ActivateEnergyGamble.ability = cards.CardUtils.CreateAbilityWithDefaultSettings(rulebookName, rulebookDescription, typeof(lifecost_ActivateEnergyGamble), tex_a1, tex_a2, LearnDialogue,
 																					true, powerlevel, LeshyUsable, part1Shops, canStack).ability;
 
 		}

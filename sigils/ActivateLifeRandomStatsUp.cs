@@ -18,15 +18,19 @@ namespace LifeCost
 			const string rulebookDescription = "Pay 5 Life/Foils to gain between 0 and 6 increase in stats, distributed randomly";
 			const string LearnDialogue = "Sing it once, Sing it twice, take a chance and roll the dice!";
 			Texture2D tex_a1 = LifeCost.cards.CardUtils.LoadTextureFromResource(Art.lifecost_ActivateLifeRandomStatsUp);
-			byte[] tex_a2 = Art.lifecost_ActivateLifeRandomStatsUp_a2;
+			Sprite tex_a2 = LifeCost.cards.CardUtils.LoadSpriteFromResource(Art.lifecost_ActivateLifeRandomStatsUp_a2);
 			int powerlevel = 3;
 			bool LeshyUsable = true;
 			bool part1Shops = false;
 			bool canStack = false;
 
+			var test = cards.CardUtils.CreateAbilityWithDefaultSettings(rulebookName, rulebookDescription, typeof(lifecost_ActivateLifeRandomStatsUp), tex_a1, tex_a2, LearnDialogue,
+																					true, powerlevel, LeshyUsable, part1Shops, canStack);
+
+			test.activated = true;
+
 			// set ability to behaviour class
-			lifecost_ActivateLifeRandomStatsUp.ability = cards.CardUtils.CreateAbilityWithDefaultSettings(rulebookName, rulebookDescription, typeof(lifecost_ActivateLifeRandomStatsUp), tex_a1, tex_a2, LearnDialogue,
-																					true, powerlevel, LeshyUsable, part1Shops, canStack).ability;
+			lifecost_ActivateLifeRandomStatsUp.ability = test.ability;
 
 		}
 	}
@@ -37,11 +41,11 @@ namespace LifeCost
 
 		public static Ability ability;
 
-		public override int LifeMoneyCost
+		public override int BonesCost
 		{
 			get
 			{
-				return 5;
+				return 1;
 			}
 		}
 

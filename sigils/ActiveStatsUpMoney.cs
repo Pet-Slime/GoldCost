@@ -18,7 +18,7 @@ namespace LifeCost
 			const string rulebookDescription = "Pay 5 currency to increase the power and health of this card by 1";
 			const string LearnDialogue = "One can be hired to do many tasks";
 			Texture2D tex_a1 = LifeCost.cards.CardUtils.LoadTextureFromResource(Art.lifecost_ActivateStatsUpMoney);
-			byte[] tex_a2 = Art.lifecost_ActivateStatsUpMoney_a2;
+			Sprite tex_a2 = LifeCost.cards.CardUtils.LoadSpriteFromResource(Art.lifecost_ActivateStatsUpMoney_a2);
 			int powerlevel = 3;
 			bool LeshyUsable = true;
 			bool part1Shops = false;

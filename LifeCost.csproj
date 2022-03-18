@@ -10,6 +10,99 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\Costs\CostChoiceBack.png" />
+    <None Remove="Resources\Costs\lifeCostChoiceRewardBack.png" />
+    <None Remove="Resources\Costs\life_cost_1.png" />
+    <None Remove="Resources\Costs\life_cost_10.png" />
+    <None Remove="Resources\Costs\life_cost_11.png" />
+    <None Remove="Resources\Costs\life_cost_12.png" />
+    <None Remove="Resources\Costs\life_cost_13.png" />
+    <None Remove="Resources\Costs\life_cost_14.png" />
+    <None Remove="Resources\Costs\life_cost_15.png" />
+    <None Remove="Resources\Costs\life_cost_2.png" />
+    <None Remove="Resources\Costs\life_cost_3.png" />
+    <None Remove="Resources\Costs\life_cost_4.png" />
+    <None Remove="Resources\Costs\life_cost_5.png" />
+    <None Remove="Resources\Costs\life_cost_6.png" />
+    <None Remove="Resources\Costs\life_cost_7.png" />
+    <None Remove="Resources\Costs\life_cost_8.png" />
+    <None Remove="Resources\Costs\life_cost_9.png" />
+    <None Remove="Resources\Costs\life_pure_cost_1.png" />
+    <None Remove="Resources\Costs\life_pure_cost_2.png" />
+    <None Remove="Resources\Costs\life_pure_cost_3.png" />
+    <None Remove="Resources\Costs\life_pure_cost_4.png" />
+    <None Remove="Resources\Costs\life_pure_cost_5.png" />
+    <None Remove="Resources\Costs\life_pure_cost_6.png" />
+    <None Remove="Resources\Costs\life_pure_cost_7.png" />
+    <None Remove="Resources\Costs\life_pure_cost_8.png" />
+    <None Remove="Resources\Costs\life_pure_cost_9.png" />
+    <None Remove="Resources\Costs\money_cost_1.png" />
+    <None Remove="Resources\Costs\money_cost_10.png" />
+    <None Remove="Resources\Costs\money_cost_11.png" />
+    <None Remove="Resources\Costs\money_cost_12.png" />
+    <None Remove="Resources\Costs\money_cost_13.png" />
+    <None Remove="Resources\Costs\money_cost_14.png" />
+    <None Remove="Resources\Costs\money_cost_15.png" />
+    <None Remove="Resources\Costs\money_cost_2.png" />
+    <None Remove="Resources\Costs\money_cost_3.png" />
+    <None Remove="Resources\Costs\money_cost_4.png" />
+    <None Remove="Resources\Costs\money_cost_5.png" />
+    <None Remove="Resources\Costs\money_cost_6.png" />
+    <None Remove="Resources\Costs\money_cost_7.png" />
+    <None Remove="Resources\Costs\money_cost_8.png" />
+    <None Remove="Resources\Costs\money_cost_9.png" />
+    <None Remove="Resources\Costs\pixel\pixel_life.png" />
+    <None Remove="Resources\Costs\pixel\pixel_money.png" />
+    <None Remove="Resources\Costs\pixel\pixel_pure_life.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Costs\CostChoiceBack.png" />
+    <EmbeddedResource Include="Resources\Costs\life_cost_1.png" />
+    <EmbeddedResource Include="Resources\Costs\life_cost_10.png" />
+    <EmbeddedResource Include="Resources\Costs\life_cost_11.png" />
+    <EmbeddedResource Include="Resources\Costs\life_cost_12.png" />
+    <EmbeddedResource Include="Resources\Costs\life_cost_13.png" />
+    <EmbeddedResource Include="Resources\Costs\life_cost_14.png" />
+    <EmbeddedResource Include="Resources\Costs\life_cost_15.png" />
+    <EmbeddedResource Include="Resources\Costs\life_cost_2.png" />
+    <EmbeddedResource Include="Resources\Costs\life_cost_3.png" />
+    <EmbeddedResource Include="Resources\Costs\life_cost_4.png" />
+    <EmbeddedResource Include="Resources\Costs\life_cost_5.png" />
+    <EmbeddedResource Include="Resources\Costs\life_cost_6.png" />
+    <EmbeddedResource Include="Resources\Costs\life_cost_7.png" />
+    <EmbeddedResource Include="Resources\Costs\life_cost_8.png" />
+    <EmbeddedResource Include="Resources\Costs\life_cost_9.png" />
+    <EmbeddedResource Include="Resources\Costs\life_pure_cost_1.png" />
+    <EmbeddedResource Include="Resources\Costs\life_pure_cost_2.png" />
+    <EmbeddedResource Include="Resources\Costs\life_pure_cost_3.png" />
+    <EmbeddedResource Include="Resources\Costs\life_pure_cost_4.png" />
+    <EmbeddedResource Include="Resources\Costs\life_pure_cost_5.png" />
+    <EmbeddedResource Include="Resources\Costs\life_pure_cost_6.png" />
+    <EmbeddedResource Include="Resources\Costs\life_pure_cost_7.png" />
+    <EmbeddedResource Include="Resources\Costs\life_pure_cost_8.png" />
+    <EmbeddedResource Include="Resources\Costs\life_pure_cost_9.png" />
+    <EmbeddedResource Include="Resources\Costs\money_cost_1.png" />
+    <EmbeddedResource Include="Resources\Costs\money_cost_10.png" />
+    <EmbeddedResource Include="Resources\Costs\money_cost_11.png" />
+    <EmbeddedResource Include="Resources\Costs\money_cost_12.png" />
+    <EmbeddedResource Include="Resources\Costs\money_cost_13.png" />
+    <EmbeddedResource Include="Resources\Costs\money_cost_14.png" />
+    <EmbeddedResource Include="Resources\Costs\money_cost_15.png" />
+    <EmbeddedResource Include="Resources\Costs\money_cost_2.png" />
+    <EmbeddedResource Include="Resources\Costs\money_cost_3.png" />
+    <EmbeddedResource Include="Resources\Costs\money_cost_4.png" />
+    <EmbeddedResource Include="Resources\Costs\money_cost_5.png" />
+    <EmbeddedResource Include="Resources\Costs\money_cost_6.png" />
+    <EmbeddedResource Include="Resources\Costs\money_cost_7.png" />
+    <EmbeddedResource Include="Resources\Costs\money_cost_8.png" />
+    <EmbeddedResource Include="Resources\Costs\money_cost_9.png" />
+    <EmbeddedResource Include="Resources\Costs\pixel\pixel_life.png" />
+    <EmbeddedResource Include="Resources\Costs\pixel\pixel_money.png" />
+    <EmbeddedResource Include="Resources\Costs\pixel\pixel_pure_life.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="BepInEx.Analyzers" Version="1.0.7" PrivateAssets="all" />
     <PackageReference Include="BepInEx.Core" Version="5.4.16" />
     <PackageReference Include="BepInEx.PluginInfoProps" Version="1.1.0" />
@@ -44,11 +137,6 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
     </Compile>
-    <Compile Update="Resources\Cost.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Cost.resx</DependentUpon>
-    </Compile>
   </ItemGroup>
 
   <ItemGroup>
@@ -59,10 +147,6 @@
     <EmbeddedResource Update="Resources\Cards.resx">
       <LastGenOutput>Cards.Designer.cs</LastGenOutput>
       <Generator>ResXFileCodeGenerator</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Resources\Cost.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Cost.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
 

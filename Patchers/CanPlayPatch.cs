@@ -16,9 +16,11 @@ namespace LifeCost
 			[HarmonyPostfix]
 			public static void Postfix(ref bool __result, ref PlayableCard __instance)
 			{
-				if (__instance.Info.LifeCostz() > 0) {
 
-					int costToPay = __instance.Info.LifeCostz();
+				//Hybrid Cost first
+				if (__instance.Info.LifeMoneyCost() > 0) {
+
+					int costToPay = __instance.Info.LifeMoneyCost();
 					int currentCurrency = 0; 
 					bool flag1 = SceneLoader.ActiveSceneName.StartsWith("Part1");
 					if (flag1)
@@ -30,22 +32,38 @@ namespace LifeCost
 						currentCurrency = SaveData.Data.currency;
 					}
 					int lifeBalance = Singleton<LifeManager>.Instance.Balance + 5;
-
-					int finalCurrency = 0;
-
-					if (__instance.HasAbility(lifecost_vamperic.ability) || __instance.Info.specialAbilities.Contains(VampericSpecialAbility.specialAbility))
-                    {
-						finalCurrency =  lifeBalance;
-					} else if (__instance.HasAbility(lifecost_Greedy.ability) || __instance.Info.specialAbilities.Contains(GreedySpecialAbility.specialAbility))
-					{
-						finalCurrency = currentCurrency;
-					} else
-                    {
-						finalCurrency = currentCurrency + lifeBalance;
-					}
-
+					int finalCurrency = currentCurrency + lifeBalance;
 					if (costToPay > finalCurrency)
                     {
+						__result = false;
+					}
+				}
+				if (__instance.Info.LifeCost() > 0)
+				{
+
+					int costToPay = __instance.Info.LifeCost();
+					int lifeBalance = Singleton<LifeManager>.Instance.Balance + 5;
+					if (costToPay > lifeBalance)
+					{
+						__result = false;
+					}
+				}
+
+				if (__instance.Info.MoneyCost() > 0)
+				{
+					int costToPay = __instance.Info.MoneyCost();
+					int currentCurrency = 0;
+					bool flag1 = SceneLoader.ActiveSceneName.StartsWith("Part1");
+					if (flag1)
+					{
+						currentCurrency = RunState.Run.currency;
+					}
+					else
+					{
+						currentCurrency = SaveData.Data.currency;
+					}
+					if (costToPay > currentCurrency)
+					{
 						__result = false;
 					}
 				}
@@ -71,11 +89,25 @@ namespace LifeCost
 				{
 					int lifeBalance = Singleton<LifeManager>.Instance.Balance + 5;
 					int finalCurrency = RunState.Run.currency + lifeBalance;
-					bool flag = card.Info.LifeCostz() > finalCurrency;
+					bool flag = card.Info.LifeMoneyCost() > finalCurrency;
 					if (flag)
 					{
 //						var cost = card.Info.LifeCostz();
 //						HintsHandlerEX.notEnoughLife.TryPlayDialogue(null);
+						return false;
+					}
+					bool flag1 = card.Info.LifeCost() > lifeBalance;
+					if (flag1)
+					{
+						TextDisplayer.Instance.PlayDialogueEvent("lifecost_NotEnoughLife", TextDisplayer.MessageAdvanceMode.Auto, TextDisplayer.EventIntersectMode.Wait, null, null);
+						HintsHandlerEX.notEnoughLife.TryPlayDialogue();
+						return false;
+					}
+					bool flag2 = card.Info.MoneyCost() > RunState.Run.currency;
+					if (flag2)
+					{
+						//						var cost = card.Info.LifeCostz();
+						//						HintsHandlerEX.notEnoughLife.TryPlayDialogue(null);
 						return false;
 					}
 				}
@@ -87,7 +119,8 @@ namespace LifeCost
 		public class HintsHandlerEX : HintsHandler
 		{
 
-			public static HintsHandler.Hint notEnoughLife = new HintsHandler.Hint("lifecost_NotEnoughLife", 1);
+			public static HintsHandler.Hint notEnoughLife = new HintsHandler.Hint("lifecost_NotEnoughLife", 3);
+
 
 		}
 	}

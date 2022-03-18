@@ -18,7 +18,7 @@ namespace LifeCost
 			const string rulebookDescription = "Pay 4 foils to put 1 damage on your opponent's side of the scale";
 			const string LearnDialogue = "Money for Blood";
 			Texture2D tex_a1 = LifeCost.cards.CardUtils.LoadTextureFromResource(Art.lifecost_CashConverter);
-			byte[] tex_a2 = Art.lifecost_CashConverter_a2;
+			Sprite tex_a2 = LifeCost.cards.CardUtils.LoadSpriteFromResource(Art.lifecost_CashConverter_a2);
 			int powerlevel = 5;
 			bool LeshyUsable = true;
 			bool part1Shops = false;

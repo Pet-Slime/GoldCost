@@ -38,16 +38,12 @@ namespace LifeCost
 			Harmony harmony = new(PluginGuid);
 			harmony.PatchAll();
 
-			AddGreedy();
-			AddVamperic();
 			AddActiveStatsUpLife();
 			AddActiveStatsUpMoney();
 			AddActivateLifeConverter();
 			AddActiveCashConverter();
 			AddActivateLifeRandomStatsUp();
 			addActivateEnergyGamble();
-			GreedySpecialAbility.addGreedySpecialAbility();
-			VampericSpecialAbility.addVampericSpecialAbility();
 
 			cards.Teck.AddCard();
 		}
@@ -55,8 +51,29 @@ namespace LifeCost
 		private void Start()
         {
 
+			Plugin.Log.LogMessage("Lifecost start event fired");
 			LifeCost.vanilla_tweaks.ChangeCardsToLifecost();
 			LifeCost.Patchers.RenderFixes.RenderFix.CommunityPatchHook();
         }
-	}
+
+
+        [HarmonyPatch(typeof(DialogueDataUtil), "ReadDialogueData")]
+        [HarmonyPostfix]
+        public static void BossDialogue()
+        {
+            // Here, we replace dialogue from Leshy based on the starter decks plugin being installed
+            // And add new dialogue
+            LifeCost.lib.DialogueHelper.AddOrModifySimpleDialogEvent("lifecost_NotEnoughLife", new string[] {
+                "You do not have enough life to play that card."
+            }, new string[][] {
+                new string[] {
+                    "You are too hurt to play that card."
+                },
+                new string[] {
+                    "That card demands more life."
+                }
+            });
+
+        }
+    }
 }

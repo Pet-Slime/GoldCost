@@ -27,13 +27,15 @@ namespace LifeCost.sigils
 		[HarmonyPatch(typeof(ActivatedAbilityBehaviour), nameof(ActivatedAbilityBehaviour.OnActivatedAbility))]
 		private static IEnumerator JankOverride(IEnumerator result, ActivatedAbilityBehaviour __instance)
 		{
+			Plugin.Log.LogMessage("Lifecost active ability patch firing 1");
 			if (__instance is LifeActiveAbilityCost yours)
 			{
+				Plugin.Log.LogMessage("Lifecost active ability patch firing 2");
 				bool baseFlag = yours.CanAfford() && yours.CanActivate();
 				bool LifeFlag = yours.CanAffordLife() && yours.CanActivate();
 				bool MoneyFlag = yours.CanAffordMoney() && yours.CanActivate();
 				bool HybridFlag = yours.CanAffordHybrid() && yours.CanActivate();
-				if (baseFlag || LifeFlag || MoneyFlag || HybridFlag)
+				if (baseFlag && LifeFlag && MoneyFlag && HybridFlag)
 				{
 					bool energyFlag = yours.EnergyCost > 0;
 					if (energyFlag)
@@ -126,7 +128,7 @@ namespace LifeCost.sigils
 		private bool CanAffordLife()
         {
 			int lifeBalance = Singleton<LifeManager>.Instance.Balance + 5;
-			return lifeBalance >= LifeCost;
+			return lifeBalance >= this.LifeCost;
         }
 
 		private bool CanAffordMoney()
@@ -141,11 +143,12 @@ namespace LifeCost.sigils
 			{
 				currentCurrency = SaveData.Data.currency;
 			}
-			return currentCurrency >= MoneyCost;
+			return currentCurrency >= this.MoneyCost;
 		}
 
 		private bool CanAffordHybrid()
 		{
+			Plugin.Log.LogMessage("Lifecost active ability patch firing 3");
 			int finalCost = 0;
 			int currentCurrency = 0;
 			bool flag1 = SceneLoader.ActiveSceneName.StartsWith("Part1");
@@ -159,7 +162,8 @@ namespace LifeCost.sigils
 			}
 			int lifeBalance = Singleton<LifeManager>.Instance.Balance + 5;
 			finalCost = currentCurrency + lifeBalance;
-			return finalCost >= LifeMoneyCost;
+			return finalCost >= this.LifeMoneyCost;
 		}
+
 	}
 }
