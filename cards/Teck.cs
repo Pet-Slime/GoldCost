@@ -17,7 +17,7 @@ namespace LifeCost.cards
 			int baseHealth = 1;
 			int bloodCost = 0;
 			int boneCost = 0;
-			int energyCost = -2;
+			int energyCost = 0;
 
 			List<CardMetaCategory> metaCategories = new List<CardMetaCategory>();
 
@@ -49,6 +49,7 @@ namespace LifeCost.cards
 				energyCost: energyCost
 				);
 			newCard.description = description;
+			newCard.SetExtendedProperty("LifeCost", 2);
 			CardManager.Add("lifecost", newCard);
 
 		}
