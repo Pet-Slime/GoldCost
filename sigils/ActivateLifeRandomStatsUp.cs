@@ -19,7 +19,7 @@ namespace LifeCost
 			const string LearnDialogue = "Sing it once, Sing it twice, take a chance and roll the dice!";
 			Texture2D tex_a1 = LifeCost.cards.CardUtils.LoadTextureFromResource(Art.lifecost_ActivateLifeRandomStatsUp);
 			Sprite tex_a2 = LifeCost.cards.CardUtils.LoadSpriteFromResource(Art.lifecost_ActivateLifeRandomStatsUp_a2);
-			int powerlevel = 3;
+			int powerlevel = 2;
 			bool LeshyUsable = true;
 			bool part1Shops = false;
 			bool canStack = false;
@@ -41,11 +41,11 @@ namespace LifeCost
 
 		public static Ability ability;
 
-		public override int BonesCost
+		public override int LifeMoneyCost
 		{
 			get
 			{
-				return 1;
+				return 5;
 			}
 		}
 

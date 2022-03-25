@@ -19,7 +19,7 @@ namespace LifeCost
 			const string LearnDialogue = "Money for Blood";
 			Texture2D tex_a1 = LifeCost.cards.CardUtils.LoadTextureFromResource(Art.lifecost_ActivateEnergyGamble);
 			Sprite tex_a2 = LifeCost.cards.CardUtils.LoadSpriteFromResource(Art.lifecost_ActivateEnergyGamble_a2);
-			int powerlevel = 3;
+			int powerlevel = 0;
 			bool LeshyUsable = true;
 			bool part1Shops = false;
 			bool canStack = false;

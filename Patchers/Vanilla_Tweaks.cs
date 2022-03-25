@@ -29,6 +29,13 @@ namespace LifeCost
     }
 
 
+
+
+
+
+
+
+
     public static class vanilla_tweaks
     {
         public static void ChangeCardsToLifecost()
@@ -45,10 +52,6 @@ namespace LifeCost
 
                 return cards;
             };
-
-
-            CardInfo card = CardManager.BaseGameCards.CardByName("Zombie");
-            card.AddAbilities(lifecost_ActivateStatsUpLife.ability);
         }
     }
 }

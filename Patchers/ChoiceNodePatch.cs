@@ -47,7 +47,7 @@ namespace LifeCost.Patchers
 			{
 				if (choice.resourceType == ResourceTypeMarker)
 				{
-					__result = TextureHelper.GetImageAsTexture($"lifeCostChoiceRewardBack.png", typeof(ChoiceNodePatch).Assembly);
+					__result = TextureHelper.GetImageAsTexture("CostChoiceBack.png", typeof(ChoiceNodePatch).Assembly);
 				}
 			}
 		}

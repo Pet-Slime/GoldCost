@@ -42,17 +42,16 @@ namespace LifeCost.Patchers.RenderFixes
                 int myCustomCost2 = card.LifeMoneyCost();
                 if (myCustomCost2 > 0)
                 {
-                    Texture2D costTexture = Part2CardCostRender.CombineIconAndCount(myCustomCost1, TextureHelper.GetImageAsTexture("pixel_life.png", typeof(RenderFix).Assembly));
+                    Texture2D costTexture = Part2CardCostRender.CombineIconAndCount(myCustomCost2, TextureHelper.GetImageAsTexture("pixel_life.png", typeof(RenderFix).Assembly));
                     costs.Add(costTexture);
                 }
 
                 int myCustomCost3 = card.MoneyCost();
                 if (myCustomCost3 > 0)
                 {
-                    Texture2D costTexture = Part2CardCostRender.CombineIconAndCount(myCustomCost1, TextureHelper.GetImageAsTexture("pixel_money.png", typeof(RenderFix).Assembly));
+                    Texture2D costTexture = Part2CardCostRender.CombineIconAndCount(myCustomCost3, TextureHelper.GetImageAsTexture("pixel_money.png", typeof(RenderFix).Assembly));
                     costs.Add(costTexture);
                 }
-
             };
         }
     }

@@ -48,7 +48,7 @@ namespace LifeCost.cards
 				energyCost: energyCost
 				);
 			newCard.description = description;
-			newCard.SetExtendedProperty("MoneyCost", 6);
+			newCard.SetExtendedProperty("LifeMoneyCost", 2);
 			CardManager.Add("lifecost", newCard);
 
 		}

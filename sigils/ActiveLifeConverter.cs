@@ -15,7 +15,7 @@ namespace LifeCost
 		{
 			// setup ability
 			const string rulebookName = "Life Converter";
-			const string rulebookDescription = "Pay 2 life to gain 2 foils";
+			const string rulebookDescription = "Pay 2 life to gain 1 foils";
 			const string LearnDialogue = "Blood for money";
 			Texture2D tex_a1 = LifeCost.cards.CardUtils.LoadTextureFromResource(Art.lifecost_LifeConverter);
 			Sprite tex_a2 = LifeCost.cards.CardUtils.LoadSpriteFromResource(Art.lifecost_LifeConverter_a2);
