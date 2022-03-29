@@ -92,22 +92,19 @@ namespace LifeCost
 					bool flag = card.Info.LifeMoneyCost() > finalCurrency;
 					if (flag)
 					{
-//						var cost = card.Info.LifeCostz();
-//						HintsHandlerEX.notEnoughLife.TryPlayDialogue(null);
+						TextDisplayer.Instance.PlayDialogueEvent("lifecost_NotEnoughLife", TextDisplayer.MessageAdvanceMode.Auto, TextDisplayer.EventIntersectMode.Wait, null, null);
 						return false;
 					}
 					bool flag1 = card.Info.LifeCost() > lifeBalance;
 					if (flag1)
 					{
 						TextDisplayer.Instance.PlayDialogueEvent("lifecost_NotEnoughLife", TextDisplayer.MessageAdvanceMode.Auto, TextDisplayer.EventIntersectMode.Wait, null, null);
-						HintsHandlerEX.notEnoughLife.TryPlayDialogue();
 						return false;
 					}
 					bool flag2 = card.Info.MoneyCost() > RunState.Run.currency;
 					if (flag2)
 					{
-						//						var cost = card.Info.LifeCostz();
-						//						HintsHandlerEX.notEnoughLife.TryPlayDialogue(null);
+						TextDisplayer.Instance.PlayDialogueEvent("lifecost_NotEnoughLife", TextDisplayer.MessageAdvanceMode.Auto, TextDisplayer.EventIntersectMode.Wait, null, null);
 						return false;
 					}
 				}
@@ -119,7 +116,11 @@ namespace LifeCost
 		public class HintsHandlerEX : HintsHandler
 		{
 
-			public static HintsHandler.Hint notEnoughLife = new HintsHandler.Hint("lifecost_NotEnoughLife", 3);
+			public static HintsHandler.Hint notEnoughLife = new HintsHandler.Hint("lifecost_NotEnoughLife", 1);
+
+			public static HintsHandler.Hint notEnoughMoney = new HintsHandler.Hint("lifecost_NotEnoughLife", 1);
+
+			public static HintsHandler.Hint notEnoughLifeMoney = new HintsHandler.Hint("lifecost_NotEnoughLife", 1);
 
 
 		}

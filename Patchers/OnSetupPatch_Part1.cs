@@ -22,12 +22,13 @@ namespace LifeCost
 			public static IEnumerator Postfix(IEnumerator enumerator, ResourcesManager __instance)
 			{
 				bool flag = __instance is Part1ResourcesManager;
-				if (flag)
+				OnSetupPatch_Part1.currencyBowlBattle = true;
+				if (flag && Singleton<CurrencyBowl>.Instance != null)
 				{
-					OnSetupPatch_Part1.currencyBowlBattle = true;
 					yield return OnSetupPatch_Part1.BowlSetup();
-					yield return enumerator;
+					yield return new WaitForSeconds(0.2f);
 				}
+				yield return enumerator;
 				yield break;
 			}
 		}
@@ -40,11 +41,141 @@ namespace LifeCost
 			public static IEnumerator Postfix(IEnumerator enumerator, Part1ResourcesManager __instance)
 			{
 				OnSetupPatch_Part1.currencyBowlBattle = false;
-				yield return OnSetupPatch_Part1.BowlCleanup();
+				if (Singleton<CurrencyBowl>.Instance != null)
+				{
+					yield return new WaitForSeconds(0.2f);
+					yield return OnSetupPatch_Part1.BowlCleanup();
+					yield return new WaitForSeconds(0.2f);
+				}
 				yield return enumerator;
 				yield break;
 			}
 		}
+
+		[HarmonyPatch(typeof(TurnManager))]
+		public class void_TeethPatch_SetupPhase
+		{
+			[HarmonyPostfix, HarmonyPatch(nameof(TurnManager.SetupPhase))]
+			public static IEnumerator Postfix(IEnumerator enumerator, EncounterData encounterData, TurnManager __instance)
+			{
+				__instance.IsSetupPhase = true;
+				Singleton<PlayerHand>.Instance.PlayingLocked = true;
+				if (__instance.SpecialSequencer != null)
+				{
+					yield return __instance.SpecialSequencer.PreBoardSetup();
+				}
+				yield return new WaitForSeconds(0.15f);
+				yield return Singleton<LifeManager>.Instance.Initialize(__instance.SpecialSequencer == null || __instance.SpecialSequencer.ShowScalesOnStart);
+				if (ProgressionData.LearnedMechanic(MechanicsConcept.Rulebook) && Singleton<TableRuleBook>.Instance != null)
+				{
+					Singleton<TableRuleBook>.Instance.SetOnBoard(true);
+				}
+				__instance.StartCoroutine(Singleton<BoardManager>.Instance.Initialize());
+				yield return new WaitForSeconds(0.2f);
+				__instance.StartCoroutine(Singleton<ResourcesManager>.Instance.Setup());
+				yield return new WaitForSeconds(1.0f);
+				yield return __instance.opponent.IntroSequence(encounterData);
+				yield return new WaitForSeconds(0.2f);
+				__instance.StartCoroutine(__instance.PlacePreSetCards(encounterData));
+				yield return new WaitForSeconds(0.2f);
+				if (Singleton<BoonsHandler>.Instance != null)
+				{
+					yield return Singleton<BoonsHandler>.Instance.ActivatePreCombatBoons();
+				}
+				if (__instance.SpecialSequencer != null)
+				{
+					yield return __instance.SpecialSequencer.PreDeckSetup();
+				}
+				Singleton<PlayerHand>.Instance.Initialize();
+				yield return Singleton<CardDrawPiles>.Instance.Initialize();
+				if (__instance.SpecialSequencer != null)
+				{
+					yield return __instance.SpecialSequencer.PreHandDraw();
+				}
+				yield return Singleton<CardDrawPiles>.Instance.DrawOpeningHand(__instance.GetFixedHand());
+				if (__instance.opponent.QueueFirstCardBeforePlayer)
+				{
+					yield return __instance.opponent.QueueNewCards(true, false);
+				}
+				if (AscensionSaveData.Data.ChallengeIsActive(AscensionChallenge.StartingDamage))
+				{
+					ChallengeActivationUI.TryShowActivation(AscensionChallenge.StartingDamage);
+					yield return Singleton<LifeManager>.Instance.ShowDamageSequence(1, 1, true, 0.125f, null, 0f, false);
+				}
+				__instance.IsSetupPhase = false;
+				yield break;
+			}
+		}
+
+
+		[HarmonyPatch(typeof(TurnManager))]
+		public class void_TeethPatch_CleanupPhase
+		{
+			[HarmonyPostfix, HarmonyPatch(nameof(TurnManager.CleanupPhase))]
+			public static IEnumerator Postfix(IEnumerator enumerator, TurnManager __instance)
+			{
+				__instance.PlayerWon = __instance.PlayerIsWinner();
+				__instance.GameEnding = true;
+				__instance.UpdateMisplaysStat();
+				if (!__instance.PlayerWon && __instance.opponent != null && __instance.opponent.Blueprint != null)
+				{
+					AnalyticsManager.SendFailedEncounterEvent(__instance.opponent.Blueprint, __instance.opponent.Difficulty, __instance.TurnNumber);
+				}
+				if (__instance.SpecialSequencer != null)
+				{
+					yield return __instance.SpecialSequencer.PreCleanUp();
+				}
+				Singleton<ViewManager>.Instance.Controller.LockState = ViewLockState.Locked;
+				if (__instance.PlayerWon && __instance.PostBattleSpecialNode == null)
+				{
+					Singleton<ViewManager>.Instance.SwitchToView((Singleton<GameFlowManager>.Instance == null) ? View.MapDefault : View.Default, false, false);
+				}
+				else
+				{
+					Singleton<ViewManager>.Instance.SwitchToView(View.Default, false, false);
+				}
+				yield return new WaitForSeconds(0.1f);
+				__instance.StartCoroutine(Singleton<ResourcesManager>.Instance.CleanUp());
+				yield return new WaitForSeconds(0.2f);
+				__instance.StartCoroutine(Singleton<PlayerHand>.Instance.CleanUp());
+				yield return new WaitForSeconds(0.2f);
+				__instance.StartCoroutine(Singleton<CardDrawPiles>.Instance.CleanUp());
+				yield return new WaitForSeconds(0.2f);
+				yield return __instance.opponent.CleanUp();
+				yield return new WaitForSeconds(0.2f);
+				yield return __instance.opponent.OutroSequence(__instance.PlayerWon);
+				yield return new WaitForSeconds(0.2f);
+				__instance.StartCoroutine(Singleton<BoardManager>.Instance.CleanUp());
+				yield return new WaitForSeconds(0.2f);
+				if (Singleton<TableRuleBook>.Instance != null)
+				{
+					Singleton<TableRuleBook>.Instance.SetOnBoard(false);
+				}
+				yield return Singleton<LifeManager>.Instance.CleanUp();
+				if (__instance.SpecialSequencer != null)
+				{
+					yield return __instance.SpecialSequencer.GameEnd(__instance.PlayerWon);
+				}
+				if (!__instance.PlayerWon && Singleton<GameFlowManager>.Instance != null)
+				{
+					yield return Singleton<GameFlowManager>.Instance.PlayerLostBattleSequence(__instance.opponent);
+				}
+				if (__instance.PlayerWon && SaveManager.SaveFile.IsPart3)
+				{
+					Part3SaveData.Data.IncreaseBounty(10);
+				}
+				UnityEngine.Object.Destroy(__instance.opponent.gameObject);
+				if (Singleton<GameFlowManager>.Instance != null)
+				{
+					yield return __instance.TransitionToNextGameState();
+				}
+				Singleton<PlayerHand>.Instance.SetShown(false, false);
+				UnityEngine.Object.Destroy(__instance.SpecialSequencer);
+				yield break;
+			}
+		}
+
+
 
 		public static IEnumerator BowlSetup()
 		{
@@ -81,7 +212,9 @@ namespace LifeCost
 			}
 			yield return new WaitForSeconds(0.2f);
 			var position = new Vector3(-2.5f, 5.4f, -0.1f);
+			yield return new WaitForSeconds(0.2f);
 			holder.MoveAway(position);
+			yield return new WaitForSeconds(0.2f);
 			yield break;
 		}
 
