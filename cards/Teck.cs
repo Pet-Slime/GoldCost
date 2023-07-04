@@ -2,55 +2,42 @@
 using DiskCardGame;
 using UnityEngine;
 using InscryptionAPI.Card;
+using LifeCost.Resources;
+using LifeCost.sigils;
 
 namespace LifeCost.cards
 {
     public static class Teck
-	{
-		public static void AddCard()
-		{
-			string name = "lifecost_Teck";
-			string displayName = "Teck";
-			string description = "The Lost Beast, in the shape of a tooth, showing up only in error.";
-			int baseAttack = 1;
-			int baseHealth = 1;
-			int bloodCost = 0;
-			int boneCost = 0;
-			int energyCost = 0;
-
-			List<CardMetaCategory> metaCategories = new List<CardMetaCategory>();
-
-			List<Tribe> Tribes = new List<Tribe>();
-
-			List<Ability> Abilities = new List<Ability>();
-			Abilities.Add(lifecost_ActivateStatsUpLife.ability);
-
-			List<Trait> Traits = new List<Trait>();
-
-			Texture2D DefaultTexture = CardUtils.LoadTextureFromResource(LifeCost.Resources.Cards.teck);
-			Texture2D pTexture = CardUtils.LoadTextureFromResource(LifeCost.Resources.Cards.pixel_teck);
-			Texture2D eTexture = CardUtils.LoadTextureFromResource(LifeCost.Resources.Cards.teck_e);
-
-			CardInfo newCard = CardUtils.CreateCardWithDefaultSettings(
-				InternalName: name,
-				DisplayName: displayName,
-				attack: baseAttack,
-				health: baseHealth,
-				texture_base: DefaultTexture,
-				texture_emission: eTexture,
-				texture_pixel: pTexture,
-				cardMetaCategories: metaCategories,
-				tribes: Tribes,
-				traits: Traits,
-				abilities: Abilities,
-				bloodCost: bloodCost,
-				boneCost: boneCost,
-				energyCost: energyCost
-				);
-			newCard.description = description;
-			newCard.SetExtendedProperty("LifeMoneyCost", 2);
-			CardManager.Add("lifecost", newCard);
-
-		}
-	}
+    {
+        public static void AddCard()
+        {
+            string text = "lifecost_Teck";
+            string text2 = "Teck";
+            string description = "The Lost Beast, in the shape of a tooth, showing up only in error.";
+            int num = 1;
+            int num2 = 1;
+            int bloodCost = 0;
+            int boneCost = 0;
+            int energyCost = 0;
+            List<CardMetaCategory> cardMetaCategories = new List<CardMetaCategory>();
+            List<Tribe> tribes = new List<Tribe>();
+            List<Ability> list = new List<Ability>();
+            list.Add(lifecost_ActivateStatsUpLife.ability);
+            List<Trait> traits = new List<Trait>();
+            Texture2D texture2D = CardUtils.LoadTextureFromResource(Cards.teck);
+            Texture2D texture2D2 = CardUtils.LoadTextureFromResource(Cards.pixel_teck);
+            Texture2D texture2D3 = CardUtils.LoadTextureFromResource(Cards.teck_e);
+            string internalName = text;
+            string displayName = text2;
+            int attack = num;
+            int health = num2;
+            Texture2D texture_base = texture2D;
+            Texture2D texture_emission = texture2D3;
+            Texture2D texture_pixel = texture2D2;
+            CardInfo cardInfo = CardUtils.CreateCardWithDefaultSettings(internalName, displayName, attack, health, texture_base, texture_emission, cardMetaCategories, tribes, traits, list, texture_pixel, bloodCost, boneCost, energyCost);
+            cardInfo.description = description;
+            CardExtensions.SetExtendedProperty(cardInfo, "LifeMoneyCost", 2);
+            CardManager.Add("lifecost", cardInfo);
+        }
+    }
 }

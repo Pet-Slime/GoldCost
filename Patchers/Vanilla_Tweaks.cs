@@ -5,26 +5,26 @@ using System.Collections;
 using System;
 using System.Linq;
 
-namespace LifeCost
+namespace LifeCost.Patchers
 {
     public static class ext
     {
         public static int LifeCost(this CardInfo info)
         {
-            int? lifecost = info.GetExtendedPropertyAsInt("LifeCost");
-            return lifecost.HasValue ? lifecost.Value : 0;
+            int? extendedPropertyAsInt = CardExtensions.GetExtendedPropertyAsInt(info, "LifeCost");
+            return (extendedPropertyAsInt != null) ? extendedPropertyAsInt.Value : 0;
         }
 
         public static int MoneyCost(this CardInfo info)
         {
-            int? lifecost = info.GetExtendedPropertyAsInt("MoneyCost");
-            return lifecost.HasValue ? lifecost.Value : 0;
+            int? extendedPropertyAsInt = CardExtensions.GetExtendedPropertyAsInt(info, "MoneyCost");
+            return (extendedPropertyAsInt != null) ? extendedPropertyAsInt.Value : 0;
         }
 
         public static int LifeMoneyCost(this CardInfo info)
         {
-            int? lifecost = info.GetExtendedPropertyAsInt("LifeMoneyCost");
-            return lifecost.HasValue ? lifecost.Value : 0;
+            int? extendedPropertyAsInt = CardExtensions.GetExtendedPropertyAsInt(info, "LifeMoneyCost");
+            return (extendedPropertyAsInt != null) ? extendedPropertyAsInt.Value : 0;
         }
     }
 
@@ -36,22 +36,26 @@ namespace LifeCost
 
 
 
-    public static class vanilla_tweaks
+
+	// Token: 0x02000008 RID: 8
+	public static class vanilla_tweaks
     {
+        // Token: 0x06000018 RID: 24 RVA: 0x00002209 File Offset: 0x00000409
         public static void ChangeCardsToLifecost()
         {
-
             CardManager.ModifyCardList += delegate (List<CardInfo> cards)
             {
-                foreach (CardInfo card in cards.Where(c => c.energyCost < 0))
+                foreach (CardInfo cardInfo in from c in cards
+                                              where c.EnergyCost < 0
+                                              select c)
                 {
-                    int cost = card.energyCost * -1;
-                    card.SetExtendedProperty("LifeMoneyCost", cost);
-                    card.energyCost = 0;
+                    int num = cardInfo.EnergyCost * -1;
+                    CardExtensions.SetExtendedProperty(cardInfo, "LifeMoneyCost", num);
+                    cardInfo.SetEnergyCost(0);
                 }
-
                 return cards;
             };
         }
     }
 }
+

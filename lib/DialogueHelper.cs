@@ -12,8 +12,6 @@ namespace LifeCost.lib
 {
     public static class DialogueHelper
     {
-        // Helper functions for dialogue
-
         public static DialogueEvent.LineSet CreateLineSet(
             string[] lineString,
             Emotion emotion = Emotion.Neutral,
@@ -21,86 +19,99 @@ namespace LifeCost.lib
             P03AnimationController.Face p03Face = P03AnimationController.Face.Default,
             int speakerIndex = 0)
         {
-            return new()
+            return new DialogueEvent.LineSet
             {
-                lines = lineString.Select(s => new DialogueEvent.Line() { text = s, emotion = emotion, letterAnimation = animation, p03Face = p03Face, speakerIndex = speakerIndex }).ToList()
+                lines = (from s in lineString
+                         select new DialogueEvent.Line
+                         {
+                             text = s,
+                             emotion = emotion,
+                             letterAnimation = animation,
+                             p03Face = p03Face,
+                             speakerIndex = speakerIndex
+                         }).ToList<DialogueEvent.Line>()
             };
         }
 
+        // Token: 0x0600006B RID: 107 RVA: 0x00002F74 File Offset: 0x00001174
         public static void AddOrModifySimpleDialogEvent(string eventId, string line, TextDisplayer.LetterAnimation? animation = null, Emotion? emotion = null)
         {
-            string[] lines = { line };
-            AddOrModifySimpleDialogEvent(eventId, lines, null, animation, emotion);
+            string[] lines = new string[]
+            {
+                line
+            };
+            DialogueHelper.AddOrModifySimpleDialogEvent(eventId, lines, null, animation, emotion, "NewRunDealtDeckDefault");
         }
 
+        // Token: 0x0600006C RID: 108 RVA: 0x00002FA0 File Offset: 0x000011A0
         private static void SyncLineCollection(List<DialogueEvent.Line> curLines, string[] newLines, TextDisplayer.LetterAnimation? animation, Emotion? emotion)
         {
-            // Delete unnecessary lines
             while (curLines.Count > newLines.Length)
-                curLines.RemoveAt(curLines.Count - 1);
-
-            // Modify all existing lines of dialogue in place
-            for (int i = 0; i < curLines.Count; i++)
-                curLines[i].text = newLines[i];
-
-            // Clone the first line, modify it, and add to the end for any additional lines
-            for (int i = curLines.Count; i < newLines.Length; i++)
             {
-                DialogueEvent.Line newLine = CloneLine(curLines[0]);
-                newLine.text = newLines[i];
-
-                if (animation.HasValue)
-                    newLine.letterAnimation = animation.Value;
-
-                if (emotion.HasValue)
-                    newLine.emotion = emotion.Value;
-
-                curLines.Add(newLine);
+                curLines.RemoveAt(curLines.Count - 1);
+            }
+            for (int i = 0; i < curLines.Count; i++)
+            {
+                curLines[i].text = newLines[i];
+            }
+            for (int j = curLines.Count; j < newLines.Length; j++)
+            {
+                DialogueEvent.Line line = DialogueHelper.CloneLine(curLines[0]);
+                line.text = newLines[j];
+                bool flag = animation != null;
+                if (flag)
+                {
+                    line.letterAnimation = animation.Value;
+                }
+                bool flag2 = emotion != null;
+                if (flag2)
+                {
+                    line.emotion = emotion.Value;
+                }
+                curLines.Add(line);
             }
         }
 
+        // Token: 0x0600006D RID: 109 RVA: 0x00003064 File Offset: 0x00001264
         public static void AddOrModifySimpleDialogEvent(string eventId, string[] lines, string[][] repeatLines = null, TextDisplayer.LetterAnimation? animation = null, Emotion? emotion = null, string template = "NewRunDealtDeckDefault")
         {
-            // Get the event from the database
-            bool addEvent = false;
-            DialogueEvent dialogue = DialogueDataUtil.Data.GetEvent(eventId);
-
-            if (dialogue == null) // This event doesn't exist, which means we need to create it
+            bool flag = false;
+            DialogueEvent dialogueEvent = DialogueDataUtil.Data.GetEvent(eventId);
+            bool flag2 = dialogueEvent == null;
+            if (flag2)
             {
-                addEvent = true;
-                dialogue = CloneDialogueEvent(DialogueDataUtil.Data.GetEvent(template), eventId);
-
-                // Remove excess lines
-                while (dialogue.mainLines.lines.Count > lines.Length)
+                flag = true;
+                dialogueEvent = DialogueHelper.CloneDialogueEvent(DialogueDataUtil.Data.GetEvent(template), eventId, false);
+                while (dialogueEvent.mainLines.lines.Count > lines.Length)
                 {
-                    dialogue.mainLines.lines.RemoveAt(lines.Length);
+                    dialogueEvent.mainLines.lines.RemoveAt(lines.Length);
                 }
             }
-
-            // Sync the main lines
-            SyncLineCollection(dialogue.mainLines.lines, lines, animation, emotion);
-
-            // Sync the repeat lines
-            if (repeatLines == null)
+            DialogueHelper.SyncLineCollection(dialogueEvent.mainLines.lines, lines, animation, emotion);
+            bool flag3 = repeatLines == null;
+            if (flag3)
             {
-                dialogue.repeatLines.Clear();
+                dialogueEvent.repeatLines.Clear();
             }
             else
             {
-
-                // Delete unnecessary
-                while (dialogue.repeatLines.Count > repeatLines.Length)
-                    dialogue.repeatLines.RemoveAt(dialogue.repeatLines.Count - 1);
-
-                // Modify all existing lines of dialogue in place
-                for (int i = 0; i < dialogue.repeatLines.Count; i++)
-                    SyncLineCollection(dialogue.repeatLines[i].lines, repeatLines[i], animation, emotion);
+                while (dialogueEvent.repeatLines.Count > repeatLines.Length)
+                {
+                    dialogueEvent.repeatLines.RemoveAt(dialogueEvent.repeatLines.Count - 1);
+                }
+                for (int i = 0; i < dialogueEvent.repeatLines.Count; i++)
+                {
+                    DialogueHelper.SyncLineCollection(dialogueEvent.repeatLines[i].lines, repeatLines[i], animation, emotion);
+                }
             }
-
-            if (addEvent)
-                DialogueDataUtil.Data.events.Add(dialogue);
+            bool flag4 = flag;
+            if (flag4)
+            {
+                DialogueDataUtil.Data.events.Add(dialogueEvent);
+            }
         }
 
+        // Token: 0x0600006E RID: 110 RVA: 0x0000318C File Offset: 0x0000138C
         public static DialogueEvent.Line CloneLine(DialogueEvent.Line line)
         {
             return new DialogueEvent.Line
@@ -116,9 +127,10 @@ namespace LifeCost.lib
             };
         }
 
+        // Token: 0x0600006F RID: 111 RVA: 0x00003204 File Offset: 0x00001404
         public static DialogueEvent CloneDialogueEvent(DialogueEvent dialogueEvent, string newId, bool includeRepeat = false)
         {
-            DialogueEvent clonedEvent = new DialogueEvent
+            DialogueEvent dialogueEvent2 = new DialogueEvent
             {
                 id = newId,
                 groupId = dialogueEvent.groupId,
@@ -126,27 +138,27 @@ namespace LifeCost.lib
                 speakers = new List<DialogueEvent.Speaker>(),
                 repeatLines = new List<DialogueEvent.LineSet>()
             };
-
-            foreach (var line in dialogueEvent.mainLines.lines)
-                clonedEvent.mainLines.lines.Add(CloneLine(line));
-
+            foreach (DialogueEvent.Line line in dialogueEvent.mainLines.lines)
+            {
+                dialogueEvent2.mainLines.lines.Add(DialogueHelper.CloneLine(line));
+            }
             if (includeRepeat)
             {
-                foreach (var lineSet in dialogueEvent.repeatLines)
+                foreach (DialogueEvent.LineSet lineSet in dialogueEvent.repeatLines)
                 {
-                    DialogueEvent.LineSet newSet = new DialogueEvent.LineSet();
-                    foreach (var line in lineSet.lines)
+                    DialogueEvent.LineSet lineSet2 = new DialogueEvent.LineSet();
+                    foreach (DialogueEvent.Line line2 in lineSet.lines)
                     {
-                        newSet.lines.Add(CloneLine(line));
+                        lineSet2.lines.Add(DialogueHelper.CloneLine(line2));
                     }
-                    clonedEvent.repeatLines.Add(newSet);
+                    dialogueEvent2.repeatLines.Add(lineSet2);
                 }
             }
-
-            foreach (var speaker in dialogueEvent.speakers)
-                clonedEvent.speakers.Add(speaker);
-
-            return clonedEvent;
+            foreach (DialogueEvent.Speaker item in dialogueEvent.speakers)
+            {
+                dialogueEvent2.speakers.Add(item);
+            }
+            return dialogueEvent2;
         }
     }
 }

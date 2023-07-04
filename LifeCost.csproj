@@ -103,11 +103,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="BepInEx.Analyzers" Version="1.0.7" PrivateAssets="all" />
-    <PackageReference Include="BepInEx.Core" Version="5.4.16" />
-    <PackageReference Include="BepInEx.PluginInfoProps" Version="1.1.0" />
-    <PackageReference Include="Inscryption.GameLibs" Version="1.9.0-r.0" />
-    <PackageReference Include="UnityEngine.Modules" Version="2019.4.24" IncludeAssets="compile" />
+    <PackageReference Include="BepInEx.Analyzers" Version="1.0.8" PrivateAssets="all" />
+    <PackageReference Include="BepInEx.Core" Version="5.4.19" />
+    <PackageReference Include="BepInEx.PluginInfoProps" Version="2.1.0" />
+    <PackageReference Include="Inscryption.GameLibs" Version="0.30.0-r.0" />
+    <PackageReference Include="UnityEngine.Modules" Version="2021.3.27" IncludeAssets="compile" />
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFramework.TrimEnd(`0123456789`))' == 'net'">
@@ -116,10 +116,10 @@
 
   <ItemGroup>
     <Reference Include="InscryptionAPI">
-      <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Inscryption\BepInEx\plugins\API 2.0\InscryptionAPI.dll</HintPath>
+      <HintPath>..\..\..\AppData\Roaming\r2modmanPlus-local\Inscryption\profiles\Test\BepInEx\plugins\API_dev-API\InscryptionAPI.dll</HintPath>
     </Reference>
     <Reference Include="InscryptionCommunityPatch">
-      <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Inscryption\BepInEx\plugins\API 2.0\InscryptionCommunityPatch.dll</HintPath>
+      <HintPath>..\..\..\AppData\Roaming\r2modmanPlus-local\Inscryption\profiles\Test\BepInEx\plugins\API_dev-API\InscryptionCommunityPatch.dll</HintPath>
     </Reference>
     <Reference Include="Sirenix.Serialization">
       <HintPath>lib\Sirenix.Serialization.dll</HintPath>
@@ -153,7 +153,7 @@
   <Target Name="CopyDLLs" AfterTargets="Build">
     <Message Text="Executing CopyDLLs task" Importance="High" />
 
-    <Copy SourceFiles="$(TargetDir)$(ProjectName).dll;" DestinationFolder="C:\Program Files (x86)\Steam\steamapps\common\Inscryption\BepInEx\plugins\Void_Slime-Life_Cost_API" />
+    <Copy SourceFiles="$(TargetDir)$(ProjectName).dll;" DestinationFolder="C:\Users\gravi\AppData\Roaming\r2modmanPlus-local\Inscryption\profiles\Test\BepInEx\plugins\Void_Slime-Life_Cost_API" />
     
     <Copy Condition="Exists('C:\DEVELOPER\InscryptionMods\lib\')" SourceFiles="$(TargetDir)$(ProjectName).dll" DestinationFolder="C:\DEVELOPER\InscryptionMods\lib\" />
 

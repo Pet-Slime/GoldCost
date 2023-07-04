@@ -12,45 +12,47 @@ namespace LifeCost.Patchers.RenderFixes
         {
             Part1CardCostRender.UpdateCardCost += delegate (CardInfo card, List<Texture2D> costs)
             {
-                int myCustomCost1 = card.LifeCost();
-                if (myCustomCost1 > 0)
+                int num = card.LifeCost();
+                bool flag = num > 0;
+                if (flag)
                 {
-                    costs.Add(TextureHelper.GetImageAsTexture($"life_pure_cost_{myCustomCost1}.png", typeof(RenderFix).Assembly));
+                    costs.Add(TextureHelper.GetImageAsTexture(string.Format("life_pure_cost_{0}.png", num), typeof(RenderFix).Assembly, 0));
                 }
-                int myCustomCost2 = card.LifeMoneyCost();
-                if (myCustomCost2 > 0)
+                int num2 = card.LifeMoneyCost();
+                bool flag2 = num2 > 0;
+                if (flag2)
                 {
-                    costs.Add(TextureHelper.GetImageAsTexture($"life_cost_{myCustomCost2}.png", typeof(RenderFix).Assembly));
+                    costs.Add(TextureHelper.GetImageAsTexture(string.Format("life_cost_{0}.png", num2), typeof(RenderFix).Assembly, 0));
                 }
-                int myCustomCost3 = card.MoneyCost();
-                if (myCustomCost3 > 0)
+                int num3 = card.MoneyCost();
+                bool flag3 = num3 > 0;
+                if (flag3)
                 {
-                    costs.Add(TextureHelper.GetImageAsTexture($"money_cost_{myCustomCost3}.png", typeof(RenderFix).Assembly));
+                    costs.Add(TextureHelper.GetImageAsTexture(string.Format("money_cost_{0}.png", num3), typeof(RenderFix).Assembly, 0));
                 }
-
             };
-
             Part2CardCostRender.UpdateCardCost += delegate (CardInfo card, List<Texture2D> costs)
             {
-                int myCustomCost1 = card.LifeCost();
-                if (myCustomCost1 > 0)
+                int num = card.LifeCost();
+                bool flag = num > 0;
+                if (flag)
                 {
-                    Texture2D costTexture = Part2CardCostRender.CombineIconAndCount(myCustomCost1, TextureHelper.GetImageAsTexture("pixel_pure_life.png", typeof(RenderFix).Assembly));
-                    costs.Add(costTexture);
+                    Texture2D item = Part2CardCostRender.CombineIconAndCount(num, TextureHelper.GetImageAsTexture("pixel_pure_life.png", typeof(RenderFix).Assembly, 0));
+                    costs.Add(item);
                 }
-
-                int myCustomCost2 = card.LifeMoneyCost();
-                if (myCustomCost2 > 0)
+                int num2 = card.LifeMoneyCost();
+                bool flag2 = num2 > 0;
+                if (flag2)
                 {
-                    Texture2D costTexture = Part2CardCostRender.CombineIconAndCount(myCustomCost2, TextureHelper.GetImageAsTexture("pixel_life.png", typeof(RenderFix).Assembly));
-                    costs.Add(costTexture);
+                    Texture2D item2 = Part2CardCostRender.CombineIconAndCount(num2, TextureHelper.GetImageAsTexture("pixel_life.png", typeof(RenderFix).Assembly, 0));
+                    costs.Add(item2);
                 }
-
-                int myCustomCost3 = card.MoneyCost();
-                if (myCustomCost3 > 0)
+                int num3 = card.MoneyCost();
+                bool flag3 = num3 > 0;
+                if (flag3)
                 {
-                    Texture2D costTexture = Part2CardCostRender.CombineIconAndCount(myCustomCost3, TextureHelper.GetImageAsTexture("pixel_money.png", typeof(RenderFix).Assembly));
-                    costs.Add(costTexture);
+                    Texture2D item3 = Part2CardCostRender.CombineIconAndCount(num3, TextureHelper.GetImageAsTexture("pixel_money.png", typeof(RenderFix).Assembly, 0));
+                    costs.Add(item3);
                 }
             };
         }
