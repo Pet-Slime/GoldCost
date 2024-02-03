@@ -1,12 +1,7 @@
 ﻿using DiskCardGame;
-using InscryptionAPI.Card;
 using InscryptionAPI.CardCosts;
-using Pixelplacement;
-using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Text;
-using UnityEngine;
+using LifeCost.Patchers;
 
 namespace LifeCost
 {
@@ -16,12 +11,13 @@ namespace LifeCost
 
         public override bool CostSatisfied(int cardCost, PlayableCard card)
         {
-            // if the player has enough energy to pay the cost
-            // takes the vanilla energy cost into account
-
-            int PlayerLife = Singleton<LifeManager>.Instance.Balance + 5;
-            int? Cost = card.Info.GetExtendedPropertyAsInt("LifeCost");
-            return cardCost <= (PlayerLife - Cost);
+            int costLife = card.Info.LifeCost();
+            int balanceLife = Singleton<LifeManager>.Instance.Balance + 5;
+            if (costLife > balanceLife)
+            {
+                return false;
+            }
+            return true;
         }
 
         // the dialogue that's played when you try to play a card with this cost, and CostSatisfied is false

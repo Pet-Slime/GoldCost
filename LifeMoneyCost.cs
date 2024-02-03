@@ -1,12 +1,8 @@
 ﻿using DiskCardGame;
-using InscryptionAPI.Card;
 using InscryptionAPI.CardCosts;
-using Pixelplacement;
-using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Text;
-using UnityEngine;
+using LifeCost.Patchers;
+using GBC;
 
 namespace LifeCost
 {
@@ -16,12 +12,26 @@ namespace LifeCost
 
         public override bool CostSatisfied(int cardCost, PlayableCard card)
         {
-            // if the player has enough energy to pay the cost
-            // takes the vanilla energy cost into account
-
-            int PlayerLife = Singleton<LifeManager>.Instance.Balance + 5;
-            int? Cost = card.Info.GetExtendedPropertyAsInt("LifeCost");
-            return cardCost <= (PlayerLife - Cost);
+            int num = card.Info.LifeMoneyCost();
+            bool flag2 = SceneLoader.ActiveSceneName.StartsWith("Part1");
+            bool flag3 = flag2;
+            int currency;
+            if (flag3)
+            {
+                currency = RunState.Run.currency;
+            }
+            else
+            {
+                currency = SaveData.Data.currency;
+            }
+            int num2 = Singleton<LifeManager>.Instance.Balance + 5;
+            int num3 = currency + num2;
+            bool flag4 = num > num3;
+            if (flag4)
+            {
+                return false;
+            }
+            return true;
         }
 
         // the dialogue that's played when you try to play a card with this cost, and CostSatisfied is false
@@ -37,11 +47,14 @@ namespace LifeCost
             bool flag = SceneLoader.ActiveSceneName.StartsWith("Part1");
             if (flag)
             {
-                yield return PayCost.extractCostPart1_lifeOnly(cardCost);
+                int currentCurrency2 = RunState.Run.currency;
+                yield return PayCost.extractCostPart1_hybrid(cardCost, currentCurrency2);
             }
             else
             {
-                yield return PayCost.extractCostPart2_lifeOnly(cardCost);
+
+                int currentCurrency3 = SaveData.Data.currency;
+                yield return PayCost.extractCostPart2_hybrid(cardCost, currentCurrency3);
             }
         }
     }

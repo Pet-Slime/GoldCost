@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace LifeCost.Patchers
 {
-    public static class ext
+    public static class Ext
     {
         public static int LifeCost(this CardInfo info)
         {
@@ -62,7 +62,7 @@ namespace LifeCost.Patchers
             CardManager.ModifyCardList += delegate (List<CardInfo> cards)
             {
                 foreach (CardInfo cardInfo in from c in cards
-                                              where c.GetCustomCost("LifeMoneyCost") < 0
+                                              where c.GetCustomCost("LifeMoneyCost") != 0
                                               select c)
                 {
                     int num = cardInfo.GetCustomCost("LifeMoneyCost");
@@ -77,7 +77,7 @@ namespace LifeCost.Patchers
             CardManager.ModifyCardList += delegate (List<CardInfo> cards)
             {
                 foreach (CardInfo cardInfo in from c in cards
-                                              where c.GetCustomCost("MoneyCost") < 0
+                                              where c.GetCustomCost("MoneyCost") != 0
                                               select c)
                 {
                     int num = cardInfo.GetCustomCost("MoneyCost");
@@ -92,11 +92,56 @@ namespace LifeCost.Patchers
             CardManager.ModifyCardList += delegate (List<CardInfo> cards)
             {
                 foreach (CardInfo cardInfo in from c in cards
-                                              where c.GetCustomCost("LifeCost") < 0
+                                              where c.GetCustomCost("LifeCost") != 0
                                               select c)
                 {
                     int num = cardInfo.GetCustomCost("LifeCost");
                     CardExtensions.SetExtendedProperty(cardInfo, "LifeCost", num);
+                }
+                return cards;
+            };
+        }
+
+        public static void FixCardsToLifeMoneycost()
+        {
+            CardManager.ModifyCardList += delegate (List<CardInfo> cards)
+            {
+                foreach (CardInfo cardInfo in from c in cards
+                                              where c.LifeMoneyCost() != 0
+                                              select c)
+                {
+                    int num = cardInfo.LifeMoneyCost();
+                    cardInfo.SetCustomCost("LifeMoneyCost", num);
+                }
+                return cards;
+            };
+        }
+
+        public static void FixCardsToMoneycost()
+        {
+            CardManager.ModifyCardList += delegate (List<CardInfo> cards)
+            {
+                foreach (CardInfo cardInfo in from c in cards
+                                              where c.MoneyCost() != 0
+                                              select c)
+                {
+                    int num = cardInfo.MoneyCost();
+                    cardInfo.SetCustomCost("MoneyCost", num);
+                }
+                return cards;
+            };
+        }
+
+        public static void FixCardsToLifecost()
+        {
+            CardManager.ModifyCardList += delegate (List<CardInfo> cards)
+            {
+                foreach (CardInfo cardInfo in from c in cards
+                                              where c.LifeCost() != 0
+                                              select c)
+                {
+                    int num = cardInfo.LifeCost();
+                    cardInfo.SetCustomCost("LifeCost",num);
                 }
                 return cards;
             };

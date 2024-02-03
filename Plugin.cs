@@ -28,10 +28,11 @@ namespace LifeCost
         {
             Plugin.Log = base.Logger;
             Plugin.Directory = base.Info.Location.Replace("LifeCost.dll", "");
-            Plugin.configTeethSpeed = base.Config.Bind<float>("Teeth Speed", "Teeth Speed", 1f, "Configer the Speed in which golden teeth have in act 1 during the set up of the board. Used to be 25f. Higher numbers may cause issues. do not go below 1f.");
             Harmony harmony = new Harmony("extraVoid.inscryption.LifeCost");
             harmony.PatchAll();
             CardCostManager.Register(PluginGuid, "LifeCost", typeof(LifeCost), TextureMethodLife, PixelTextureMethodLife);
+            CardCostManager.Register(PluginGuid, "LifeMoneyCost", typeof(LifeCost), TextureMethodLifeMoney, PixelTextureMethodLifeMoney);
+            CardCostManager.Register(PluginGuid, "MoneyCost", typeof(LifeCost), TextureMethodMoney, PixelTextureMethodMoney);
             this.AddActiveStatsUpLife();
             this.AddActiveStatsUpMoney();
             this.AddActivateLifeConverter();
@@ -43,42 +44,51 @@ namespace LifeCost
 
         public static Texture2D TextureMethodLife(int cardCost, CardInfo info, PlayableCard card)
         {
-            return TextureHelper.GetImageAsTexture($"life_pure_cost_{cardCost}");
+            return TextureHelper.GetImageAsTexture(string.Format("life_pure_cost_{0}.png", cardCost), typeof(Plugin).Assembly, 0);
         }
 
         public static Texture2D PixelTextureMethodLife(int cardCost, CardInfo info, PlayableCard card)
         {
 
             // if you want the API to handle adding stack numbers, you can instead provide a 7x8 texture like so:
+            return Part2CardCostRender.CombineIconAndCount(cardCost, TextureHelper.GetImageAsTexture("pixel_pure_life.png", typeof(Plugin).Assembly, 0));
+        }
+
+        public static Texture2D TextureMethodLifeMoney(int cardCost, CardInfo info, PlayableCard card)
+        {
+            return TextureHelper.GetImageAsTexture(string.Format("life_cost_{0}.png", cardCost), typeof(Plugin).Assembly, 0);
+        }
+
+        public static Texture2D PixelTextureMethodLifeMoney(int cardCost, CardInfo info, PlayableCard card)
+        {
+
+            // if you want the API to handle adding stack numbers, you can instead provide a 7x8 texture like so:
             return Part2CardCostRender.CombineIconAndCount(cardCost, TextureHelper.GetImageAsTexture("pixel_life.png", typeof(Plugin).Assembly, 0));
+        }
+
+        public static Texture2D TextureMethodMoney(int cardCost, CardInfo info, PlayableCard card)
+        {
+            return TextureHelper.GetImageAsTexture(string.Format("money_cost_{0}.png", cardCost), typeof(Plugin).Assembly, 0);
+        }
+
+        public static Texture2D PixelTextureMethodMoney(int cardCost, CardInfo info, PlayableCard card)
+        {
+
+            // if you want the API to handle adding stack numbers, you can instead provide a 7x8 texture like so:
+            return Part2CardCostRender.CombineIconAndCount(cardCost, TextureHelper.GetImageAsTexture("pixel_money.png", typeof(Plugin).Assembly, 0));
         }
 
         // Token: 0x0600001A RID: 26 RVA: 0x000022D2 File Offset: 0x000004D2
         private void Start()
         {
             Plugin.Log.LogMessage("Lifecost start event fired");
-            global::LifeCost.Patchers.vanilla_tweaks.ChangeCardsToLifecost();
-        }
-
-        // Token: 0x0600001B RID: 27 RVA: 0x000022F4 File Offset: 0x000004F4
-        [HarmonyPatch(typeof(DialogueDataUtil), "ReadDialogueData")]
-        [HarmonyPostfix]
-        public static void BossDialogue()
-        {
-            DialogueHelper.AddOrModifySimpleDialogEvent("lifecost_NotEnoughLife", new string[]
-            {
-                "You do not have enough life to play that card."
-            }, new string[][]
-            {
-                new string[]
-                {
-                    "You are too hurt to play that card."
-                },
-                new string[]
-                {
-                    "That card demands more life."
-                }
-            }, null, null, "NewRunDealtDeckDefault");
+            Patchers.vanilla_tweaks.ChangeCardsToLifecost();
+            Patchers.vanilla_tweaks.SetCardsToLifecost();
+            Patchers.vanilla_tweaks.SetCardsToLifeMoneycost();
+            Patchers.vanilla_tweaks.SetCardsToMoneycost();
+            Patchers.vanilla_tweaks.FixCardsToLifecost();
+            Patchers.vanilla_tweaks.FixCardsToLifecost();
+            Patchers.vanilla_tweaks.FixCardsToLifecost();
         }
 
         // Token: 0x0600001C RID: 28 RVA: 0x0000235C File Offset: 0x0000055C
@@ -170,7 +180,7 @@ namespace LifeCost
         private const string PluginName = "Life Scrybe";
 
         // Token: 0x04000007 RID: 7
-        private const string PluginVersion = "2.0.0";
+        private const string PluginVersion = "3.0.0";
 
         // Token: 0x04000008 RID: 8
         public static string Directory;
@@ -178,7 +188,5 @@ namespace LifeCost
         // Token: 0x04000009 RID: 9
         internal static ManualLogSource Log;
 
-        // Token: 0x0400000A RID: 10
-        internal static ConfigEntry<float> configTeethSpeed;
     }
 }

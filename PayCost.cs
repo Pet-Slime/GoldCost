@@ -12,6 +12,7 @@ namespace LifeCost
 {
     internal class PayCost
     {
+
     public static IEnumerator extractCostPart1_hybrid(int costToPay, int currentCurrency)
         {
             float waitTime = 0.1f;

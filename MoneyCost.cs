@@ -2,6 +2,7 @@
 using GBC;
 using InscryptionAPI.Card;
 using InscryptionAPI.CardCosts;
+using LifeCost.Patchers;
 using Pixelplacement;
 using System;
 using System.Collections;
@@ -13,17 +14,14 @@ namespace LifeCost
 {
     internal class MoneyCost : CustomCardCost
     {
-        public override string CostName => "LifeCost";
+        public override string CostName => "MoneyCost";
 
         public override bool CostSatisfied(int cardCost, PlayableCard card)
         {
-            // if the player has enough energy to pay the cost
-            // takes the vanilla energy cost into account
             int num6 = card.Info.MoneyCost();
-            bool flag8 = SceneLoader.ActiveSceneName.StartsWith("Part1");
-            bool flag9 = flag8;
+            bool flagScene = SceneLoader.ActiveSceneName.StartsWith("Part1");
             int currency2;
-            if (flag9)
+            if (flagScene)
             {
                 currency2 = RunState.Run.currency;
             }
@@ -31,8 +29,8 @@ namespace LifeCost
             {
                 currency2 = SaveData.Data.currency;
             }
-            bool flag10 = num6 > currency2;
-            if (flag10)
+            bool enoughMoney = num6 > currency2;
+            if (enoughMoney)
             {
                 return false;
             }
@@ -42,7 +40,7 @@ namespace LifeCost
         // the dialogue that's played when you try to play a card with this cost, and CostSatisfied is false
         public override string CostUnsatisfiedHint(int cardCost, PlayableCard card)
         {
-            return $"You do not have enouggh life to play {card.Info.DisplayedNameLocalized}.";
+            return $"You do not have enough Foils to play {card.Info.DisplayedNameLocalized}.";
         }
 
         // this is called after a card with this cost resolves on the board
@@ -52,11 +50,11 @@ namespace LifeCost
             bool flag = SceneLoader.ActiveSceneName.StartsWith("Part1");
             if (flag)
             {
-                yield return PayCost.extractCostPart1_lifeOnly(cardCost);
+                yield return PayCost.extractCostPart1_MoneyOnly(cardCost, RunState.Run.currency);
             }
             else
             {
-                yield return PayCost.extractCostPart2_lifeOnly(cardCost);
+                yield return PayCost.extractCostPart2_MoneyOnly(cardCost);
             }
         }
     }

@@ -34,7 +34,7 @@ namespace LifeCost.sigils
                 float waitTime = 0.1f;
                 Singleton<ViewManager>.Instance.SwitchToView(View.Scales, false, true);
                 yield return new WaitForSeconds(waitTime);
-                yield return PayCostPatch.ShowDamageSequence(1, 1, false, 0.125f, null, 0f, false);
+                yield return PayCost.ShowDamageSequence(1, 1, false, 0.125f, null, 0f, false);
                 yield return new WaitForSeconds(waitTime);
                 Singleton<ViewManager>.Instance.SwitchToView(View.Scales, false, true);
                 Singleton<ViewManager>.Instance.Controller.LockState = 0;
@@ -43,7 +43,7 @@ namespace LifeCost.sigils
             {
                 float waitTime2 = 0.5f;
                 yield return new WaitForSeconds(waitTime2);
-                yield return PayCostPatch.ShowDamageSequence(1, 1, false, 0.125f, null, 0f, false);
+                yield return PayCost.ShowDamageSequence(1, 1, false, 0.125f, null, 0f, false);
                 yield return new WaitForSeconds(waitTime2);
             }
             yield return base.LearnAbility(0.25f);
