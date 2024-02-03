@@ -79,11 +79,11 @@ namespace LifeCost.sigils
                         bool flag17 = flag6;
                         if (flag17)
                         {
-                            yield return PayCostPatch.extractCostPart1_lifeOnly(yours.LifeCost);
+                            yield return PayCost.extractCostPart1_lifeOnly(yours.LifeCost);
                         }
                         else
                         {
-                            yield return PayCostPatch.extractCostPart2_lifeOnly(yours.LifeCost);
+                            yield return PayCost.extractCostPart2_lifeOnly(yours.LifeCost);
                         }
                     }
                     bool moneyFlag2 = yours.MoneyCost > 0;
@@ -95,11 +95,11 @@ namespace LifeCost.sigils
                         if (flag19)
                         {
                             int currentCurrency = RunState.Run.currency;
-                            yield return PayCostPatch.extractCostPart1_MoneyOnly(yours.MoneyCost, currentCurrency);
+                            yield return PayCost.extractCostPart1_MoneyOnly(yours.MoneyCost, currentCurrency);
                         }
                         else
                         {
-                            yield return PayCostPatch.extractCostPart2_MoneyOnly(yours.MoneyCost);
+                            yield return PayCost.extractCostPart2_MoneyOnly(yours.MoneyCost);
                         }
                     }
                     bool hybridFlag2 = yours.LifeMoneyCost > 0;
@@ -111,12 +111,12 @@ namespace LifeCost.sigils
                         if (flag21)
                         {
                             int currentCurrency2 = RunState.Run.currency;
-                            yield return PayCostPatch.extractCostPart1_hybrid(yours.LifeMoneyCost, currentCurrency2);
+                            yield return PayCost.extractCostPart1_hybrid(yours.LifeMoneyCost, currentCurrency2);
                         }
                         else
                         {
                             int currentCurrency3 = SaveData.Data.currency;
-                            yield return PayCostPatch.extractCostPart2_hybrid(yours.LifeMoneyCost, currentCurrency3);
+                            yield return PayCost.extractCostPart2_hybrid(yours.LifeMoneyCost, currentCurrency3);
                         }
                     }
                     yield return new WaitForSeconds(0.1f);

@@ -6,7 +6,8 @@ using DiskCardGame;
 using HarmonyLib;
 using LifeCost.cards;
 using LifeCost.lib;
-using LifeCost.Patchers.RenderFixes;
+
+using InscryptionCommunityPatch.Card;
 using LifeCost.sigils;
 using LifeCost.Resources;
 using UnityEngine;
@@ -30,7 +31,7 @@ namespace LifeCost
             Plugin.configTeethSpeed = base.Config.Bind<float>("Teeth Speed", "Teeth Speed", 1f, "Configer the Speed in which golden teeth have in act 1 during the set up of the board. Used to be 25f. Higher numbers may cause issues. do not go below 1f.");
             Harmony harmony = new Harmony("extraVoid.inscryption.LifeCost");
             harmony.PatchAll();
-            CardCostManager.Register(PluginGuid, "LifeCost", typeof(LifeCost), );
+            CardCostManager.Register(PluginGuid, "LifeCost", typeof(LifeCost), TextureMethodLife, PixelTextureMethodLife);
             this.AddActiveStatsUpLife();
             this.AddActiveStatsUpMoney();
             this.AddActivateLifeConverter();
@@ -40,9 +41,16 @@ namespace LifeCost
             Teck.AddCard();
         }
 
-        public static Texture2D TextureMethod(int cardCost, CardInfo info, PlayableCard card)
+        public static Texture2D TextureMethodLife(int cardCost, CardInfo info, PlayableCard card)
         {
-            return TextureHelper.GetImageAsTexture($"myCost_{cardCost}");
+            return TextureHelper.GetImageAsTexture($"life_pure_cost_{cardCost}");
+        }
+
+        public static Texture2D PixelTextureMethodLife(int cardCost, CardInfo info, PlayableCard card)
+        {
+
+            // if you want the API to handle adding stack numbers, you can instead provide a 7x8 texture like so:
+            return Part2CardCostRender.CombineIconAndCount(cardCost, TextureHelper.GetImageAsTexture("pixel_life.png", typeof(Plugin).Assembly, 0));
         }
 
         // Token: 0x0600001A RID: 26 RVA: 0x000022D2 File Offset: 0x000004D2

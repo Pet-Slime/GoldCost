@@ -46,7 +46,7 @@ namespace LifeCost.sigils
                 Singleton<ViewManager>.Instance.SwitchToView(View.Scales, false, true);
                 yield return new WaitForSeconds(waitTime);
                 base.Card.Anim.LightNegationEffect();
-                yield return PayCostPatch.ShowDamageSequence(amount, amount, whoGetsit, 0.125f, null, 0f, false);
+                yield return PayCost.ShowDamageSequence(amount, amount, whoGetsit, 0.125f, null, 0f, false);
                 yield return new WaitForSeconds(waitTime);
                 Singleton<ViewManager>.Instance.SwitchToView(View.Board, false, true);
                 Singleton<ViewManager>.Instance.Controller.LockState = 0;
@@ -56,7 +56,7 @@ namespace LifeCost.sigils
                 float waitTime2 = 0.5f;
                 yield return new WaitForSeconds(waitTime2);
                 base.Card.Anim.LightNegationEffect();
-                yield return PayCostPatch.ShowDamageSequence(amount, amount, whoGetsit, 0.125f, null, 0f, false);
+                yield return PayCost.ShowDamageSequence(amount, amount, whoGetsit, 0.125f, null, 0f, false);
                 yield return new WaitForSeconds(waitTime2);
             }
             yield return base.LearnAbility(0.25f);

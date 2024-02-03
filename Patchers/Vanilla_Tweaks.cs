@@ -56,6 +56,51 @@ namespace LifeCost.Patchers
                 return cards;
             };
         }
+
+        public static void SetCardsToLifeMoneycost()
+        {
+            CardManager.ModifyCardList += delegate (List<CardInfo> cards)
+            {
+                foreach (CardInfo cardInfo in from c in cards
+                                              where c.GetCustomCost("LifeMoneyCost") < 0
+                                              select c)
+                {
+                    int num = cardInfo.GetCustomCost("LifeMoneyCost");
+                    CardExtensions.SetExtendedProperty(cardInfo, "LifeMoneyCost", num);
+                }
+                return cards;
+            };
+        }
+
+        public static void SetCardsToMoneycost()
+        {
+            CardManager.ModifyCardList += delegate (List<CardInfo> cards)
+            {
+                foreach (CardInfo cardInfo in from c in cards
+                                              where c.GetCustomCost("MoneyCost") < 0
+                                              select c)
+                {
+                    int num = cardInfo.GetCustomCost("MoneyCost");
+                    CardExtensions.SetExtendedProperty(cardInfo, "MoneyCost", num);
+                }
+                return cards;
+            };
+        }
+
+        public static void SetCardsToLifecost()
+        {
+            CardManager.ModifyCardList += delegate (List<CardInfo> cards)
+            {
+                foreach (CardInfo cardInfo in from c in cards
+                                              where c.GetCustomCost("LifeCost") < 0
+                                              select c)
+                {
+                    int num = cardInfo.GetCustomCost("LifeCost");
+                    CardExtensions.SetExtendedProperty(cardInfo, "LifeCost", num);
+                }
+                return cards;
+            };
+        }
     }
 }
 

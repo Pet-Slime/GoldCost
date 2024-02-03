@@ -1,4 +1,5 @@
 ﻿using DiskCardGame;
+using GBC;
 using InscryptionAPI.Card;
 using InscryptionAPI.CardCosts;
 using Pixelplacement;
@@ -10,7 +11,7 @@ using UnityEngine;
 
 namespace LifeCost
 {
-    internal class LifeCost : CustomCardCost
+    internal class MoneyCost : CustomCardCost
     {
         public override string CostName => "LifeCost";
 
@@ -18,10 +19,24 @@ namespace LifeCost
         {
             // if the player has enough energy to pay the cost
             // takes the vanilla energy cost into account
-
-            int PlayerLife = Singleton<LifeManager>.Instance.Balance + 5;
-            int? Cost = card.Info.GetExtendedPropertyAsInt("LifeCost");
-            return cardCost <= (PlayerLife - Cost);
+            int num6 = card.Info.MoneyCost();
+            bool flag8 = SceneLoader.ActiveSceneName.StartsWith("Part1");
+            bool flag9 = flag8;
+            int currency2;
+            if (flag9)
+            {
+                currency2 = RunState.Run.currency;
+            }
+            else
+            {
+                currency2 = SaveData.Data.currency;
+            }
+            bool flag10 = num6 > currency2;
+            if (flag10)
+            {
+                return false;
+            }
+            return true;
         }
 
         // the dialogue that's played when you try to play a card with this cost, and CostSatisfied is false

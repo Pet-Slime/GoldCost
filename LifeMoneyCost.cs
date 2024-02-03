@@ -10,9 +10,9 @@ using UnityEngine;
 
 namespace LifeCost
 {
-    internal class LifeCost : CustomCardCost
+    internal class LifeMoneyCost : CustomCardCost
     {
-        public override string CostName => "LifeCost";
+        public override string CostName => "LifeMoneyCost";
 
         public override bool CostSatisfied(int cardCost, PlayableCard card)
         {
