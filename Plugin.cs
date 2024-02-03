@@ -10,6 +10,9 @@ using LifeCost.Patchers.RenderFixes;
 using LifeCost.sigils;
 using LifeCost.Resources;
 using UnityEngine;
+using JetBrains.Annotations;
+using InscryptionAPI.CardCosts;
+using InscryptionAPI.Helpers;
 
 namespace LifeCost
 {
@@ -27,6 +30,7 @@ namespace LifeCost
             Plugin.configTeethSpeed = base.Config.Bind<float>("Teeth Speed", "Teeth Speed", 1f, "Configer the Speed in which golden teeth have in act 1 during the set up of the board. Used to be 25f. Higher numbers may cause issues. do not go below 1f.");
             Harmony harmony = new Harmony("extraVoid.inscryption.LifeCost");
             harmony.PatchAll();
+            CardCostManager.Register(PluginGuid, "LifeCost", typeof(LifeCost), );
             this.AddActiveStatsUpLife();
             this.AddActiveStatsUpMoney();
             this.AddActivateLifeConverter();
@@ -36,12 +40,16 @@ namespace LifeCost
             Teck.AddCard();
         }
 
+        public static Texture2D TextureMethod(int cardCost, CardInfo info, PlayableCard card)
+        {
+            return TextureHelper.GetImageAsTexture($"myCost_{cardCost}");
+        }
+
         // Token: 0x0600001A RID: 26 RVA: 0x000022D2 File Offset: 0x000004D2
         private void Start()
         {
             Plugin.Log.LogMessage("Lifecost start event fired");
-            LifeCost.Patchers.vanilla_tweaks.ChangeCardsToLifecost();
-            RenderFix.CommunityPatchHook();
+            global::LifeCost.Patchers.vanilla_tweaks.ChangeCardsToLifecost();
         }
 
         // Token: 0x0600001B RID: 27 RVA: 0x000022F4 File Offset: 0x000004F4
