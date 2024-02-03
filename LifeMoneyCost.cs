@@ -12,26 +12,8 @@ namespace LifeCost
 
         public override bool CostSatisfied(int cardCost, PlayableCard card)
         {
-            int num = card.Info.LifeMoneyCost();
-            bool flag2 = SceneLoader.ActiveSceneName.StartsWith("Part1");
-            bool flag3 = flag2;
-            int currency;
-            if (flag3)
-            {
-                currency = RunState.Run.currency;
-            }
-            else
-            {
-                currency = SaveData.Data.currency;
-            }
-            int num2 = Singleton<LifeManager>.Instance.Balance + 5;
-            int num3 = currency + num2;
-            bool flag4 = num > num3;
-            if (flag4)
-            {
-                return false;
-            }
-            return true;
+
+            return cardCost <= (Singleton<ResourcesManager>.Instance.PlayerEnergy - card.EnergyCost);
         }
 
         // the dialogue that's played when you try to play a card with this cost, and CostSatisfied is false
@@ -44,18 +26,8 @@ namespace LifeCost
         // if your cost spends a resource, this is where you'd put that logic
         public override IEnumerator OnPlayed(int cardCost, PlayableCard card)
         {
-            bool flag = SceneLoader.ActiveSceneName.StartsWith("Part1");
-            if (flag)
-            {
-                int currentCurrency2 = RunState.Run.currency;
-                yield return PayCost.extractCostPart1_hybrid(cardCost, currentCurrency2);
-            }
-            else
-            {
 
-                int currentCurrency3 = SaveData.Data.currency;
-                yield return PayCost.extractCostPart2_hybrid(cardCost, currentCurrency3);
-            }
+            yield return Singleton<ResourcesManager>.Instance.SpendEnergy(cardCost);
         }
     }
 }

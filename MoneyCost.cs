@@ -18,7 +18,6 @@ namespace LifeCost
 
         public override bool CostSatisfied(int cardCost, PlayableCard card)
         {
-            int num6 = card.Info.MoneyCost();
             bool flagScene = SceneLoader.ActiveSceneName.StartsWith("Part1");
             int currency2;
             if (flagScene)
@@ -29,7 +28,7 @@ namespace LifeCost
             {
                 currency2 = SaveData.Data.currency;
             }
-            bool enoughMoney = num6 > currency2;
+            bool enoughMoney = cardCost > currency2;
             if (enoughMoney)
             {
                 return false;

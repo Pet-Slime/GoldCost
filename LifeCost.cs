@@ -11,9 +11,8 @@ namespace LifeCost
 
         public override bool CostSatisfied(int cardCost, PlayableCard card)
         {
-            int costLife = card.Info.LifeCost();
             int balanceLife = Singleton<LifeManager>.Instance.Balance + 5;
-            if (costLife > balanceLife)
+            if (cardCost > balanceLife)
             {
                 return false;
             }

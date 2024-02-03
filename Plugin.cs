@@ -83,12 +83,12 @@ namespace LifeCost
         {
             Plugin.Log.LogMessage("Lifecost start event fired");
             Patchers.vanilla_tweaks.ChangeCardsToLifecost();
-            Patchers.vanilla_tweaks.SetCardsToLifecost();
-            Patchers.vanilla_tweaks.SetCardsToLifeMoneycost();
-            Patchers.vanilla_tweaks.SetCardsToMoneycost();
-            Patchers.vanilla_tweaks.FixCardsToLifecost();
-            Patchers.vanilla_tweaks.FixCardsToLifecost();
-            Patchers.vanilla_tweaks.FixCardsToLifecost();
+///           Patchers.vanilla_tweaks.SetCardsToLifecost();
+///           Patchers.vanilla_tweaks.SetCardsToLifeMoneycost();
+///           Patchers.vanilla_tweaks.SetCardsToMoneycost();
+///           Patchers.vanilla_tweaks.FixCardsToLifecost();
+///           Patchers.vanilla_tweaks.FixCardsToLifeMoneycost();
+///           Patchers.vanilla_tweaks.FixCardsToMoneycost();
         }
 
         // Token: 0x0600001C RID: 28 RVA: 0x0000235C File Offset: 0x0000055C

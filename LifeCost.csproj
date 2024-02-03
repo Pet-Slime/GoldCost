@@ -12,6 +12,7 @@
   <ItemGroup>
     <None Remove="Resources\Costs\CostChoiceBack.png" />
     <None Remove="Resources\Costs\lifeCostChoiceRewardBack.png" />
+    <None Remove="Resources\Costs\life_cost_0.png" />
     <None Remove="Resources\Costs\life_cost_1.png" />
     <None Remove="Resources\Costs\life_cost_10.png" />
     <None Remove="Resources\Costs\life_cost_11.png" />
@@ -27,6 +28,7 @@
     <None Remove="Resources\Costs\life_cost_7.png" />
     <None Remove="Resources\Costs\life_cost_8.png" />
     <None Remove="Resources\Costs\life_cost_9.png" />
+    <None Remove="Resources\Costs\life_pure_cost_0.png" />
     <None Remove="Resources\Costs\life_pure_cost_1.png" />
     <None Remove="Resources\Costs\life_pure_cost_2.png" />
     <None Remove="Resources\Costs\life_pure_cost_3.png" />
@@ -36,6 +38,7 @@
     <None Remove="Resources\Costs\life_pure_cost_7.png" />
     <None Remove="Resources\Costs\life_pure_cost_8.png" />
     <None Remove="Resources\Costs\life_pure_cost_9.png" />
+    <None Remove="Resources\Costs\money_cost_0.png" />
     <None Remove="Resources\Costs\money_cost_1.png" />
     <None Remove="Resources\Costs\money_cost_10.png" />
     <None Remove="Resources\Costs\money_cost_11.png" />
@@ -58,6 +61,7 @@
 
   <ItemGroup>
     <EmbeddedResource Include="Resources\Costs\CostChoiceBack.png" />
+    <EmbeddedResource Include="Resources\Costs\life_cost_0.png" />
     <EmbeddedResource Include="Resources\Costs\life_cost_1.png" />
     <EmbeddedResource Include="Resources\Costs\life_cost_10.png" />
     <EmbeddedResource Include="Resources\Costs\life_cost_11.png" />
@@ -73,6 +77,7 @@
     <EmbeddedResource Include="Resources\Costs\life_cost_7.png" />
     <EmbeddedResource Include="Resources\Costs\life_cost_8.png" />
     <EmbeddedResource Include="Resources\Costs\life_cost_9.png" />
+    <EmbeddedResource Include="Resources\Costs\life_pure_cost_0.png" />
     <EmbeddedResource Include="Resources\Costs\life_pure_cost_1.png" />
     <EmbeddedResource Include="Resources\Costs\life_pure_cost_2.png" />
     <EmbeddedResource Include="Resources\Costs\life_pure_cost_3.png" />
@@ -82,6 +87,7 @@
     <EmbeddedResource Include="Resources\Costs\life_pure_cost_7.png" />
     <EmbeddedResource Include="Resources\Costs\life_pure_cost_8.png" />
     <EmbeddedResource Include="Resources\Costs\life_pure_cost_9.png" />
+    <EmbeddedResource Include="Resources\Costs\money_cost_0.png" />
     <EmbeddedResource Include="Resources\Costs\money_cost_1.png" />
     <EmbeddedResource Include="Resources\Costs\money_cost_10.png" />
     <EmbeddedResource Include="Resources\Costs\money_cost_11.png" />
