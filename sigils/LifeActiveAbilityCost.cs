@@ -10,27 +10,16 @@ namespace LifeCost.sigils
     [HarmonyPatch]
     public abstract class LifeActiveAbilityCost : ActivatedAbilityBehaviour
     {
-        // Token: 0x1700000E RID: 14
-        // (get) Token: 0x0600003B RID: 59 RVA: 0x000026F3 File Offset: 0x000008F3
         public virtual int LifeMoneyCost { get; }
 
-        // Token: 0x1700000F RID: 15
-        // (get) Token: 0x0600003C RID: 60 RVA: 0x000026FB File Offset: 0x000008FB
         public virtual int LifeCost { get; }
 
-        // Token: 0x17000010 RID: 16
-        // (get) Token: 0x0600003D RID: 61 RVA: 0x00002703 File Offset: 0x00000903
         public virtual int MoneyCost { get; }
 
-        // Token: 0x17000011 RID: 17
-        // (get) Token: 0x0600003E RID: 62 RVA: 0x0000270B File Offset: 0x0000090B
         public override int EnergyCost { get; }
 
-        // Token: 0x17000012 RID: 18
-        // (get) Token: 0x0600003F RID: 63 RVA: 0x00002713 File Offset: 0x00000913
         public override int BonesCost { get; }
 
-        // Token: 0x06000040 RID: 64 RVA: 0x0000271B File Offset: 0x0000091B
         [HarmonyPostfix]
         [HarmonyPatch(typeof(ActivatedAbilityBehaviour), "OnActivatedAbility")]
         private static IEnumerator JankOverride(IEnumerator result, ActivatedAbilityBehaviour __instance)

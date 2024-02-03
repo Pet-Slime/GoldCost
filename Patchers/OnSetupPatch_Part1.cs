@@ -12,7 +12,7 @@ namespace LifeCost.Patchers
 {
     internal class OnSetupPatch_Part1
     {
-        // Token: 0x06000002 RID: 2 RVA: 0x00002059 File Offset: 0x00000259
+
         public static IEnumerator BowlSetup()
         {
             CurrencyBowl holder = Singleton<CurrencyBowl>.Instance;
@@ -32,7 +32,7 @@ namespace LifeCost.Patchers
             yield break;
         }
 
-        // Token: 0x06000003 RID: 3 RVA: 0x00002061 File Offset: 0x00000261
+
         public static IEnumerator BowlCleanup()
         {
             CurrencyBowl holder = Singleton<CurrencyBowl>.Instance;
@@ -76,7 +76,7 @@ namespace LifeCost.Patchers
                 bool flag2 = flag && Singleton<CurrencyBowl>.Instance != null;
                 if (flag2)
                 {
-                    yield return OnSetupPatch_Part1.BowlSetup();
+                    ///                    yield return OnSetupPatch_Part1.BowlSetup();
                     yield return new WaitForSeconds(0.2f);
                 }
                 yield return enumerator;
@@ -98,7 +98,7 @@ namespace LifeCost.Patchers
                 if (flag)
                 {
                     yield return new WaitForSeconds(0.2f);
-                    yield return OnSetupPatch_Part1.BowlCleanup();
+                    ///                    yield return OnSetupPatch_Part1.BowlCleanup();
                     yield return new WaitForSeconds(0.2f);
                 }
                 yield return enumerator;
@@ -107,122 +107,123 @@ namespace LifeCost.Patchers
         }
 
         // Token: 0x0200001F RID: 31
-        [HarmonyPatch(typeof(TurnManager))]
-        public class void_TeethPatch_CleanupPhase
-        {
-            // Token: 0x06000080 RID: 128 RVA: 0x0000395E File Offset: 0x00001B5E
-            [HarmonyPostfix]
-            [HarmonyPatch("CleanupPhase")]
-            public static IEnumerator Postfix(IEnumerator enumerator, TurnManager __instance)
-            {
-                __instance.PlayerWon = __instance.PlayerIsWinner();
-                __instance.GameEnding = true;
-                __instance.UpdateMisplaysStat();
-                bool flag = !__instance.PlayerWon && __instance.opponent != null && __instance.opponent.Blueprint != null;
-                if (flag)
-                {
-                    AnalyticsManager.SendFailedEncounterEvent(__instance.opponent.Blueprint, __instance.opponent.Difficulty, __instance.TurnNumber);
-                }
-                bool flag2 = __instance.SpecialSequencer != null;
-                if (flag2)
-                {
-                    yield return __instance.SpecialSequencer.PreCleanUp();
-                }
-                Singleton<ViewManager>.Instance.Controller.LockState = ViewLockState.Locked;
-                bool flag3 = __instance.PlayerWon && __instance.PostBattleSpecialNode == null;
-                if (flag3)
-                {
-                    Singleton<ViewManager>.Instance.SwitchToView((Singleton<GameFlowManager>.Instance == null) ? View.MapDefault : View.Default, false, false);
-                }
-                else
-                {
-                    Singleton<ViewManager>.Instance.SwitchToView(View.Default, false, false);
-                }
-                yield return new WaitForSeconds(0.1f);
-                __instance.StartCoroutine(Singleton<ResourcesManager>.Instance.CleanUp());
-                yield return new WaitForSeconds(0.2f);
-                __instance.StartCoroutine(Singleton<PlayerHand>.Instance.CleanUp());
-                yield return new WaitForSeconds(0.2f);
-                __instance.StartCoroutine(Singleton<CardDrawPiles>.Instance.CleanUp());
-                yield return new WaitForSeconds(0.2f);
-                yield return __instance.opponent.CleanUp();
-                yield return new WaitForSeconds(0.2f);
-                yield return __instance.opponent.OutroSequence(__instance.PlayerWon);
-                yield return new WaitForSeconds(0.2f);
-                __instance.StartCoroutine(Singleton<BoardManager>.Instance.CleanUp());
-                yield return new WaitForSeconds(0.2f);
-                bool flag4 = Singleton<TableRuleBook>.Instance != null;
-                if (flag4)
-                {
-                    Singleton<TableRuleBook>.Instance.SetOnBoard(false);
-                }
-                yield return Singleton<LifeManager>.Instance.CleanUp();
-                bool flag5 = __instance.SpecialSequencer != null;
-                if (flag5)
-                {
-                    yield return __instance.SpecialSequencer.GameEnd(__instance.PlayerWon);
-                }
-                bool flag6 = !__instance.PlayerWon && Singleton<GameFlowManager>.Instance != null;
-                if (flag6)
-                {
-                    yield return Singleton<GameFlowManager>.Instance.PlayerLostBattleSequence(__instance.opponent);
-                }
-                bool flag7 = __instance.PlayerWon && SaveManager.SaveFile.IsPart3;
-                if (flag7)
-                {
-                    Part3SaveData.Data.IncreaseBounty(10);
-                }
-                Object.Destroy(__instance.opponent.gameObject);
-                bool flag8 = Singleton<GameFlowManager>.Instance != null;
-                if (flag8)
-                {
-                    yield return __instance.TransitionToNextGameState();
-                }
-                Singleton<PlayerHand>.Instance.SetShown(false, false);
-                Object.Destroy(__instance.SpecialSequencer);
-                yield break;
-            }
-        }
+        ///       [HarmonyPatch(typeof(TurnManager))]
+        ///       public class void_TeethPatch_CleanupPhase
+        ///       {
+        ///           // Token: 0x06000080 RID: 128 RVA: 0x0000395E File Offset: 0x00001B5E
+        ///           [HarmonyPostfix]
+        ///           [HarmonyPatch("CleanupPhase")]
+        ///           public static IEnumerator Postfix(IEnumerator enumerator, TurnManager __instance)
+        ///           {
+        ///               __instance.PlayerWon = __instance.PlayerIsWinner();
+        ///               __instance.GameEnding = true;
+        ///               __instance.UpdateMisplaysStat();
+        ///               bool flag = !__instance.PlayerWon && __instance.Opponent != null && __instance.Opponent.Blueprint != null;
+        ///               if (flag)
+        ///               {
+        ///                   AnalyticsManager.SendFailedEncounterEvent(__instance.Opponent.Blueprint, __instance.Opponent.Difficulty, __instance.TurnNumber);
+        ///               }
+        ///               bool flag2 = __instance.SpecialSequencer != null;
+        ///               if (flag2)
+        ///               {
+        ///                   yield return __instance.SpecialSequencer.PreCleanUp();
+        ///               }
+        ///               Singleton<ViewManager>.Instance.Controller.LockState = ViewLockState.Locked;
+        ///               bool flag3 = __instance.PlayerWon && __instance.PostBattleSpecialNode == null;
+        ///               if (flag3)
+        ///               {
+        ///                   Singleton<ViewManager>.Instance.SwitchToView((Singleton<GameFlowManager>.Instance == null) ? View.MapDefault : View.Default, false, false);
+        ///               }
+        ///               else
+        ///               {
+        ///                   Singleton<ViewManager>.Instance.SwitchToView(View.Default, false, false);
+        ///               }
+        ///               yield return new WaitForSeconds(0.1f);
+        ///               __instance.StartCoroutine(Singleton<ResourcesManager>.Instance.CleanUp());
+        ///               yield return new WaitForSeconds(0.2f);
+        ///               __instance.StartCoroutine(Singleton<PlayerHand>.Instance.CleanUp());
+        ///               yield return new WaitForSeconds(0.2f);
+        ///               __instance.StartCoroutine(Singleton<CardDrawPiles>.Instance.CleanUp());
+        ///               yield return new WaitForSeconds(0.2f);
+        ///               yield return __instance.opponent.CleanUp();
+        ///               yield return new WaitForSeconds(0.2f);
+        ///               yield return __instance.opponent.OutroSequence(__instance.PlayerWon);
+        ///               yield return new WaitForSeconds(0.2f);
+        ///               __instance.StartCoroutine(Singleton<BoardManager>.Instance.CleanUp());
+        ///               yield return new WaitForSeconds(0.2f);
+        ///               bool flag4 = Singleton<TableRuleBook>.Instance != null;
+        ///               if (flag4)
+        ///               {
+        ///                   Singleton<TableRuleBook>.Instance.SetOnBoard(false);
+        ///               }
+        ///               yield return Singleton<LifeManager>.Instance.CleanUp();
+        ///               bool flag5 = __instance.SpecialSequencer != null;
+        ///               if (flag5)
+        ///               {
+        ///                   yield return __instance.SpecialSequencer.GameEnd(__instance.PlayerWon);
+        ///               }
+        ///               bool flag6 = !__instance.PlayerWon && Singleton<GameFlowManager>.Instance != null;
+        ///               if (flag6)
+        ///               {
+        ///                   yield return Singleton<GameFlowManager>.Instance.PlayerLostBattleSequence(__instance.opponent);
+        ///               }
+        ///               bool flag7 = __instance.PlayerWon && SaveManager.SaveFile.IsPart3;
+        ///               if (flag7)
+        ///               {
+        ///                   Part3SaveData.Data.IncreaseBounty(10);
+        ///               }
+        ///               Object.Destroy(__instance.opponent.gameObject);
+        ///               bool flag8 = Singleton<GameFlowManager>.Instance != null;
+        ///               if (flag8)
+        ///               {
+        ///                   yield return __instance.TransitionToNextGameState();
+        ///               }
+        ///               Singleton<PlayerHand>.Instance.SetShown(false, false);
+        ///               Object.Destroy(__instance.SpecialSequencer);
+        ///               yield break;
+        ///           }
+        ///       }
 
-        // Token: 0x02000020 RID: 32
-        [HarmonyPatch(typeof(CurrencyBowl))]
-        public class void_TeethPatch_CurrencyBowlPatch
-        {
-            // Token: 0x06000082 RID: 130 RVA: 0x0000397D File Offset: 0x00001B7D
-            [HarmonyPostfix]
-            [HarmonyPatch("ShowGain")]
-            public static IEnumerator Postfix(IEnumerator enumerator, CurrencyBowl __instance, int amount, bool enterFromAbove = false, bool noTutorial = false)
-            {
-                bool flag3 = !OnSetupPatch_Part1.currencyBowlBattle;
-                bool flag9 = flag3;
-                if (flag9)
-                {
-                    __instance.MoveIntoPlace(__instance.NEAR_SCALES_POS, __instance.NEAR_SCALES_ROT, Tween.EaseInOutStrong, enterFromAbove);
-                }
-                yield return __instance.DropWeightsIn(amount);
-                yield return new WaitForSeconds(0.75f);
-                bool flag4 = !noTutorial;
-                bool flag5 = flag4;
-                bool flag10 = flag5;
-                if (flag10)
-                {
-                    bool flag6 = !ProgressionData.LearnedMechanic(MechanicsConcept.GainCurrency) && (StoryEventsData.EventCompleted(StoryEvent.TutorialRunCompleted) || StoryEventsData.EventCompleted(StoryEvent.ProspectorDefeated));
-                    bool flag7 = flag6;
-                    bool flag11 = flag7;
-                    if (flag11)
-                    {
-                        ProgressionData.SetMechanicLearned(MechanicsConcept.GainCurrency);
-                        yield return Singleton<TextDisplayer>.Instance.PlayDialogueEvent("TutorialGainCurrency", TextDisplayer.MessageAdvanceMode.Input, TextDisplayer.EventIntersectMode.Wait, null, null);
-                    }
-                }
-                bool flag8 = !OnSetupPatch_Part1.currencyBowlBattle;
-                bool flag12 = flag8;
-                if (flag12)
-                {
-                    __instance.MoveAway(__instance.NEAR_SCALES_POS);
-                }
-                yield break;
-            }
-        }
+
+        ///        [HarmonyPatch(typeof(CurrencyBowl))]
+        ///        public class void_TeethPatch_CurrencyBowlPatch
+        ///        {
+        ///            // Token: 0x06000082 RID: 130 RVA: 0x0000397D File Offset: 0x00001B7D
+        ///            [HarmonyPostfix]
+        ///            [HarmonyPatch("ShowGain")]
+        ///            public static IEnumerator Postfix(IEnumerator enumerator, CurrencyBowl __instance, int amount, bool enterFromAbove = false, bool noTutorial = false)
+        ///            {
+        ///                bool flag3 = !OnSetupPatch_Part1.currencyBowlBattle;
+        ///                bool flag9 = flag3;
+        ///                if (flag9)
+        ///                {
+        ///                    __instance.MoveIntoPlace(__instance.NEAR_SCALES_POS, __instance.NEAR_SCALES_ROT, Tween.EaseInOutStrong, enterFromAbove);
+        ///                }
+        ///                yield return __instance.DropWeightsIn(amount);
+        ///                yield return new WaitForSeconds(0.75f);
+        ///                bool flag4 = !noTutorial;
+        ///                bool flag5 = flag4;
+        ///                bool flag10 = flag5;
+        ///                if (flag10)
+        ///                {
+        ///                    bool flag6 = !ProgressionData.LearnedMechanic(MechanicsConcept.GainCurrency) && (StoryEventsData.EventCompleted(StoryEvent.TutorialRunCompleted) || StoryEventsData.EventCompleted(StoryEvent.ProspectorDefeated));
+        ///                    bool flag7 = flag6;
+        ///                    bool flag11 = flag7;
+        ///                    if (flag11)
+        ///                    {
+        ///                        ProgressionData.SetMechanicLearned(MechanicsConcept.GainCurrency);
+        ///                        yield return Singleton<TextDisplayer>.Instance.PlayDialogueEvent("TutorialGainCurrency", TextDisplayer.MessageAdvanceMode.Input, TextDisplayer.EventIntersectMode.Wait, null, null);
+        ///                    }
+        ///                }
+        ///                bool flag8 = !OnSetupPatch_Part1.currencyBowlBattle;
+        ///                bool flag12 = flag8;
+        ///                if (flag12)
+        ///                {
+        ///                    __instance.MoveAway(__instance.NEAR_SCALES_POS);
+        ///                }
+        ///                yield break;
+        ///            }
+        ///        }
+        ///    }
     }
 }

@@ -96,7 +96,7 @@ namespace LifeCost.Patchers
             yield break;
         }
 
-        // Token: 0x0600000F RID: 15 RVA: 0x000020EC File Offset: 0x000002EC
+
         public static IEnumerator ShowDamageSequence(int damage, int numWeights, bool toPlayer, float waitAfter = 0.125f, GameObject alternateWeightPrefab = null, float waitBeforeCalcDamage = 0f, bool changeView = false)
         {
             bool flag = damage > 1 && Singleton<OpponentAnimationController>.Instance != null;
@@ -111,7 +111,7 @@ namespace LifeCost.Patchers
                 }
                 else
                 {
-                    bool flag3 = Singleton<LifeManager>.Instance.scales != null;
+                    bool flag3 = Singleton<LifeManager>.Instance.Scales != null;
                     bool flag10 = flag3;
                     if (flag10)
                     {
@@ -196,7 +196,7 @@ namespace LifeCost.Patchers
             yield break;
         }
 
-        // Token: 0x06000012 RID: 18 RVA: 0x0000214D File Offset: 0x0000034D
+
         public static IEnumerator extractCostPart2_MoneyOnly(int costToPay)
         {
             float waitTime = 0.5f;
