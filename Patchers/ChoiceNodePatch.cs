@@ -4,6 +4,7 @@ using InscryptionAPI.Helpers;
 using DiskCardGame;
 using UnityEngine;
 using HarmonyLib;
+using EasyFeedback.APIs;
 
 namespace LifeCost.Patchers
 {
@@ -30,15 +31,25 @@ namespace LifeCost.Patchers
             return texture2D;
         }
 
+
+        public static List<CardInfo> IsThereLifeMoneyCards()
+        {
+
+            var meta = CardMetaCategory.ChoiceNode;
+            var temp = CardTemple.Nature;
+
+            List<CardInfo> list = CardLoader.GetUnlockedCards(meta, temp).FindAll((CardInfo x) => x.LifeMoneyCost() > 0);
+            list.AddRange(CardLoader.GetUnlockedCards(meta, temp).FindAll((CardInfo x) => x.LifeCost() > 0));
+            list.AddRange(CardLoader.GetUnlockedCards(meta, temp).FindAll((CardInfo x) => x.MoneyCost() > 0));
+            return list;
+        }
+
         public static CardInfo GetRandomChoosableLifeCard(int randomSeed)
         {
-            List<CardInfo> list = CardLoader.GetUnlockedCards(0, 0).FindAll((CardInfo x) => x.LifeMoneyCost() > 0);
-            list.AddRange(CardLoader.GetUnlockedCards(0, 0).FindAll((CardInfo x) => x.LifeCost() > 0));
-            list.AddRange(CardLoader.GetUnlockedCards(0, 0).FindAll((CardInfo x) => x.MoneyCost() > 0));
+            List<CardInfo> list = IsThereLifeMoneyCards();
             bool flag = list.Count == 0;
-            bool flag2 = flag;
             CardInfo result;
-            if (flag2)
+            if (flag)
             {
                 result = CardLoader.Clone(CardLoader.GetCardByName("lifecost_Teck"));
             }
@@ -73,17 +84,22 @@ namespace LifeCost.Patchers
             [HarmonyPostfix]
             public static void Postfix(ref List<CardChoice> __result, int randomSeed)
             {
-                List<CardChoice> list = __result;
-                list.Add(new CardChoice
+                List<CardInfo> list = IsThereLifeMoneyCards();
+                bool flag = list.Count > 0;
+                if (flag)
                 {
-                    resourceType = ChoiceNodePatch.ResourceTypeMarker
-                });
-                list.Shuffle<CardChoice>();
-                while (list.Count > 3)
-                {
-                    list.RemoveAt(SeededRandom.Range(0, list.Count, randomSeed++));
+                    List<CardChoice> resultList = __result;
+                    resultList.Add(new CardChoice
+                    {
+                        resourceType = ChoiceNodePatch.ResourceTypeMarker
+                    });
+                    resultList.Shuffle<CardChoice>();
+                    while (resultList.Count > 3)
+                    {
+                        resultList.RemoveAt(SeededRandom.Range(0, resultList.Count, randomSeed++));
+                    }
+                    __result = resultList;
                 }
-                __result = list;
             }
         }
 
